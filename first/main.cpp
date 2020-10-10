@@ -1,10 +1,8 @@
 #include "PSO.h"
 int main(int argc, char *argv[]) {
-	Particle *one = new Particle();
-	Particle *two = new Particle();
-
-	one->getParamenters();
-	two->getParamenters();
-
+	std::vector<Particle> particle(4);
+	for(auto particle : particle)
+			particle.getParamenters();
+	
 	return EXIT_SUCCESS;
 }

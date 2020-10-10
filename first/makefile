@@ -1,4 +1,4 @@
-main = main
+main = .main
 objects = PSO.cpp main.cpp
 
 objects: $(objects)

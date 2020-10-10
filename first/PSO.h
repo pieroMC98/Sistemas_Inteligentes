@@ -3,13 +3,7 @@
 /*     https://www.sfu.ca/~ssurjano/optimization.html */
 
 // Algoritmo optimizacion por enjambre de particulas
-#ifndef _PSO_H
-#define _PSO_H
-#include <cstdio>
-#include <cstdlib>
-#include <iostream>
-#define VMAX 100
-#define VMIN 1
+#include "HEADER_H.h"
 class Particle {
        private:
 	int id;
@@ -20,6 +14,7 @@ class Particle {
 		static int id;
 		return this->id = id++;
 	}
+
        public:
 	Particle();
 	~Particle(){};
@@ -46,5 +41,5 @@ class Particle {
 	float speed(Particle v, int t, int f1, int f2, int e1, int e2, float *g);
 	float position(int t, float *x, float *speed);
 
+	int testParticle();
 };
-#endif
