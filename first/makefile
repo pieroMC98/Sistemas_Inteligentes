@@ -1,8 +1,10 @@
 main = main
-objects = PSO.c main.c 
-format : 
-	clang-format -i *.c *.h
-objects : $(objects) gcc $(objects) -
-		      o $(main)
+objects = PSO.cpp main.cpp
+
+objects: $(objects)
+	g++ $(objects) -o $(main)
+
 run:objects
-	./ $(main)
+	./$(main)
+format:
+	clang-format -i *.cpp *.h
