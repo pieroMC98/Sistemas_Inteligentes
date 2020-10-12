@@ -1,13 +1,14 @@
 #include "PSO.h"
 
+#include <ostream>
+
 Particle::Particle() {
 	Particle::counter();
-	this->speedx = VMIN + rand() % (VMAX - VMIN + 1);
-	this->speedy = VMIN + rand() % (VMAX - VMIN + 1);
+	Particle::setGlobal();
+	this->speedx = this->speedy = 0;
 
-	this->posx = VMIN + rand() % (VMAX - VMIN + 1);
-	this->posy = VMIN + rand() % (VMAX - VMIN + 1);
-	this->b = (float *)calloc(10, sizeof(float));
+	this->posx = -VMAX + rand() % (VMAX + VMAX + 1);
+	this->posy = -VMAX + rand() % (VMAX + VMAX + 1);
 }
 
 void Particle::setPosX(float x) { this->posx = x; }
@@ -27,8 +28,11 @@ float Particle::getSpeedX() { return this->speedx; }
 float Particle::getSpeedY() { return this->speedy; }
 
 float Particle::getOnX(int i) { return this->x[i]; }
+
 float Particle::getOnB(int i) { return this->b[i]; }
+
 int Particle::getID() { return this->id; }
+
 float Particle::speed(Particle v, int t, int f1, int f2, int e1, int e2, float *g) {
 	if (t > 1)
 		return speed(v, t - 1, f1, f2, e1, e2, g) + f1 * e1 * (v.getOnB(t) - v.getOnX(t)) +
@@ -49,6 +53,7 @@ void Particle::getParamenters() {
 	std::cout << "--------------------\n";
 	std::cout << "particle " << this->getID() << "\n";
 	std::cout << "Vx = " << this->getSpeedX() << ", Vy = " << getSpeedY() << "\nPosx = " << getPosX()
-		  << " , PosY = " << getPosX();
+		  << " , PosY = " << getPosX() << std::endl;
+	for (int i = 0; i < this->global.size(); i++) std::cout << "v" << i << " = " << this->global[i] << std::endl;
 	std::cout << "\n--------------------";
-}  // namespace Particle
+}

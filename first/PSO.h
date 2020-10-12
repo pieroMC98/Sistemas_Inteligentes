@@ -8,16 +8,27 @@ class Particle {
        private:
 	int id;
 	float speedy, speedx, posy, posx;
-	float *x, *b;
-	static float *global;
+	std::vector<float> x, b, global;
 	int counter() {
 		static int id;
 		return this->id = id++;
 	}
 
+	std::vector<float> setGlobal(float x) {
+		static std::vector<float> global;
+		global.push_back(x);
+		return this->global = global;
+	}
+
+	std::vector<float> setGlobal() {
+		static std::vector<float> global;
+		for (int i = 0; i < 5; i++) global.push_back(rand() % 10);
+		return this->global = global;
+	}
+
        public:
 	Particle();
-	~Particle(){};
+	~Particle() { std::cout << "\nobject deleted \n"; }
 	void setSpeedX(float);
 	void setSpeedY(float);
 	float getSpeedX();
@@ -40,6 +51,5 @@ class Particle {
 	int getID();
 	float speed(Particle v, int t, int f1, int f2, int e1, int e2, float *g);
 	float position(int t, float *x, float *speed);
-
 	int testParticle();
 };
