@@ -7,13 +7,23 @@
 class Particle {
        private:
 	int id;
-	float speedy, speedx, posy, posx;
+	int Dimension;
+	std::vector<float> speed, position;
 	std::vector<float> x, b, global;
+	float best_pos, best_value, value;
 	int counter() {
 		static int id;
 		return this->id = id++;
 	}
-
+	
+	void dimension(){
+		static int Dimension;
+		if( !Dimension ){
+			std::cout<<"Introduzca dimension del sistema\n";
+			std::cin>>Dimension;
+		}
+		if( !this->Dimension ) this->Dimension = Dimension;
+	}
 	std::vector<float> setGlobal(float x) {
 		static std::vector<float> global;
 		global.push_back(x);
@@ -32,14 +42,7 @@ class Particle {
 	void setSpeedX(float);
 	void setSpeedY(float);
 
-	float getSpeedX();
-	float getSpeedY();
-
-	void setPosX(float);
-	void setPosY(float);
-	float getPosX();
-	float getPosY();
-
+	float target_function(std::vector<float>);
 	void setX(float *);
 	void setB(float *);
 	void getParamenters();
@@ -50,7 +53,7 @@ class Particle {
 	void insertOnB(float);
 	float getOnB(int);
 	int getID();
-	float speed(int t, int f1, int f2, int e1, int e2, float *g);
-	float position(int t, float *x, float *speed);
-	int testParticle();
+	float speed_test(int , int , int , int , int , float *);
+	float pos_test(int , float *, float *);
+	int testParticle(int,int);
 };
