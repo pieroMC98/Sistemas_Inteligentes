@@ -31,6 +31,7 @@ class Particle {
 	~Particle() { std::cout << "\nobject deleted \n"; }
 	void setSpeedX(float);
 	void setSpeedY(float);
+
 	float getSpeedX();
 	float getSpeedY();
 
@@ -49,7 +50,7 @@ class Particle {
 	void insertOnB(float);
 	float getOnB(int);
 	int getID();
-	float speed(Particle v, int t, int f1, int f2, int e1, int e2, float *g);
+	float speed(int t, int f1, int f2, int e1, int e2, float *g);
 	float position(int t, float *x, float *speed);
 	int testParticle();
 };
