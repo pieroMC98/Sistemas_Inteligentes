@@ -1,4 +1,5 @@
 #include "PSO.h"
+#include <algorithm>
 
 Particle::Particle() {
 	Particle::counter();
@@ -13,6 +14,11 @@ Particle::Particle() {
 			});
 }
 
+Particle::Particle(int x){
+	std::vector<float> v = {3,4};
+	std::cout<< sqrt(module_vector(v,v.size()-1));
+}
+
 float Particle::getOnX(int i) { return this->x[i]; }
 
 float Particle::getOnB(int i) { return this->b[i]; }
@@ -20,12 +26,12 @@ float Particle::getOnB(int i) { return this->b[i]; }
 int Particle::getID() { return this->id; }
 
 float Particle::speed_test(int t, int f1, int f2, int e1, int e2, float *g) {
-	if (t > 1)
+	if (t > 0)
 		return speed_test(t - 1, f1, f2, e1, e2, g) + f1 * e1 * (this->getOnB(t) - this->getOnX(t)) +
 		       f2 * e2 * (g[t] - this->getOnX(t));
 	/* return speed(v, t - 1, f1, f2, e1, e2, g) + f1 * e1 * (v.b[t] - v.x[t]) + f2 * e2 * (g[t] - v.x[t]); */
 	else
-		return 1;
+		return 0;
 }
 
 float Particle::pos_test(int t, float *x, float *speed){
@@ -33,6 +39,20 @@ float Particle::pos_test(int t, float *x, float *speed){
 		return pos_test(t - 1, x, speed) + speed[t - 1];
 	else
 		return 1;
+}
+
+std::vector<float> Particle::test_particle(){
+	for( auto &i : this->speed){
+		;
+	}
+
+	std::for_each(this->speed.begin(),this->speed.end(), [this](float &x){
+		x = -102;
+		// alqui va la velocidad ya que recorreo todo el array
+	});
+
+return this->speed;
+
 }
 
 float Particle::target_function(std::vector<float> x, int i){
@@ -49,15 +69,15 @@ int Particle::testParticle(int f, int optimization) {
 
 float Particle::module_vector(std::vector<float> v, int i){
 	if( i > 0 )
-		return sqrtf((module_vector(v,i-1),2) + pow(v[i],2));
+		return pow(module_vector(v,i-1),2) + pow(v[i],2);
 	else
-		return pow(v[0],2);
-
+		return v[i]; 
 }
 void Particle::getParamenters() {
 	int j = 0;
 	std::cout << "--------------------\n";
 	std::cout << "particle " << this->getID() << "\n";
+	test_particle();
 	for(auto i : this->position){
 		std::cout<<"pos "<<j<<" = "<<i<<std::endl;
 		++j;

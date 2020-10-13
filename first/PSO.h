@@ -39,6 +39,7 @@ class Particle {
 	float module_vector(std::vector<float>,int);
        public:
 	Particle();
+	Particle(int);
 	~Particle() {}
 	void setSpeedX(float);
 	void setSpeedY(float);
@@ -55,6 +56,7 @@ class Particle {
 	float getOnB(int);
 	int getID();
 	float speed_test(int , int , int , int , int , float *);
+	std::vector<float> test_particle();
 	float pos_test(int , float *, float *);
 	int testParticle(int,int);
 };
