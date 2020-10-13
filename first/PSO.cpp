@@ -1,5 +1,4 @@
 #include "PSO.h"
-#include <algorithm>
 
 Particle::Particle() {
 	Particle::counter();
@@ -29,8 +28,6 @@ float Particle::speed_test(int t, int f1, int f2, int e1, int e2, float *g) {
 	if (t > 0)
 		return speed_test(t - 1, f1, f2, e1, e2, g) + f1 * e1 * (this->getOnB(t) - this->getOnX(t)) +
 		       f2 * e2 * (g[t] - this->getOnX(t));
-	/* return speed(v, t - 1, f1, f2, e1, e2, g) + f1 * e1 * (v.b[t] - v.x[t]) + f2 * e2 * (g[t] - v.x[t]); */
-	else
 		return 0;
 }
 
@@ -42,17 +39,10 @@ float Particle::pos_test(int t, float *x, float *speed){
 }
 
 std::vector<float> Particle::test_particle(){
-	for( auto &i : this->speed){
-		;
-	}
-
 	std::for_each(this->speed.begin(),this->speed.end(), [this](float &x){
-		x = -102;
-		// alqui va la velocidad ya que recorreo todo el array
-	});
-
-return this->speed;
-
+		x = speed_test(10,0,0,rand()%2,rand()%2,NULL);
+	}); 
+	return this->speed; 
 }
 
 float Particle::target_function(std::vector<float> x, int i){
@@ -65,6 +55,15 @@ float Particle::target_function(std::vector<float> x, int i){
 int Particle::testParticle(int f, int optimization) { 
 	this->value = target_function(this->position,0);
 	return 0;
+}
+
+Particle Particle::best_part(int process){
+	if( process == MAXIMIZAR ){
+		if (1 > 0) {
+			;
+		}
+	}
+	return *this;
 }
 
 float Particle::module_vector(std::vector<float> v, int i){

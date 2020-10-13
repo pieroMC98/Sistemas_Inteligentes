@@ -10,7 +10,7 @@ class Particle {
 	int Dimension;
 	std::vector<float> speed, position;
 	std::vector<float> x, b, global;
-		float best_pos, best_value, value;
+	float best_pos, best_value, value;
 	int counter() {
 		static int id;
 		return this->id = id++;
@@ -43,7 +43,7 @@ class Particle {
 	~Particle() {}
 	void setSpeedX(float);
 	void setSpeedY(float);
-
+	Particle best_part(int);
 	float target_function(std::vector<float>,int);
 	void setX(float *);
 	void setB(float *);
