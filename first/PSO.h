@@ -10,7 +10,7 @@ class Particle {
 	int Dimension;
 	std::vector<float> speed, position;
 	std::vector<float> x, b, global;
-	float best_pos, best_value, value;
+		float best_pos, best_value, value;
 	int counter() {
 		static int id;
 		return this->id = id++;
@@ -36,13 +36,14 @@ class Particle {
 		return this->global = global;
 	}
 
+	float module_vector(std::vector<float>,int);
        public:
 	Particle();
-	~Particle() { std::cout << "\nobject deleted \n"; }
+	~Particle() {}
 	void setSpeedX(float);
 	void setSpeedY(float);
 
-	float target_function(std::vector<float>);
+	float target_function(std::vector<float>,int);
 	void setX(float *);
 	void setB(float *);
 	void getParamenters();

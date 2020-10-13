@@ -35,14 +35,25 @@ float Particle::pos_test(int t, float *x, float *speed){
 		return 1;
 }
 
-float Particle::target_function(std::vector<float> i){
-	return 1;
+float Particle::target_function(std::vector<float> x, int i){
+	if( i > 0)
+		return pow(target_function(x,i-1),2);
+	else
+		return 1;
+	
 }
 int Particle::testParticle(int f, int optimization) { 
-	this->value = target_function(this->position);
+	this->value = target_function(this->position,0);
 	return 0;
 }
 
+float Particle::module_vector(std::vector<float> v, int i){
+	if( i > 0 )
+		return sqrtf((module_vector(v,i-1),2) + pow(v[i],2));
+	else
+		return pow(v[0],2);
+
+}
 void Particle::getParamenters() {
 	int j = 0;
 	std::cout << "--------------------\n";
@@ -59,6 +70,5 @@ void Particle::getParamenters() {
 	
 	std::cout<<"global array == \n";
 	std::for_each(this->global.begin(), this->global.end(), [](float i) { std::cout << "v = " << i << std::endl; });
-	this->global.rbegin();
 	std::cout << "\n--------------------";
 }
