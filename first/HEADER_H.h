@@ -13,4 +13,5 @@
 #define VMAX 100
 #define MAXIMIZAR 0
 #define MINIMIZAR 1
+#define EXIT 10
 #endif

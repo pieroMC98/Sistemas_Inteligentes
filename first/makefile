@@ -2,7 +2,7 @@ main = .main
 objects = PSO.cpp main.cpp
 
 objects: $(objects)
-	g++ $(objects) -o $(main)
+	g++ -Wall -g $(objects) -o $(main)
 
 run:objects
 	./$(main)

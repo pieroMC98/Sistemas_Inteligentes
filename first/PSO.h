@@ -10,6 +10,7 @@ class Particle {
 	int Dimension;
 	std::vector<float> speed, position;
 	std::vector<float> x, b, global;
+	float best;
 	float best_pos, best_value, value;
 	int counter() {
 		static int id;
@@ -42,22 +43,16 @@ class Particle {
 	Particle();
 	Particle(int);
 	~Particle() {}
-	void setSpeedX(float);
-	void setSpeedY(float);
-	Particle best_part(int);
-	float target_function(std::vector<float>, int);
+	Particle best_part(int, Particle);
+	float fitness(std::vector<float>, int);
+	std::vector<float> update_speed(float, float, float);
+	std::vector<float> update_position();
 	void setX(float *);
 	void setB(float *);
-	void getParamenters();
+	void getParameters();
 
-	void insertOnX(float);
 	float getOnX(int);
-
-	void insertOnB(float);
 	float getOnB(int);
 	int getID();
-	float speed_test(int, int, int, int, int, float *);
-	std::vector<float> test_particle();
-	float pos_test(int, float *, float *);
-	int testParticle(int, int);
+	void run();
 };

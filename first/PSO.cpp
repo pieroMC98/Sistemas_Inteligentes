@@ -1,10 +1,17 @@
 #include "PSO.h"
 
+#include "HEADER_H.h"
+
+/**
+ * @brief Construct a new Particle:: Particle object
+ * 
+ */
 Particle::Particle() {
 	Particle::counter();
 	Particle::setGlobal();
-	Particle::dimension();
-
+	// Particle::dimension();
+	this->Dimension = 2;
+	srand(time(NULL));
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
 
@@ -12,68 +19,102 @@ Particle::Particle() {
 		      [](float &x) { x = -VMAX + rand() % (VMAX + VMAX + 1); });
 }
 
-Particle::Particle(int x) {
-	std::vector<float> v = {3, 4};
-	std::cout << sqrt(module_vector(v, v.size() - 1));
-}
-
 float Particle::getOnX(int i) { return this->x[i]; }
 
 float Particle::getOnB(int i) { return this->b[i]; }
 
 int Particle::getID() { return this->id; }
-
-float Particle::speed_test(int t, int f1, int f2, int e1, int e2, float *g) {
-	if (t > 0)
-		return speed_test(t - 1, f1, f2, e1, e2, g) + f1 * e1 * (this->getOnB(t) - this->getOnX(t)) +
-		       f2 * e2 * (g[t] - this->getOnX(t));
-	return 0;
-}
-
-float Particle::pos_test(int t, float *x, float *speed) {
-	if (t > 1)
-		return pos_test(t - 1, x, speed) + speed[t - 1];
-	else
-		return 1;
-}
-
-std::vector<float> Particle::test_particle() {
-	std::for_each(this->speed.begin(), this->speed.end(),
-		      [this](float &x) { x = speed_test(10, 0, 0, rand() % 2, rand() % 2, NULL); });
+/**
+ * @brief actualiza la velocidad de la partícula
+ * 
+ * @param w innercia
+ * @param f1 parámentro cognitivo
+ * @param f2 parámetro social
+ * @return std::vector<float> velocidad actualizada
+ */
+std::vector<float> Particle::update_speed(float w, float f1, float f2) {
+	int i = 0;
+	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
+		v = w * v + f1 * (rand() % 2) * (this->best - this->position[i]) +
+		    f2 * (rand() % 2) * (this->global[i] - this->position[i]);
+		i++;
+	});
 	return this->speed;
 }
+/**
+ * @brief actualiza la posición de la partícula
+ * 
+ * @return std::vector<float> posición actualizada
+ */
+std::vector<float> Particle::update_position() {
+	int j = 0;
+	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->speed[j++]; });
+	return this->position;
+}
 
-float Particle::target_function(std::vector<float> x, int i) {
+/**
+ * @brief ejecuta a la partícula
+ * 
+ */
+void Particle::run() {
+	float solve = fitness(std::vector<float>(), 4);
+	this->speed = update_speed(0.729, 2.05, 2.05);
+	this->position = update_position();
+}
+
+/**
+ * @brief función objetivo de la partícula (función esfera)
+ * 
+ * @param x vector posición de la partícula
+ * @param i condición de salida de la llamada recursiva
+ * @return float dominio de la función
+ */
+float Particle::fitness(std::vector<float> x, int i) {
+	x = this->position;
 	if (i > 0)
-		return pow(target_function(x, i - 1), 2);
+		return fitness(x, i - 1) + pow(x[i], 2);
 	else
-		return 1;
-}
-int Particle::testParticle(int f, int optimization) {
-	this->value = target_function(this->position, 0);
-	return 0;
+		return pow(x[i], 2);
 }
 
-Particle Particle::best_part(int process) {
-	if (process == MAXIMIZAR) {
-		if (1 > 0) {
-			;
-		}
-	}
+/**
+ * @brief mejor valor de la partícula
+ * 
+ * @param process optimización de la función(MAXIMIZAR | MINIMIZAR)
+ * @param zero partícula a comparar
+ * @return Particle la mejor partícula
+ */
+Particle Particle::best_part(int process, Particle zero) {
+	Particle *best_particle = this;
+	if (process == MINIMIZAR)
+		if (zero.value < best_particle->value) return zero;
+
+	if (process == MINIMIZAR)
+		if (zero.value > best_particle->value) return zero;
 	return *this;
 }
-
+/**
+ * @brief módulo del vector de dimensión i
+ * 
+ * @param v vector
+ * @param i dimensión del vector
+ * @return float módulo del vector
+ */
 float Particle::module_vector(std::vector<float> v, int i) {
 	if (i > 0)
 		return pow(module_vector(v, i - 1), 2) + pow(v[i], 2);
 	else
 		return v[i];
 }
-void Particle::getParamenters() {
+
+/**
+ * @brief imprime las propiedades de la partícula
+ * 
+ */
+void Particle::getParameters() {
 	int j = 0;
 	std::cout << "--------------------\n";
 	std::cout << "particle " << this->getID() << "\n";
-	test_particle();
 	for (auto i : this->position) {
 		std::cout << "pos " << j << " = " << i << std::endl;
 		++j;
