@@ -9,9 +9,22 @@ class Particle {
 	int id;
 	int Dimension;
 	std::vector<float> speed, position;
-	std::vector<float> x, b, global;
+	std::vector<float> x, b, global, limits;
 	float best;
 	float best_pos, best_value, value;
+	void limit() {
+		static std::vector<float> LIMIT;
+		if (!LIMIT[0]) {
+			int option = 0;
+			std::cout << " introduzca los limites o por defecto = 1000 (skip)" << std::endl;
+			std::cin >> option;
+			if (!option) option = 1000;
+			std::for_each(this->limits.begin(), this->limits.end(), [=](float &x) { x = option; });
+			LIMIT = this->limits;
+		}
+		std::cout << " limit " << LIMIT[0] << std::endl;
+	}
+
 	int counter() {
 		static int id;
 		return this->id = id++;
@@ -44,7 +57,7 @@ class Particle {
 	Particle(int);
 	~Particle() {}
 	Particle best_part(int, Particle);
-	float fitness(std::vector<float>(), int);
+	float fitness(std::vector<float>, int);
 	std::vector<float> update_speed(float, float, float);
 	std::vector<float> update_position();
 	void setX(float *);
