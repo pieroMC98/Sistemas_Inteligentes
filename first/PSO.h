@@ -3,6 +3,8 @@
 /*     https://www.sfu.ca/~ssurjano/optimization.html */
 
 // Algoritmo optimizacion por enjambre de particulas
+#include <cstdio>
+#include <cstdlib>
 #include "HEADER_H.h"
 class Particle {
        private:
@@ -13,16 +15,20 @@ class Particle {
 	float best;
 	float best_pos, best_value, value;
 	void limit() {
-		static std::vector<float> LIMIT;
+		static std::vector<float> LIMIT(this->Dimension);
+		bug;
 		if (!LIMIT[0]) {
-			int option = 0;
+		float option;
+		std::string op;
 			std::cout << " introduzca los limites o por defecto = 1000 (skip)" << std::endl;
-			std::cin >> option;
-			if (!option) option = 1000;
-			std::for_each(this->limits.begin(), this->limits.end(), [=](float &x) { x = option; });
-			LIMIT = this->limits;
+			std::getline(std::cin, op);
+			option = atoi(op.c_str())== 0?1000:atoi(op.c_str());
+			std::for_each(LIMIT.begin(), LIMIT.end(), [&](float &x) { 
+					x = option; 
+			});
+			this->limits = LIMIT;
 		}
-		std::cout << " limit " << LIMIT[0] << std::endl;
+		std::cout << " limit en primera" << LIMIT[0] << std::endl;
 	}
 
 	int counter() {
@@ -64,7 +70,7 @@ class Particle {
 	void setB(float *);
 	void getParameters();
 	void test_particle(int);
-
+	Particle limit_test();
 	float getOnX(int);
 	float getOnB(int);
 	int getID();

@@ -1,7 +1,6 @@
 #include "PSO.h"
 
 #include "HEADER_H.h"
-
 /**
  * @brief Construct a new Particle:: Particle object
  *
@@ -10,7 +9,8 @@ Particle::Particle() {
 	Particle::counter();
 	Particle::setGlobal();
 	// Particle::dimension();
-	this->Dimension = 2;
+this->Dimension = 2;
+	Particle::limit();
 	srand(time(NULL));
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
@@ -92,7 +92,7 @@ void Particle::test_particle(int i) {
 }
 
 Particle Particle::limit_test() {
-	std::for_each(this->position.begin(), this->position.end(), [this](float &x) { if (x <) });
+	std::for_each(this->position.begin(), this->position.end(), [this](float &x) { if (x < 0); });
 	return *this;
 }
 /**
