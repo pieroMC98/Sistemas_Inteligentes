@@ -44,7 +44,7 @@ class Particle {
 	Particle(int);
 	~Particle() {}
 	Particle best_part(int, Particle);
-	float fitness(float, int);
+	float fitness(std::vector<float>(), int);
 	std::vector<float> update_speed(float, float, float);
 	std::vector<float> update_position();
 	void setX(float *);

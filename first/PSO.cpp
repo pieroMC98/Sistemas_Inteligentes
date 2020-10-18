@@ -64,7 +64,7 @@ void Particle::run() {
 	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
 
 	std::cout << "----" << std::endl;
-	std::for_each(s.begin(), s.end(), [this](float &x) { x = this->fitness(x, 4); });
+	float solve = this->fitness(std::vector<float>(),this->Dimension);
 	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
 	getchar();
 	/* float solve = fitness(std::vector<float>(), 4); */
@@ -79,11 +79,11 @@ void Particle::run() {
  * @param i condición de salida de la llamada recursiva
  * @return float dominio de la función
  */
-float Particle::fitness(float x, int i) {
+float Particle::fitness(std:vector<float> x, int i) {
 	if (i > 0)
-		return fitness(x, i - 1) + pow(x, 2);
+		return fitness(x[i], i - 1) + pow(x[i], 2);
 	else
-		return pow(x, 2);
+		return pow(x[i], 2);
 }
 
 void Particle::test_particle(int i) {
