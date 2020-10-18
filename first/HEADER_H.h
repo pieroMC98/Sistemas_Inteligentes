@@ -10,8 +10,8 @@
 #include <iterator>
 #include <string>
 #include <vector>
-
-#define VMAX 1000
+#include <iomanip> 
+#define MAX_POS 1000
 #define MAXIMIZAR 0
 #define MINIMIZAR 1
 #define EXIT 10

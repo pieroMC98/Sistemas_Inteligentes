@@ -1,22 +1,34 @@
 #include "PSO.h"
 
-#include "HEADER_H.h"
 /**
  * @brief Construct a new Particle:: Particle object
  *
  */
 Particle::Particle() {
 	Particle::counter();
-	Particle::setGlobal();
-	// Particle::dimension();
+	/* Particle::dimension(); */
 	this->Dimension = 2;
+
 	Particle::limit();
-	srand(time(NULL));
+	srand(time(NULL)+this->id*MAX_POS);
+	this->value = this->best_global_value = 0;
+	this->best_global_position.resize(this->Dimension);
+	this->best_personal_position.resize(this->Dimension);
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
+	
+	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
+			x = this->random_float(-this->limits, this->limits);
+			x/=2;
+	});
+	std::fill(this->speed.begin(), this->speed.end(), 0);
+}
 
-	std::for_each(this->position.begin(), this->position.end(),
-		      [](float &x) { x = -VMAX + rand() % (VMAX + VMAX + 1); });
+float Particle::random_float(float x, float y) {
+	float random = ((float)rand())/(float)RAND_MAX;
+	float diff = y - x;
+	float r = random*diff;
+	return x + r;
 }
 
 float Particle::getOnX(int i) { return this->x[i]; }
@@ -36,12 +48,16 @@ int Particle::getID() { return this->id; }
 std::vector<float> Particle::update_speed(float w, float f1, float f2) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
-		v = w * v + f1 * (rand() % 2) * (this->best - this->position[i]) +
-		    f2 * (rand() % 2) * (this->global[i] - this->position[i]);
+		v = w * v + f1 * (this->random_float(0,1)) * (this->best_personal_position[i] - this->position[i]) +
+		    f2 * (this->random_float(0,1)) * (this->best_global_position[i] - this->position[i]);
+			
+			/* std::cout<<" speed  = "<<v<<" bgposition = "<<this->best_global_position[i]<<std::endl; */
+			/* std::cout<<" i  = "<<i<<" bgposition = "<<this->best_personal_position[i]<<std::endl; */
 		i++;
 	});
 	return this->speed;
 }
+
 
 /**
  * @brief actualiza la posición de la partícula
@@ -59,18 +75,24 @@ std::vector<float> Particle::update_position() {
  *
  */
 void Particle::run() {
-	std::vector<float> s = this->position;
-	/* s = {1, 2}; */
-	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
+	std::vector<float> aux_pos = this->position;
+	float aux_value = this->value;
 
-	std::cout << "----" << std::endl;
 	this->value = this->fitness(this->position, this->Dimension - 1);
-	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
-	/* float solve = fitness(std::vector<float>(), 4); */
+	SetBest_personal_value();
+	SetBest_personal_position((this->value > aux_value ? this->position : aux_pos));
 	this->speed = update_speed(0.729, 2.05, 2.05);
 	this->position = update_position();
 	this->limit_test();
 }
+
+void Particle::SetBest_personal_value() {
+	if (this->value > this->best_personal_value) {
+		this->best_personal_value = this->value;
+	}
+}
+
+void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->best_personal_position = aux_pos; }
 
 /**
  * @brief función objetivo de la partícula (función esfera)
@@ -92,7 +114,6 @@ void Particle::test_particle(int i) {
 }
 
 std::vector<float> Particle::limit_test() {
-	int i = 0;
 	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
 		int neg = false;
 		if (x < 0) neg = true;
@@ -143,13 +164,12 @@ float Particle::module_vector(std::vector<float> v, int i) {
  *
  */
 void Particle::getParameters() {
-	std::cout << "--------------------\n";
-	std::cout << "particle " << this->getID() << "\n";
+	std::cout << "\033[1;31m--------------------------------------\033[0m";
+	std::cout << "\n\033[1;35mParticle " << this->getID() << "\033[0m\n";
+	std::cout << "best personal value " << this->best_personal_value << " & personal value = " << this->value<< "\n"; 
+	std::cout << "best global value " << this->best_global_value <<"\n";
 	for (int i = 0; i < this->Dimension; i++) {
-		std::cout << "position (" << this->position[i] << "), speed(" << this->speed[i] << ")" << std::endl;
+		std::cout << "position (" << this->position[i] << "), speed(" << this->speed[i] << ")";
+		std::cout << " Best personal position " << this->best_personal_position[i] << std::endl;
 	}
-
-	std::cout << "global array == \n";
-	std::for_each(this->global.begin(), this->global.end(), [](float i) { std::cout << "v = " << i << std::endl; });
-	std::cout << "\n--------------------";
 }
