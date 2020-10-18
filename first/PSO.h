@@ -44,12 +44,13 @@ class Particle {
 	Particle(int);
 	~Particle() {}
 	Particle best_part(int, Particle);
-	float fitness(std::vector<float>, int);
+	float fitness(float, int);
 	std::vector<float> update_speed(float, float, float);
 	std::vector<float> update_position();
 	void setX(float *);
 	void setB(float *);
 	void getParameters();
+	void test_particle(int);
 
 	float getOnX(int);
 	float getOnB(int);

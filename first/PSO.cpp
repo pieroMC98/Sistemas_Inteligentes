@@ -4,7 +4,7 @@
 
 /**
  * @brief Construct a new Particle:: Particle object
- * 
+ *
  */
 Particle::Particle() {
 	Particle::counter();
@@ -24,9 +24,10 @@ float Particle::getOnX(int i) { return this->x[i]; }
 float Particle::getOnB(int i) { return this->b[i]; }
 
 int Particle::getID() { return this->id; }
+
 /**
  * @brief actualiza la velocidad de la partícula
- * 
+ *
  * @param w innercia
  * @param f1 parámentro cognitivo
  * @param f2 parámetro social
@@ -41,9 +42,10 @@ std::vector<float> Particle::update_speed(float w, float f1, float f2) {
 	});
 	return this->speed;
 }
+
 /**
  * @brief actualiza la posición de la partícula
- * 
+ *
  * @return std::vector<float> posición actualizada
  */
 std::vector<float> Particle::update_position() {
@@ -53,33 +55,44 @@ std::vector<float> Particle::update_position() {
 }
 
 /**
- * @brief ejecuta a la partícula
- * 
+ * @brief ejecuta la partícula
+ *
  */
 void Particle::run() {
-	float solve = fitness(std::vector<float>(), 4);
+	std::vector<float> s = this->position;
+	s = {1, 2};
+	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
+
+	std::cout << "----" << std::endl;
+	std::for_each(s.begin(), s.end(), [this](float &x) { x = this->fitness(x, 4); });
+	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
+	getchar();
+	/* float solve = fitness(std::vector<float>(), 4); */
 	this->speed = update_speed(0.729, 2.05, 2.05);
 	this->position = update_position();
 }
 
 /**
  * @brief función objetivo de la partícula (función esfera)
- * 
+ *
  * @param x vector posición de la partícula
  * @param i condición de salida de la llamada recursiva
  * @return float dominio de la función
  */
-float Particle::fitness(std::vector<float> x, int i) {
-	x = this->position;
+float Particle::fitness(float x, int i) {
 	if (i > 0)
-		return fitness(x, i - 1) + pow(x[i], 2);
+		return fitness(x, i - 1) + pow(x, 2);
 	else
-		return pow(x[i], 2);
+		return pow(x, 2);
 }
 
+void Particle::test_particle(int i) {
+	for (int j = 0; j < i; j++)
+		std::for_each(this->position.begin(), this->position.end(), [](float &x) { x *= x * x; });
+}
 /**
  * @brief mejor valor de la partícula
- * 
+ *
  * @param process optimización de la función(MAXIMIZAR | MINIMIZAR)
  * @param zero partícula a comparar
  * @return Particle la mejor partícula
@@ -93,9 +106,10 @@ Particle Particle::best_part(int process, Particle zero) {
 		if (zero.value > best_particle->value) return zero;
 	return *this;
 }
+
 /**
  * @brief módulo del vector de dimensión i
- * 
+ *
  * @param v vector
  * @param i dimensión del vector
  * @return float módulo del vector
@@ -109,7 +123,7 @@ float Particle::module_vector(std::vector<float> v, int i) {
 
 /**
  * @brief imprime las propiedades de la partícula
- * 
+ *
  */
 void Particle::getParameters() {
 	int j = 0;
