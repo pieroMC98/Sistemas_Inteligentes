@@ -3,32 +3,34 @@
 /*     https://www.sfu.ca/~ssurjano/optimization.html */
 
 // Algoritmo optimizacion por enjambre de particulas
-#include <cstdio>
-#include <cstdlib>
 #include "HEADER_H.h"
+
 class Particle {
        private:
 	int id;
 	int Dimension;
-	std::vector<float> speed, position;
-	std::vector<float> x, b, global, limits;
-	float best;
-	float best_pos, best_value, value;
+	std::vector<float> speed, position, best_personal_position;
+	std::vector<float> x, b, global;
+	float best, limits;
+	float best_personal_value, value;
+
+	void best_value_position(float value, std::vector<float> position) {
+		static float best_value;
+		static std::vector<float> best_position;
+		if (!best_value) {
+			best_value = value;
+			best_position = position;
+		}
+	}
 	void limit() {
-		static std::vector<float> LIMIT(this->Dimension);
-		bug;
-		if (!LIMIT[0]) {
-		float option;
-		std::string op;
+		static float LIMIT;
+		if (!LIMIT) {
+			std::string op;
 			std::cout << " introduzca los limites o por defecto = 1000 (skip)" << std::endl;
 			std::getline(std::cin, op);
-			option = atoi(op.c_str())== 0?1000:atoi(op.c_str());
-			std::for_each(LIMIT.begin(), LIMIT.end(), [&](float &x) { 
-					x = option; 
-			});
-			this->limits = LIMIT;
+			LIMIT = atoi(op.c_str()) == 0 ? 1000 : atoi(op.c_str());
 		}
-		std::cout << " limit en primera" << LIMIT[0] << std::endl;
+		this->limits = LIMIT;
 	}
 
 	int counter() {
@@ -70,7 +72,7 @@ class Particle {
 	void setB(float *);
 	void getParameters();
 	void test_particle(int);
-	Particle limit_test();
+	std::vector<float> limit_test();
 	float getOnX(int);
 	float getOnB(int);
 	int getID();

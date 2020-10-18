@@ -8,12 +8,13 @@
 #include <cstdlib>
 #include <iostream>
 #include <iterator>
-#include <vector>
 #include <string>
-#define VMAX 100
+#include <vector>
+
+#define VMAX 1000
 #define MAXIMIZAR 0
 #define MINIMIZAR 1
 #define EXIT 10
 
-#define bug std::cout<<"-------8888--------"<<std::endl
+#define bug std::cout << "-------8888--------" << std::endl
 #endif

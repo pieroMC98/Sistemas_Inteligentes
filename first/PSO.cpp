@@ -9,7 +9,7 @@ Particle::Particle() {
 	Particle::counter();
 	Particle::setGlobal();
 	// Particle::dimension();
-this->Dimension = 2;
+	this->Dimension = 2;
 	Particle::limit();
 	srand(time(NULL));
 	this->speed.resize(this->Dimension);
@@ -64,12 +64,12 @@ void Particle::run() {
 	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
 
 	std::cout << "----" << std::endl;
-	float solve = this->fitness(this->position, this->Dimension - 1);
+	this->value = this->fitness(this->position, this->Dimension - 1);
 	std::for_each(s.begin(), s.end(), [](float x) { std::cout << " vect = " << x << std::endl; });
-	getchar();
 	/* float solve = fitness(std::vector<float>(), 4); */
 	this->speed = update_speed(0.729, 2.05, 2.05);
 	this->position = update_position();
+	this->limit_test();
 }
 
 /**
@@ -91,10 +91,21 @@ void Particle::test_particle(int i) {
 		std::for_each(this->position.begin(), this->position.end(), [](float &x) { x *= x * x; });
 }
 
-Particle Particle::limit_test() {
-	std::for_each(this->position.begin(), this->position.end(), [this](float &x) { if (x < 0); });
-	return *this;
+std::vector<float> Particle::limit_test() {
+	int i = 0;
+	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
+		int neg = false;
+		if (x < 0) neg = true;
+		if (abs(x) > this->limits) {
+			x = this->limits;
+			std::fill(this->speed.begin(), this->speed.end(), 0);
+		}
+		if (neg == true) x *= -1;
+	});
+
+	return this->position;
 }
+
 /**
  * @brief mejor valor de la partícula
  *
@@ -109,6 +120,7 @@ Particle Particle::best_part(int process, Particle zero) {
 
 	if (process == MINIMIZAR)
 		if (zero.value > best_particle->value) return zero;
+	this->best_value_position(best_particle->value, best_particle->position);
 	return *this;
 }
 
@@ -131,17 +143,10 @@ float Particle::module_vector(std::vector<float> v, int i) {
  *
  */
 void Particle::getParameters() {
-	int j = 0;
 	std::cout << "--------------------\n";
 	std::cout << "particle " << this->getID() << "\n";
-	for (auto i : this->position) {
-		std::cout << "pos " << j << " = " << i << std::endl;
-		++j;
-	}
-	j = 0;
-	for (auto i : this->speed) {
-		std::cout << "V " << j << " = " << i << std::endl;
-		++j;
+	for (int i = 0; i < this->Dimension; i++) {
+		std::cout << "position (" << this->position[i] << "), speed(" << this->speed[i] << ")" << std::endl;
 	}
 
 	std::cout << "global array == \n";

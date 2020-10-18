@@ -7,6 +7,8 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < 10; i++) {
 		enjambre[0].run();
 		for (auto &x : enjambre) {
+			x.run();
+			best_particle = x.best_part(MAXIMIZAR, best_particle);
 			// evaluar el fitness de cada particula
 			// actualizar la mejor solucion personal de cada particula
 			// actualizar la mejor solucion global
