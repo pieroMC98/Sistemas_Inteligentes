@@ -12,10 +12,13 @@ class Particle {
 	void best_value_position(float value, std::vector<float> position) {
 		static float best_value;
 		static std::vector<float> best_position;
-		if (!best_value || value > best_value) best_value = value;
+		if (!best_value || value > best_value) {
+			best_value = value;
+			best_position = position;
+		}
 
 		this->best_global_value = best_value;
-		this->best_global_position = position;
+		this->best_global_position = best_position;
 	}
 	void limit() {
 		static float LIMIT;
@@ -36,8 +39,10 @@ class Particle {
 	void dimension() {
 		static int Dimension;
 		if (!Dimension) {
+			std::string n;
 			std::cout << "Introduzca dimension del sistema\n";
-			std::cin >> Dimension;
+			std::getline(std::cin, n);
+			Dimension = atoi(n.c_str());
 		}
 		if (!this->Dimension) this->Dimension = Dimension;
 	}

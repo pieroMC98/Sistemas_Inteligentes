@@ -7,22 +7,24 @@
 Particle::Particle() {
 	srand(time(NULL) + this->id * MAX_POS);
 	Particle::counter();
-	/* Particle::dimension(); */
-	this->Dimension = 2;
+	Particle::dimension();
 	best_personal_value = value = 0;
 	Particle::limit();
 	this->best_global_position.resize(this->Dimension);
 	this->best_personal_position.resize(this->Dimension);
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
-	/* this->best_value_position(this->value, this->position); */
-	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
-		x = this->random_float(-this->limits, this->limits);
-		x /= 2;
-	});
+	std::for_each(this->position.begin(), this->position.end(),
+		      [this](float &x) { x = this->random_float(-this->limits, this->limits); });
 	std::fill(this->speed.begin(), this->speed.end(), 0);
 }
-
+/**
+ * @brief genera números aleatorios flotantes
+ *
+ * @param x límite inferior del número a generar
+ * @param y límite superior del número a generar
+ * @return float número generado
+ */
 float Particle::random_float(float x, float y) {
 	float random = ((float)rand()) / (float)RAND_MAX;
 	float diff = y - x;
@@ -30,6 +32,11 @@ float Particle::random_float(float x, float y) {
 	return x + r;
 }
 
+/**
+ * @brief getter de if
+ *
+ * @return int devuelve id
+ */
 int Particle::getID() { return this->id; }
 
 /**
@@ -77,12 +84,21 @@ void Particle::run() {
 	this->limit_test();
 }
 
+/**
+ * @brief setter del mejor valor de la partícula
+ *
+ */
 void Particle::SetBest_personal_value() {
 	if (this->value > this->best_personal_value) {
 		this->best_personal_value = this->value;
 	}
 }
 
+/**
+ * @brief setter de la mejor posición de la partícula
+ *
+ * @param aux_pos vector a guardar en el objeto
+ */
 void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->best_personal_position = aux_pos; }
 
 /**
@@ -99,11 +115,21 @@ float Particle::fitness(std::vector<float> x, int i) {
 		return pow(x[i], 2);
 }
 
+/**
+ * @brief test de prueba iterativa
+ *
+ * @param i condición de salida
+ */
 void Particle::test_particle(int i) {
 	for (int j = 0; j < i; j++)
 		std::for_each(this->position.begin(), this->position.end(), [](float &x) { x *= x * x; });
 }
 
+/**
+ * @brief comprueba que no se pase del límite
+ *
+ * @return std::vector<float> devuelve vector comprobado
+ */
 std::vector<float> Particle::limit_test() {
 	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
 		int neg = false;
@@ -131,7 +157,6 @@ void Particle::best_part(int process, Particle &best_particle) {
 
 	if (process == MAXIMIZAR)
 		if (this->value > best_particle.value) best_particle = *this;
-	/* std::cout << "creo que no me estoy metiendo en best_pa()" << this->getID() << std::endl; */
 	this->best_value_position(best_particle.value, best_particle.position);
 }
 
