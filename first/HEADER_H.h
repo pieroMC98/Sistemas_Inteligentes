@@ -6,11 +6,11 @@
 #include <algorithm>
 #include <cstdio>
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <vector>
-#include <iomanip> 
 #define MAX_POS 1000
 #define MAXIMIZAR 0
 #define MINIMIZAR 1
