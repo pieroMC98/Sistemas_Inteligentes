@@ -12,13 +12,10 @@ class Particle {
 	void best_value_position(float value, std::vector<float> position) {
 		static float best_value;
 		static std::vector<float> best_position;
-		if (!best_value || value > best_value) {
-			best_value = value;
-			this->best_global_value = best_value;
-			this->best_global_position = position;
-			std::cout << "la mejor posicion del mundo mundo para " << this->getID()
-				  << " es = " << best_value << std::endl;
-		}
+		if (!best_value || value > best_value) best_value = value;
+
+		this->best_global_value = best_value;
+		this->best_global_position = position;
 	}
 	void limit() {
 		static float LIMIT;
@@ -52,7 +49,7 @@ class Particle {
 	Particle(int);
 	~Particle() {}
 	float random_float(float, float);
-	Particle best_part(int, Particle);
+	void best_part(int, Particle &);
 	float fitness(std::vector<float>, int);
 	std::vector<float> update_speed(float, float, float);
 	std::vector<float> update_position();

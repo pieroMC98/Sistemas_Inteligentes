@@ -15,7 +15,7 @@ Particle::Particle() {
 	this->best_personal_position.resize(this->Dimension);
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
-	this->best_value_position(this->value, this->position);
+	/* this->best_value_position(this->value, this->position); */
 	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
 		x = this->random_float(-this->limits, this->limits);
 		x /= 2;
@@ -125,16 +125,14 @@ std::vector<float> Particle::limit_test() {
  * @param zero partícula a comparar
  * @return Particle la mejor partícula
  */
-Particle Particle::best_part(int process, Particle zero) {
-	Particle *best_particle = this;
+void Particle::best_part(int process, Particle &best_particle) {
 	if (process == MINIMIZAR)
-		if (zero.value < best_particle->value) best_particle = &zero;
+		if (this->value < best_particle.value) best_particle = *this;
 
 	if (process == MAXIMIZAR)
-		if (zero.value > best_particle->value) best_particle = &zero;
-	std::cout << "creo que no me estoy metiendo en best_pa()" << this->getID() << std::endl;
-	this->best_value_position(best_particle->value, best_particle->position);
-	return *best_particle;
+		if (this->value > best_particle.value) best_particle = *this;
+	/* std::cout << "creo que no me estoy metiendo en best_pa()" << this->getID() << std::endl; */
+	this->best_value_position(best_particle.value, best_particle.position);
 }
 
 /**

@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < 3; i++) {
 		for (auto &x : enjambre) {
 			x.run();
-			*best_particle = x.best_part(MAXIMIZAR, *best_particle);
+			x.best_part(MAXIMIZAR, *best_particle);
 			x.getParameters();
 			// evaluar el fitness de cada particula
 			// actualizar la mejor solucion personal de cada particula
