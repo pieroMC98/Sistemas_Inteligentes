@@ -1,5 +1,5 @@
 main = .main
-objects = PSO.cpp main.cpp
+objects = Particle/PSO.cpp Function/function.cpp main.cpp
 
 objects: $(objects)
 	g++ -Wall -g $(objects) -o $(main)

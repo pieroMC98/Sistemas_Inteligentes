@@ -4,8 +4,8 @@
 
 // Algoritmo optimizacion por enjambre de particulas
 
-#include "PSO.h"
-#include "function.h"
+#include "Particle/PSO.h"
+#include "Function/function.h"
 
 int main(int argc, char *argv[]) {
 	int N = 3;
