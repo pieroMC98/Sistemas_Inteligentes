@@ -69,5 +69,5 @@ class Particle {
 	float getOnB(int);
 	int getID();
 	void run();
-	float (*call_back)(std::vector<float>,int);
+	float (*call_back)(std::vector<float>, int);
 };
