@@ -76,7 +76,7 @@ void Particle::run() {
 	std::vector<float> aux_pos = this->position;
 	float aux_value = this->value;
 
-	this->value = this->fitness(this->position, this->Dimension - 1);
+	this->value = this->call_back(this->position, this->Dimension - 1);
 	SetBest_personal_value();
 	SetBest_personal_position((this->value > aux_value ? this->position : aux_pos));
 	this->speed = update_speed(0.729, 2.05, 2.05);

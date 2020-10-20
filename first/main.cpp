@@ -3,7 +3,19 @@
 /*     https://www.sfu.ca/~ssurjano/optimization.html */
 
 // Algoritmo optimizacion por enjambre de particulas
+#include <vector>
 #include "PSO.h"
+int suma(int a, int b) {
+	return a + b;
+}
+
+float esfera(std::vector<float> x, int i) {
+	if (i > 0)
+		return esfera(x, i - 1) + pow(x[i], 2);
+	else
+		return pow(x[i], 2);
+
+}
 int main(int argc, char *argv[]) {
 	int N = 3;
 	int salida = 10;
@@ -11,7 +23,10 @@ int main(int argc, char *argv[]) {
 		N = atoi(argv[1]);
 		salida = atoi(argv[2]);
 	}
+
 	std::vector<Particle> enjambre(N);
+	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = esfera; });
+
 	Particle *best_particle = &enjambre[0];
 	for (int i = 0; i < 3; i++) {
 		for (auto &x : enjambre) {
