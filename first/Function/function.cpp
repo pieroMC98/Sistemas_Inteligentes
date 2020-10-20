@@ -16,8 +16,8 @@ float dixon_price(std::vector<float> x, int i) {
 }
 
 int select_function() {
-	int option = 0;
+	std::string option;
 	std::cout << "Elija la funcion fitness: sphere(0) | sum_of_different_power(1) | dixon_price(2)" << std::endl;
-	std::cin >> option;
-	return option;
+	std::getline(std::cin , option);
+	return atoi(option.c_str());
 }
