@@ -4,12 +4,14 @@
 
 // Algoritmo optimizacion por enjambre de particulas
 
-#include "Particle/PSO.h"
+#include <algorithm>
+
 #include "Function/function.h"
+#include "Particle/PSO.h"
 
 int main(int argc, char *argv[]) {
-	int N = 3;
-	int salida = 10;
+	int N = 5;
+	int salida = 3;
 	if (argc > 3) {
 		N = atoi(argv[1]);
 		salida = atoi(argv[2]);
@@ -20,16 +22,17 @@ int main(int argc, char *argv[]) {
 	std::vector<Particle> enjambre(N);
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 
-	Particle *best_particle = &enjambre[0];
+	Particle best_particle = enjambre[0];
 	for (int i = 0; i < salida; i++) {
-		for (auto &x : enjambre) {
+		for (auto x : enjambre) {
 			x.run();
-			x.best_part(MAXIMIZAR, *best_particle);
+			x.best_part(MAXIMIZAR, best_particle);
 			x.getParameters();
 			// evaluar el fitness de cada particula
 			// actualizar la mejor solucion personal de cada particula
 			// actualizar la mejor solucion global
-			// actualizar la velocidad y posicion de cada partucla
+			// actualizar la velocidad y posicion de cada particula
+			std::cout << "la mejor particula ( ahora )es " << best_particle.getID() << std::endl;
 		}
 		std::cout << "\n\033[1;32m################################################\033[0m" << std::endl;
 	}

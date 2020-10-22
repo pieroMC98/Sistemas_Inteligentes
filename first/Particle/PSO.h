@@ -31,9 +31,9 @@ class Particle {
 		this->limits = LIMIT;
 	}
 
-	int counter() {
+	void counter() {
 		static int id;
-		return this->id = id++;
+		this->id = id++;
 	}
 
 	void dimension() {

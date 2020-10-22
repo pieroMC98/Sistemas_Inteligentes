@@ -4,8 +4,8 @@
  *
  */
 Particle::Particle() {
-	srand(time(NULL) + this->id * MAX_POS);
 	Particle::counter();
+	srand(time(NULL) + this->id * MAX_POS);
 	Particle::dimension();
 	best_personal_value = value = 0;
 	Particle::limit();
@@ -63,8 +63,9 @@ std::vector<float> Particle::update_speed(float w, float f1, float f2) {
  */
 std::vector<float> Particle::update_position() {
 	int j = 0;
-	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->speed[j++]; });
-	return this->position;
+	std::vector<float> aux = this->position;
+	std::for_each(aux.begin(), aux.end(), [&](float &x) { x += aux[j++]; });
+	return aux;
 }
 
 /**
