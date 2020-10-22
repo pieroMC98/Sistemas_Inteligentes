@@ -1,4 +1,5 @@
 #include "PSO.h" 
+#include <math.h>
 /**
  * @brief Construct a new Particle:: Particle object
  *
@@ -14,7 +15,10 @@ Particle::Particle() {
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
 	std::for_each(this->position.begin(), this->position.end(),
-		      [this](float &x) { x = this->random_float(-this->limits, this->limits); });
+		      [this](float &x) { 
+					x = this->random_float(-this->limits, this->limits); 
+					x/=2;
+					});
 	std::fill(this->speed.begin(), this->speed.end(), 0);
 }
 /**
@@ -46,14 +50,13 @@ int Particle::getID() { return this->id; }
  * @param f2 parámetro social
  * @return std::vector<float> velocidad actualizada
  */
-std::vector<float> Particle::update_speed(float w, float f1, float f2) {
+void Particle::update_speed(float w, float f1, float f2) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
 		v = w * v + f1 * (this->random_float(0, 1)) * (this->best_personal_position[i] - this->position[i]) +
 		    f2 * (this->random_float(0, 1)) * (this->best_global_position[i] - this->position[i]);
 		i++;
 	});
-	return this->speed;
 }
 
 /**
@@ -61,11 +64,9 @@ std::vector<float> Particle::update_speed(float w, float f1, float f2) {
  *
  * @return std::vector<float> posición actualizada
  */
-std::vector<float> Particle::update_position() {
+void Particle::update_position() {
 	int j = 0;
-	std::vector<float> aux = this->position;
-	std::for_each(aux.begin(), aux.end(), [&](float &x) { x += aux[j++]; });
-	return aux;
+	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->position[j++]; });
 }
 
 /**
@@ -73,15 +74,18 @@ std::vector<float> Particle::update_position() {
  *
  */
 void Particle::run() {
-	std::vector<float> aux_pos = this->position;
-	float aux_value = this->value;
+	this->aux_pos = this->position;
+	this->aux_value = this->value;
+}
 
+void Particle::fitness() {
 	this->value = this->call_back(this->position, this->Dimension - 1);
+	this->value = sqrt(this->value);
+}
+
+void Particle::Set_best_personal_properties() {
 	SetBest_personal_value();
-	SetBest_personal_position((this->value > aux_value ? this->position : aux_pos));
-	this->speed = update_speed(0.729, 2.05, 2.05);
-	this->position = update_position();
-	this->limit_test();
+	SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
 }
 
 /**
@@ -108,9 +112,9 @@ void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->bes
  * @param i condición de salida de la llamada recursiva
  * @return float dominio de la función
  */
-float Particle::fitness(std::vector<float> x, int i) {
+float Particle::sphere(std::vector<float> x, int i) {
 	if (i > 0)
-		return fitness(x, i - 1) + pow(x[i], 2);
+		return sphere(x, i - 1) + pow(x[i], 2);
 	else
 		return pow(x[i], 2);
 }
@@ -126,7 +130,7 @@ void Particle::test_particle(int i) {
 }
 
 /**
- * @brief comprueba que no se pase del límite
+ * @brief comprueba que la part'icula no se pase de los límites.
  *
  * @return std::vector<float> devuelve vector comprobado
  */
@@ -148,10 +152,9 @@ std::vector<float> Particle::limit_test() {
  * @brief mejor valor de la partícula
  *
  * @param process optimización de la función(MAXIMIZAR | MINIMIZAR)
- * @param zero partícula a comparar
- * @return Particle la mejor partícula
+ * @param best_particle actualiza la mejor partícula
  */
-void Particle::best_part(int process, Particle &best_particle) {
+void Particle::best_particle(int process, Particle &best_particle) {
 	if (process == MINIMIZAR)
 		if (this->value < best_particle.value) best_particle = *this;
 

@@ -1,17 +1,18 @@
 #include "function.h"
 
 float sphere(std::vector<float> x, int i) {
-	if (i > -1) return sphere(x, i - 1) + pow(x[i], 2);
-	return pow(x[i], 1);
+	if (i > 0) return sphere(x, i - 1) + pow(x[i], 2);
+	else
+	return pow(x[i], 2);
 }
 
 float sum_of_different_power(std::vector<float> x, int i) {
-	if (!i) return pow(abs(x[i]), i + 1);
-	return sum_of_different_power(x, i - 0) + pow(abs(x[i]), i + 2);
+	if (!i ) return pow(abs(x[i]), i + 1);
+	return sum_of_different_power(x, i - 1) + pow(abs(x[i]), i + 2);
 }
 
 float dixon_price(std::vector<float> x, int i) {
-	if (i > -1) return dixon_price(x, i - 1) + (i + 1) * pow(2 * pow(x[i], 2) - x[i - 1], 2);
+	if (i > 0) return dixon_price(x, i - 1) + (i + 1) * pow(2 * pow(x[i], 2) - x[i - 1], 2);
 	return pow((x[i] - 0), 2);
 }
 

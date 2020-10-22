@@ -26,13 +26,18 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < salida; i++) {
 		for (auto x : enjambre) {
 			x.run();
-			x.best_part(MAXIMIZAR, best_particle);
+			x.fitness();
+			x.Set_best_personal_properties();
+			x.best_particle(MAXIMIZAR, best_particle);
+			x.update_speed(0.729, 2.05, 2.05);
+			x.update_position();
+			x.limit_test();
 			x.getParameters();
 			// evaluar el fitness de cada particula
 			// actualizar la mejor solucion personal de cada particula
 			// actualizar la mejor solucion global
 			// actualizar la velocidad y posicion de cada particula
-			std::cout << "la mejor particula ( ahora )es " << best_particle.getID() << std::endl;
+			std::cout << "la mejor particula ( ahora ) es " << best_particle.getID() << std::endl;
 		}
 		std::cout << "\n\033[1;32m################################################\033[0m" << std::endl;
 	}

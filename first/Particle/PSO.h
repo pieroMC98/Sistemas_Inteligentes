@@ -4,10 +4,11 @@ class Particle {
        private:
 	int id;
 	int Dimension;
-	std::vector<float> speed, position;
+	std::vector<float> speed, position, aux_pos;
 	std::vector<float> best_global_position, best_personal_position;
 	float limits;
 	float best_personal_value, value, best_global_value;
+	float aux_value;
 
 	void best_value_position(float value, std::vector<float> position) {
 		static float best_value;
@@ -54,10 +55,12 @@ class Particle {
 	Particle(int);
 	~Particle() {}
 	float random_float(float, float);
-	void best_part(int, Particle &);
-	float fitness(std::vector<float>, int);
-	std::vector<float> update_speed(float, float, float);
-	std::vector<float> update_position();
+	void best_particle(int, Particle &);
+	float sphere(std::vector<float>, int);
+	void fitness();
+	void Set_best_personal_properties();
+	void update_speed(float, float, float);
+	void update_position();
 	void setX(float *);
 	void setB(float *);
 	void getParameters();
