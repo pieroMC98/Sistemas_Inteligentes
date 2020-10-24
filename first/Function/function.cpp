@@ -1,9 +1,10 @@
 #include "function.h"
+#include <math.h>
 
 float sphere(std::vector<float> x, int i) {
-	if (i > 0) return sphere(x, i - 1) + pow(x[i], 2);
-	else
-	return pow(x[i], 2);
+	float r = 0;
+	for( auto j : x ) r += j*j;
+	return sqrt(r);
 }
 
 float sum_of_different_power(std::vector<float> x, int i) {

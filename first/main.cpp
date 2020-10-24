@@ -3,9 +3,6 @@
 /*     https://www.sfu.ca/~ssurjano/optimization.html */
 
 // Algoritmo optimizacion por enjambre de particulas
-
-#include <algorithm>
-
 #include "Function/function.h"
 #include "Particle/PSO.h"
 
@@ -16,8 +13,8 @@ int main(int argc, char *argv[]) {
 		N = atoi(argv[1]);
 		salida = atoi(argv[2]);
 	}
-	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
 
+	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
 	int option = select_function();
 	std::vector<Particle> enjambre(N);
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
@@ -29,10 +26,12 @@ int main(int argc, char *argv[]) {
 			x.fitness();
 			x.Set_best_personal_properties();
 			x.best_particle(MAXIMIZAR, best_particle);
+			/* x.getParameters(); */
 			x.update_speed(0.729, 2.05, 2.05);
 			x.update_position();
 			x.limit_test();
-			x.getParameters();
+			/* std::cout << "\n//////////////los datos actualizado son: " << std::endl; */
+			/* x.getParameters(); */
 			// evaluar el fitness de cada particula
 			// actualizar la mejor solucion personal de cada particula
 			// actualizar la mejor solucion global

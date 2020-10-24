@@ -1,5 +1,5 @@
 #include "PSO.h" 
-#include <math.h>
+
 /**
  * @brief Construct a new Particle:: Particle object
  *
@@ -15,12 +15,13 @@ Particle::Particle() {
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
 	std::for_each(this->position.begin(), this->position.end(),
-		      [this](float &x) { 
+		      [this](float &x) {
 					x = this->random_float(-this->limits, this->limits); 
-					x/=2;
+					/* x/=2; */
 					});
 	std::fill(this->speed.begin(), this->speed.end(), 0);
 }
+
 /**
  * @brief genera números aleatorios flotantes
  *
@@ -41,6 +42,24 @@ float Particle::random_float(float x, float y) {
  * @return int devuelve id
  */
 int Particle::getID() { return this->id; }
+
+/**
+ * @brief ejecuta la partícula
+ *
+ */
+void Particle::run() {
+	this->aux_pos = this->position;
+	this->aux_value = this->value;
+}
+
+void Particle::fitness() {
+	this->value = this->call_back(this->position, this->Dimension - 1);
+}
+
+void Particle::Set_best_personal_properties() {
+	SetBest_personal_value();
+	SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
+}
 
 /**
  * @brief actualiza la velocidad de la partícula
@@ -70,25 +89,6 @@ void Particle::update_position() {
 }
 
 /**
- * @brief ejecuta la partícula
- *
- */
-void Particle::run() {
-	this->aux_pos = this->position;
-	this->aux_value = this->value;
-}
-
-void Particle::fitness() {
-	this->value = this->call_back(this->position, this->Dimension - 1);
-	this->value = sqrt(this->value);
-}
-
-void Particle::Set_best_personal_properties() {
-	SetBest_personal_value();
-	SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
-}
-
-/**
  * @brief setter del mejor valor de la partícula
  *
  */
@@ -112,6 +112,7 @@ void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->bes
  * @param i condición de salida de la llamada recursiva
  * @return float dominio de la función
  */
+
 float Particle::sphere(std::vector<float> x, int i) {
 	if (i > 0)
 		return sphere(x, i - 1) + pow(x[i], 2);
