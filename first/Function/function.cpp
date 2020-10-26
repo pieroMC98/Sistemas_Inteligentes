@@ -1,5 +1,4 @@
 #include "function.h"
-#include <math.h>
 
 float sphere(std::vector<float> x, int i) {
 	float r = 0;

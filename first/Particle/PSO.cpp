@@ -37,7 +37,7 @@ float Particle::random_float(float x, float y) {
 }
 
 /**
- * @brief getter de if
+ * @brief getter de id
  *
  * @return int devuelve id
  */
@@ -58,7 +58,12 @@ void Particle::fitness() {
 
 void Particle::Set_best_personal_properties() {
 	SetBest_personal_value();
-	SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
+	if( this->process == MAXIMIZAR )
+		SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
+
+	if( this->process == MINIMIZAR )
+		SetBest_personal_position((this->value < this->aux_value ? this->position : this->aux_pos));
+/* SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos)); */
 }
 
 /**
@@ -93,9 +98,14 @@ void Particle::update_position() {
  *
  */
 void Particle::SetBest_personal_value() {
-	if (this->value > this->best_personal_value) {
-		this->best_personal_value = this->value;
-	}
+	if( this->process == MAXIMIZAR )
+		if (this->value > this->best_personal_value)
+			this->best_personal_value = this->value;
+
+	if( this->process == MINIMIZAR )
+		if (this->value < this->best_personal_value)
+			this->best_personal_value = this->value;
+
 }
 
 /**
@@ -156,8 +166,12 @@ std::vector<float> Particle::limit_test() {
  * @param best_particle actualiza la mejor partícula
  */
 void Particle::best_particle(int process, Particle &best_particle) {
+	this->process = process;
 	if (process == MINIMIZAR)
-		if (this->value < best_particle.value) best_particle = *this;
+		if (this->value < best_particle.value){
+			std::cout<<"mi valor es "<<this->value<<" y best es "<<best_particle.value<<std::endl;
+			best_particle = *this;
+		}
 
 	if (process == MAXIMIZAR)
 		if (this->value > best_particle.value) best_particle = *this;

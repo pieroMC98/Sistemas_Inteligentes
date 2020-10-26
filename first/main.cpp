@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) {
 	int N = 5;
 	int salida = 3;
-	if (argc > 3) {
+	if (argc >= 3) {
 		N = atoi(argv[1]);
 		salida = atoi(argv[2]);
 	}
@@ -20,13 +20,15 @@ int main(int argc, char *argv[]) {
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 
 	Particle best_particle = enjambre[0];
+	best_particle.fitness();
 	for (int i = 0; i < salida; i++) {
 		for (auto x : enjambre) {
 			x.run();
 			x.fitness();
 			x.Set_best_personal_properties();
-			x.best_particle(MAXIMIZAR, best_particle);
-			/* x.getParameters(); */
+			x.best_particle(MINIMIZAR, best_particle);
+
+			x.getParameters();
 			x.update_speed(0.729, 2.05, 2.05);
 			x.update_position();
 			x.limit_test();

@@ -3,7 +3,7 @@
 class Particle {
        private:
 	int id;
-	int Dimension;
+	int Dimension,process;
 	std::vector<float> speed, position, aux_pos;
 	std::vector<float> best_global_position, best_personal_position;
 	float limits;
@@ -14,8 +14,17 @@ class Particle {
 		static float best_value;
 		static std::vector<float> best_position;
 		if (!best_value || value > best_value) {
-			best_value = value;
-			best_position = position;
+			if( this->process == MAXIMIZAR )
+				if( value > best_value ){
+					best_value = value;
+					best_position = position;
+				}
+
+			if( this->process == MINIMIZAR)
+				if( value < best_value ){
+					best_value = value;
+					best_position = position;
+				}
 		}
 
 		this->best_global_value = best_value;
