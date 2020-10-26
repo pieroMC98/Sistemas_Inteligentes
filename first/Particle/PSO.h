@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "../HEADER_H.h"
 
 class Particle {
@@ -10,6 +11,16 @@ class Particle {
 	float best_personal_value, value, best_global_value;
 	float aux_value;
 
+	void setProcess(){
+		static int process;
+		if( !process ){
+			std::string option;
+			std::cout<<"MINIMIZAR(1) | MAXIMIZAR(2)\n";
+			std::getline(std::cin,option);
+			process = atoi(option.c_str());
+		}
+		this->process = process;
+	}
 	void best_value_position(float value, std::vector<float> position) {
 		static float best_value;
 		static std::vector<float> best_position;
@@ -64,7 +75,7 @@ class Particle {
 	Particle(int);
 	~Particle() {}
 	float random_float(float, float);
-	void best_particle(int, Particle &);
+	void best_particle(Particle &);
 	float sphere(std::vector<float>, int);
 	void fitness();
 	void Set_best_personal_properties();

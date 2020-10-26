@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 			x.run();
 			x.fitness();
 			x.Set_best_personal_properties();
-			x.best_particle(MINIMIZAR, best_particle);
+			x.best_particle(best_particle);
 
 			x.getParameters();
 			x.update_speed(0.729, 2.05, 2.05);

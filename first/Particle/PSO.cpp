@@ -6,6 +6,7 @@
  */
 Particle::Particle() {
 	Particle::counter();
+	Particle::setProcess();
 	srand(time(NULL) + this->id * MAX_POS);
 	Particle::dimension();
 	best_personal_value = value = 0;
@@ -165,15 +166,14 @@ std::vector<float> Particle::limit_test() {
  * @param process optimización de la función(MAXIMIZAR | MINIMIZAR)
  * @param best_particle actualiza la mejor partícula
  */
-void Particle::best_particle(int process, Particle &best_particle) {
-	this->process = process;
-	if (process == MINIMIZAR)
+void Particle::best_particle(Particle &best_particle) {
+	if (this->process == MINIMIZAR)
 		if (this->value < best_particle.value){
 			std::cout<<"mi valor es "<<this->value<<" y best es "<<best_particle.value<<std::endl;
 			best_particle = *this;
 		}
 
-	if (process == MAXIMIZAR)
+	if (this->process == MAXIMIZAR)
 		if (this->value > best_particle.value) best_particle = *this;
 	this->best_value_position(best_particle.value, best_particle.position);
 }

@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 #define MAX_POS 1000
-#define MAXIMIZAR 0
+#define MAXIMIZAR 2
 #define MINIMIZAR 1
 #define EXIT 10
 
