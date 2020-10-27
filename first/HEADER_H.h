@@ -12,8 +12,8 @@
 #include <string>
 #include <vector>
 #define MAX_POS 1000
-#define MAXIMIZAR 2
 #define MINIMIZAR 1
+#define MAXIMIZAR 2
 #define EXIT 10
 
 #define bug std::cout << "-------8888--------" << std::endl

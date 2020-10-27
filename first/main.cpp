@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 	Particle best_particle = enjambre[0];
 	best_particle.fitness();
 	for (int i = 0; i < salida; i++) {
-		for (auto x : enjambre) {
+		for (auto &x : enjambre) {
 			x.run();
 			x.fitness();
 			x.Set_best_personal_properties();
@@ -40,6 +40,7 @@ int main(int argc, char *argv[]) {
 			// actualizar la velocidad y posicion de cada particula
 			std::cout << "la mejor particula ( ahora ) es " << best_particle.getID() << std::endl;
 		}
+	best_particle.best_value_position(best_particle);
 		std::cout << "\n\033[1;32m################################################\033[0m" << std::endl;
 	}
 	return EXIT_SUCCESS;

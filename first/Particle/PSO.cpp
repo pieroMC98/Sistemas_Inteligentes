@@ -1,4 +1,5 @@
 #include "PSO.h" 
+#include <cstdio>
 
 /**
  * @brief Construct a new Particle:: Particle object
@@ -10,6 +11,7 @@ Particle::Particle() {
 	srand(time(NULL) + this->id * MAX_POS);
 	Particle::dimension();
 	best_personal_value = value = 0;
+	
 	Particle::limit();
 	this->best_global_position.resize(this->Dimension);
 	this->best_personal_position.resize(this->Dimension);
@@ -57,14 +59,41 @@ void Particle::fitness() {
 	this->value = this->call_back(this->position, this->Dimension - 1);
 }
 
+/**
+ * @brief setter del mejor valor de la partícula
+ *
+ */
+void Particle::SetBest_personal_value() {
+if( this->aux_value != 0 ) {
+		if( this->process == MAXIMIZAR )
+			if (this->value > this->best_personal_value)
+				this->best_personal_value = this->value;
+
+		if( this->process == MINIMIZAR )
+			if (this->value < this->best_personal_value)
+				this->best_personal_value = this->value;
+	}else
+		this->best_personal_value = this->value;
+}
+
+/**
+ * @brief setter de la mejor posición de la partícula
+ *
+ * @param aux_pos vector a guardar en el objeto
+ */
+void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->best_personal_position = aux_pos; }
+
 void Particle::Set_best_personal_properties() {
 	SetBest_personal_value();
-	if( this->process == MAXIMIZAR )
-		SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
+	if( this->aux_value != 0 ){
+		if( this->process == MAXIMIZAR )
+			SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
 
-	if( this->process == MINIMIZAR )
-		SetBest_personal_position((this->value < this->aux_value ? this->position : this->aux_pos));
-/* SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos)); */
+		if( this->process == MINIMIZAR )
+			SetBest_personal_position((this->value < this->aux_value ? this->position : this->aux_pos));
+	/* SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos)); */
+	} else
+		SetBest_personal_position(this->position);
 }
 
 /**
@@ -94,27 +123,7 @@ void Particle::update_position() {
 	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->position[j++]; });
 }
 
-/**
- * @brief setter del mejor valor de la partícula
- *
- */
-void Particle::SetBest_personal_value() {
-	if( this->process == MAXIMIZAR )
-		if (this->value > this->best_personal_value)
-			this->best_personal_value = this->value;
 
-	if( this->process == MINIMIZAR )
-		if (this->value < this->best_personal_value)
-			this->best_personal_value = this->value;
-
-}
-
-/**
- * @brief setter de la mejor posición de la partícula
- *
- * @param aux_pos vector a guardar en el objeto
- */
-void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->best_personal_position = aux_pos; }
 
 /**
  * @brief función objetivo de la partícula (función esfera)
@@ -175,7 +184,7 @@ void Particle::best_particle(Particle &best_particle) {
 
 	if (this->process == MAXIMIZAR)
 		if (this->value > best_particle.value) best_particle = *this;
-	this->best_value_position(best_particle.value, best_particle.position);
+	/* this->best_value_position(best_particle.value, best_particle.position); */
 }
 
 /**

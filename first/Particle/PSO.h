@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <cstdlib>
 #include "../HEADER_H.h"
 
@@ -21,26 +22,8 @@ class Particle {
 		}
 		this->process = process;
 	}
-	void best_value_position(float value, std::vector<float> position) {
-		static float best_value;
-		static std::vector<float> best_position;
-		if (!best_value || value > best_value) {
-			if( this->process == MAXIMIZAR )
-				if( value > best_value ){
-					best_value = value;
-					best_position = position;
-				}
 
-			if( this->process == MINIMIZAR)
-				if( value < best_value ){
-					best_value = value;
-					best_position = position;
-				}
-		}
 
-		this->best_global_value = best_value;
-		this->best_global_position = best_position;
-	}
 	void limit() {
 		static float LIMIT;
 		if (!LIMIT) {
@@ -93,4 +76,37 @@ class Particle {
 	int getID();
 	void run();
 	float (*call_back)(std::vector<float>, int);
+
+	void best_value_position(Particle &best_particle) {
+		float value = best_particle.value;
+		std::vector<float> position = best_particle.position;
+
+		/* bug; */
+		/* best_particle.getParameters(); */
+		/* bug; */
+		/* getchar(); */
+		static float best_value;
+		static std::vector<float> best_position;
+
+		if( best_value != 0 ){
+			if( this->process == MAXIMIZAR )
+				if( value > best_value ) {
+					best_value = value;
+					best_position = position;
+				}
+
+			if( this->process == MINIMIZAR)
+				if( value < best_value ) {
+					best_value = value;
+					best_position = position;
+				}
+		} else {
+			best_value = value;
+			best_position = position;
+		}
+		
+		// esto no es est'atico
+		this->best_global_value = best_value;
+		this->best_global_position = best_position;
+	}
 };
