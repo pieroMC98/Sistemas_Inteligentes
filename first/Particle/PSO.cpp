@@ -1,5 +1,4 @@
-#include "PSO.h" 
-#include <cstdio>
+#include "PSO.h"
 
 /**
  * @brief Construct a new Particle:: Particle object
@@ -11,17 +10,16 @@ Particle::Particle() {
 	srand(time(NULL) + this->id * MAX_POS);
 	Particle::dimension();
 	best_personal_value = value = 0;
-	
+
 	Particle::limit();
 	this->best_global_position.resize(this->Dimension);
 	this->best_personal_position.resize(this->Dimension);
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
-	std::for_each(this->position.begin(), this->position.end(),
-		      [this](float &x) {
-					x = this->random_float(-this->limits, this->limits); 
-					/* x/=2; */
-					});
+	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
+		x = this->random_float(-this->limits, this->limits);
+		/* x/=2; */
+	});
 	std::fill(this->speed.begin(), this->speed.end(), 0);
 }
 
@@ -50,29 +48,31 @@ int Particle::getID() { return this->id; }
  * @brief ejecuta la partícula
  *
  */
-void Particle::run() {
+void Particle::run(Particle best_particle) {
+	this->best_global_position = best_particle.best_global_position;
+	this->best_global_value = best_particle.best_global_value;
 	this->aux_pos = this->position;
 	this->aux_value = this->value;
 }
 
-void Particle::fitness() {
-	this->value = this->call_back(this->position, this->Dimension - 1);
-}
+/**
+ * @brief valor del fitness de la partícula
+ *
+ */
+void Particle::fitness() { this->value = this->call_back(this->position, this->Dimension - 1); }
 
 /**
  * @brief setter del mejor valor de la partícula
  *
  */
 void Particle::SetBest_personal_value() {
-if( this->aux_value != 0 ) {
-		if( this->process == MAXIMIZAR )
-			if (this->value > this->best_personal_value)
-				this->best_personal_value = this->value;
+	if (this->aux_value != 0) {
+		if (this->process == MAXIMIZAR)
+			if (this->value > this->best_personal_value) this->best_personal_value = this->value;
 
-		if( this->process == MINIMIZAR )
-			if (this->value < this->best_personal_value)
-				this->best_personal_value = this->value;
-	}else
+		if (this->process == MINIMIZAR)
+			if (this->value < this->best_personal_value) this->best_personal_value = this->value;
+	} else
 		this->best_personal_value = this->value;
 }
 
@@ -83,15 +83,18 @@ if( this->aux_value != 0 ) {
  */
 void Particle::SetBest_personal_position(std::vector<float> aux_pos) { this->best_personal_position = aux_pos; }
 
+/**
+ * @brief actualiza lo mejores valroes de las partículas
+ *
+ */
 void Particle::Set_best_personal_properties() {
 	SetBest_personal_value();
-	if( this->aux_value != 0 ){
-		if( this->process == MAXIMIZAR )
+	if (this->aux_value != 0) {
+		if (this->process == MAXIMIZAR)
 			SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos));
 
-		if( this->process == MINIMIZAR )
+		if (this->process == MINIMIZAR)
 			SetBest_personal_position((this->value < this->aux_value ? this->position : this->aux_pos));
-	/* SetBest_personal_position((this->value > this->aux_value ? this->position : this->aux_pos)); */
 	} else
 		SetBest_personal_position(this->position);
 }
@@ -120,10 +123,8 @@ void Particle::update_speed(float w, float f1, float f2) {
  */
 void Particle::update_position() {
 	int j = 0;
-	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->position[j++]; });
+	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->speed[j++]; });
 }
-
-
 
 /**
  * @brief función objetivo de la partícula (función esfera)
@@ -132,7 +133,6 @@ void Particle::update_position() {
  * @param i condición de salida de la llamada recursiva
  * @return float dominio de la función
  */
-
 float Particle::sphere(std::vector<float> x, int i) {
 	if (i > 0)
 		return sphere(x, i - 1) + pow(x[i], 2);
@@ -177,8 +177,8 @@ std::vector<float> Particle::limit_test() {
  */
 void Particle::best_particle(Particle &best_particle) {
 	if (this->process == MINIMIZAR)
-		if (this->value < best_particle.value){
-			std::cout<<"mi valor es "<<this->value<<" y best es "<<best_particle.value<<std::endl;
+		if (this->value < best_particle.value) {
+			std::cout << "mi valor es " << this->value << " y best es " << best_particle.value << std::endl;
 			best_particle = *this;
 		}
 

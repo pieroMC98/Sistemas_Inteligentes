@@ -21,9 +21,10 @@ int main(int argc, char *argv[]) {
 
 	Particle best_particle = enjambre[0];
 	best_particle.fitness();
+
 	for (int i = 0; i < salida; i++) {
 		for (auto &x : enjambre) {
-			x.run();
+			x.run(best_particle);
 			x.fitness();
 			x.Set_best_personal_properties();
 			x.best_particle(best_particle);
