@@ -184,7 +184,6 @@ void Particle::best_particle(Particle &best_particle) {
 
 	if (this->process == MAXIMIZAR)
 		if (this->value > best_particle.value) best_particle = *this;
-	/* this->best_value_position(best_particle.value, best_particle.position); */
 }
 
 /**

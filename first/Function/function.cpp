@@ -1,4 +1,6 @@
 #include "function.h"
+
+#include <cstdlib>
 /**
  * @brief función esfera
  *
@@ -45,4 +47,15 @@ int select_function() {
 	std::cout << "Elija la funcion fitness: sphere(0) | sum_of_different_power(1) | dixon_price(2)" << std::endl;
 	std::getline(std::cin, option);
 	return atoi(option.c_str());
+}
+
+int params(char **argv, int argc, int &N, int &s) {
+	if (argc >= 3) {
+		N = atoi(argv[1]);
+		s = atoi(argv[2]);
+		return EXIT_SUCCESS;
+	} else {
+		std::cout << "los parámetros son:\n1º- número de partículas\n2º- número de iteraciones\n";
+		return EXIT_FAILURE;
+	}
 }

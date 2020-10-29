@@ -6,6 +6,6 @@ objects: $(objects)
 
 run:objects
 	clear
-	./$(main)
+	./$(main) 2 3
 format:
 	clang-format -i *.cpp *.h

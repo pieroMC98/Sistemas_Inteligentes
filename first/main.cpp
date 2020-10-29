@@ -9,13 +9,12 @@
 int main(int argc, char *argv[]) {
 	int N = 5;
 	int salida = 3;
-	if (argc >= 3) {
-		N = atoi(argv[1]);
-		salida = atoi(argv[2]);
-	}
+	int option = 0;
+
+	if (params(argv, argc, N, salida) == EXIT_FAILURE) return EXIT_FAILURE;
+	option = select_function();
 
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
-	int option = select_function();
 	std::vector<Particle> enjambre(N);
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 
@@ -33,15 +32,13 @@ int main(int argc, char *argv[]) {
 			x.update_speed(0.729, 2.05, 2.05);
 			x.update_position();
 			x.limit_test();
-			/* std::cout << "\n//////////////los datos actualizado son: " << std::endl; */
-			/* x.getParameters(); */
 			// evaluar el fitness de cada particula
 			// actualizar la mejor solucion personal de cada particula
 			// actualizar la mejor solucion global
 			// actualizar la velocidad y posicion de cada particula
 			std::cout << "la mejor particula ( ahora ) es " << best_particle.getID() << std::endl;
 		}
-	best_particle.best_value_position(best_particle);
+		best_particle.best_value_position(best_particle);
 		std::cout << "\n\033[1;32m################################################\033[0m" << std::endl;
 	}
 	return EXIT_SUCCESS;
