@@ -10,11 +10,12 @@ int main(int argc, char *argv[]) {
 	int N = 5;
 	int salida = 3;
 	int option = 0;
+	int process, dimension, limits;
 
-	if (params(argv, argc, N, salida) == EXIT_FAILURE) return EXIT_FAILURE;
-	option = select_function();
+	if (params(argv, argc, N, salida, option, process, dimension,limits) == EXIT_FAILURE) return EXIT_FAILURE;
 
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
+	Particle *tmp = new Particle(process, dimension, limits);
 	std::vector<Particle> enjambre(N);
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 

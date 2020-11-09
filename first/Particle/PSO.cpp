@@ -7,7 +7,7 @@
 Particle::Particle() {
 	Particle::counter();
 	Particle::setProcess();
-	srand(time(NULL) + this->id * MAX_POS);
+	srand(time(NULL) + this->getID() * MAX_POS);
 	Particle::dimension();
 	best_personal_value = value = 0;
 
@@ -18,10 +18,19 @@ Particle::Particle() {
 	this->position.resize(this->Dimension);
 	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
 		x = this->random_float(-this->limits, this->limits);
-		/* x/=2; */
 	});
 	std::fill(this->speed.begin(), this->speed.end(), 0);
 }
+
+Particle::Particle(int p, int d, int l){
+	this->process = p;
+	this->Dimension = d;
+	this->limits = l;
+	Particle::dimension();
+	Particle::setProcess();
+	Particle::limit();
+}
+
 
 /**
  * @brief genera números aleatorios flotantes

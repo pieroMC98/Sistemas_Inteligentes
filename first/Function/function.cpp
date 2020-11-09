@@ -1,6 +1,5 @@
 #include "function.h"
 
-#include <cstdlib>
 /**
  * @brief función esfera
  *
@@ -49,13 +48,23 @@ int select_function() {
 	return atoi(option.c_str());
 }
 
-int params(char **argv, int argc, int &N, int &s) {
-	if (argc >= 3) {
+int params(char **argv, int argc, int &N, int &s, int &option, int &process, int &dimension, int &limits) {
+	if (argc == 7) {
 		N = atoi(argv[1]);
 		s = atoi(argv[2]);
+		option = atoi(argv[3]);
+		process = atoi(argv[4]);
+		dimension = atoi(argv[5]);
+		limits = atoi(argv[6]);
 		return EXIT_SUCCESS;
 	} else {
-		std::cout << "los parámetros son:\n1º- número de partículas\n2º- número de iteraciones\n";
+		std::cout << "los parámetros son:\n\
+			1º - número de partículas\n\
+			2º - número de iteraciones\n\
+			3º - funcion para el fitness: sphere(0) | sum_of_different_power(1) | dixon_price(2)\n\
+			4º - proceso de optimizado: 1> minimizar, 2> maximizar\n\
+			5º - dimension del sistema\n\
+			6º - limite del sistema\n";
 		return EXIT_FAILURE;
 	}
 }
