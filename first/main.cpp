@@ -11,13 +11,13 @@ int main(int argc, char *argv[]) {
 	int salida = 3;
 	int option = 0;
 	int process, dimension, limits;
-
-	if (params(argv, argc, N, salida, option, process, dimension,limits) == EXIT_FAILURE) return EXIT_FAILURE;
-
+	if (params(argv, argc, N, salida, option, process, dimension, limits) == EXIT_FAILURE) return EXIT_FAILURE;
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
+
 	Particle *tmp = new Particle(process, dimension, limits);
 	std::vector<Particle> enjambre(N);
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
+	tmp->~Particle();
 
 	Particle best_particle = enjambre[0];
 	best_particle.fitness();

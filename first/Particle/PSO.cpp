@@ -16,13 +16,20 @@ Particle::Particle() {
 	this->best_personal_position.resize(this->Dimension);
 	this->speed.resize(this->Dimension);
 	this->position.resize(this->Dimension);
-	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
-		x = this->random_float(-this->limits, this->limits);
-	});
+
+	std::for_each(this->position.begin(), this->position.end(),
+		      [this](float &x) { x = this->random_float(-this->limits, this->limits); });
 	std::fill(this->speed.begin(), this->speed.end(), 0);
 }
 
-Particle::Particle(int p, int d, int l){
+/**
+ * @brief Construct a new Particle:: Particle object
+ *
+ * @params p optimizaci'on de la particula
+ * @params d dimensión del sistema
+ * @params l limite de la particula
+ */
+Particle::Particle(int p, int d, int l) {
 	this->process = p;
 	this->Dimension = d;
 	this->limits = l;
@@ -30,7 +37,6 @@ Particle::Particle(int p, int d, int l){
 	Particle::setProcess();
 	Particle::limit();
 }
-
 
 /**
  * @brief genera números aleatorios flotantes
@@ -40,6 +46,7 @@ Particle::Particle(int p, int d, int l){
  * @return float número generado
  */
 float Particle::random_float(float x, float y) {
+	srand(time(NULL));
 	float random = ((float)rand()) / (float)RAND_MAX;
 	float diff = y - x;
 	float r = random * diff;
@@ -186,10 +193,7 @@ std::vector<float> Particle::limit_test() {
  */
 void Particle::best_particle(Particle &best_particle) {
 	if (this->process == MINIMIZAR)
-		if (this->value < best_particle.value) {
-			std::cout << "mi valor es " << this->value << " y best es " << best_particle.value << std::endl;
-			best_particle = *this;
-		}
+		if (this->value < best_particle.value) best_particle = *this;
 
 	if (this->process == MAXIMIZAR)
 		if (this->value > best_particle.value) best_particle = *this;

@@ -12,6 +12,7 @@ float sphere(std::vector<float> x, int i) {
 	for (auto j : x) r += j * j;
 	return sqrt(r);
 }
+
 /**
  * @brief función suma de diferencia cuadrática
  *
@@ -48,6 +49,11 @@ int select_function() {
 	return atoi(option.c_str());
 }
 
+/**
+ * @brief parametros que recibe el programa
+ *
+ * @return int si se han recibido los parametros
+ */
 int params(char **argv, int argc, int &N, int &s, int &option, int &process, int &dimension, int &limits) {
 	if (argc == 7) {
 		N = atoi(argv[1]);

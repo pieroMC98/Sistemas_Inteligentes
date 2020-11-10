@@ -16,7 +16,7 @@ class Particle {
 	 */
 	void setProcess() {
 		static int process;
-		if( this->process != 0 ) process = this->process;
+		if (this->process != 0) process = this->process;
 		if (!process) {
 			std::string option;
 			std::cout << "MINIMIZAR(1) | MAXIMIZAR(2)\n";
@@ -32,7 +32,7 @@ class Particle {
 	 */
 	void limit() {
 		static float LIMIT;
-		if( this->limits != 0 ) LIMIT = this->limits;
+		if (this->limits != 0) LIMIT = this->limits;
 		if (!LIMIT) {
 			std::string op;
 			std::cout << "\033[1;33mIntroduzca los limites o por defecto = 1000 (skip)\033[0m" << std::endl;
@@ -57,7 +57,7 @@ class Particle {
 	 */
 	void dimension() {
 		static int Dimension;
-		if( this->Dimension != 0 ) Dimension = this->Dimension;
+		if (this->Dimension != 0) Dimension = this->Dimension;
 		if (!Dimension) {
 			std::string n;
 			std::cout << "Introduzca dimension del sistema\n";
@@ -68,12 +68,10 @@ class Particle {
 	}
 
        public:
-	Particle(int,int, int);
+	Particle(int, int, int);
 	Particle();
 	~Particle() {}
 	float random_float(float, float);
-	void setProcess(int);
-	void setDimension(int);
 	void best_particle(Particle &);
 	float sphere(std::vector<float>, int);
 	void fitness();
