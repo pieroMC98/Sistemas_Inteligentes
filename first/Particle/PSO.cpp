@@ -46,7 +46,6 @@ Particle::Particle(int p, int d, int l) {
  * @return float número generado
  */
 float Particle::random_float(float x, float y) {
-	srand(time(NULL));
 	float random = ((float)rand()) / (float)RAND_MAX;
 	float diff = y - x;
 	float r = random * diff;
@@ -67,7 +66,7 @@ int Particle::getID() { return this->id; }
 void Particle::run(Particle best_particle) {
 	this->best_global_position = best_particle.best_global_position;
 	this->best_global_value = best_particle.best_global_value;
-	this->aux_pos = this->position;
+
 	this->aux_value = this->value;
 }
 
@@ -139,6 +138,7 @@ void Particle::update_speed(float w, float f1, float f2) {
  */
 void Particle::update_position() {
 	int j = 0;
+	this->aux_pos = this->position;
 	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->speed[j++]; });
 }
 
@@ -223,8 +223,14 @@ void Particle::getParameters() {
 	std::cout << "best personal value " << this->best_personal_value << " & personal value = " << this->value
 		  << "\n";
 	std::cout << "best global value " << this->best_global_value << "\n";
-	for (int i = 0; i < this->Dimension; i++) {
-		std::cout << "position (" << this->position[i] << "), speed(" << this->speed[i] << ")";
-		std::cout << " Best personal position " << this->best_personal_position[i] << std::endl;
-	}
+
+	std::cout << "position: (";
+	for (int i = 0; i < this->Dimension; i++) std::cout << this->position[i] << " ";
+
+	std::cout << "\b)\n\nspeed: (";
+	for (int i = 0; i < this->Dimension; i++) std::cout << this->speed[i] << " ";
+
+	std::cout << "\b)\n\nbest personal position: (";
+	for (int i = 0; i < this->Dimension; i++) std::cout << this->best_personal_position[i] << " ";
+	std::cout << "\b)\n\n";
 }

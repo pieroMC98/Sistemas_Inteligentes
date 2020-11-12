@@ -6,6 +6,6 @@ objects: $(objects)
 
 run:objects
 	clear
-	./$(main) 2 7 0 1 2 20
+	./$(main) 3 6 0 1 3 10
 format:
-	clang-format -i *.cpp *.h
+	find . -regex '.*\.\(cpp\|hpp\|h\|c\)' -exec clang-format -style=file -i {} \;
