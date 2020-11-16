@@ -1,7 +1,7 @@
 #include "../../HEADER_H.h"
 
 class Particle {
-       private:
+       protected:
 	int id;
 	int Dimension, process;
 	std::vector<float> speed, position, aux_pos;
@@ -67,25 +67,26 @@ class Particle {
 		if (!this->Dimension) this->Dimension = Dimension;
 	}
 
+	float random_float(float, float);
+	float sphere(std::vector<float>, int);
+	void test_particle(int);
+	void SetBest_personal_value();
+	void SetBest_personal_position(std::vector<float>);
+	float module_vector(std::vector<float>, int);
+	void Set_best_personal_properties();
+
        public:
 	Particle(int, int, int);
 	Particle();
 	~Particle() {}
-	float random_float(float, float);
-	void best_particle(Particle &);
-	float sphere(std::vector<float>, int);
+	void run(Particle);
 	void fitness();
-	void Set_best_personal_properties();
+	void best_particle(Particle &);
+	void getParameters();
 	void update_speed(float, float, float);
 	void update_position();
-	void getParameters();
-	void test_particle(int);
-	std::vector<float> limit_test();
-	void SetBest_personal_value();
-	void SetBest_personal_position(std::vector<float>);
 	int getID();
-	float module_vector(std::vector<float>, int);
-	void run(Particle);
+	std::vector<float> limit_test();
 	float (*call_back)(std::vector<float>, int);
 
 	/**
