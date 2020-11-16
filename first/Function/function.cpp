@@ -10,7 +10,7 @@
 float sphere(std::vector<float> x, int i) {
 	float r = 0;
 	for (auto j : x) r += j * j;
-	return sqrt(r);
+	return r;
 }
 
 /**

@@ -73,7 +73,6 @@ class Particle {
 	void SetBest_personal_value();
 	void SetBest_personal_position(std::vector<float>);
 	float module_vector(std::vector<float>, int);
-	void Set_best_personal_properties();
 
        public:
 	Particle(int, int, int);
@@ -81,12 +80,14 @@ class Particle {
 	~Particle() {}
 	void run(Particle);
 	void fitness();
+	void Set_best_personal_properties();
 	void best_particle(Particle &);
 	void getParameters();
+	void getGlobalParameters();
 	void update_speed(float, float, float);
 	void update_position();
 	int getID();
-	std::vector<float> limit_test();
+	std::vector<float> limit_test(std::vector<float>);
 	float (*call_back)(std::vector<float>, int);
 
 	/**

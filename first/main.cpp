@@ -49,11 +49,11 @@ int main(int argc, char *argv[]) {
 			// actualizar la velocidad y posicion de cada particula
 			x.update_speed(0.729, 2.05, 2.05);
 			x.update_position();
-			x.limit_test();
-			std::cout << "la mejor particula ( ahora ) es " << best_particle.getID() << std::endl;
+			/* x.limit_test(); */
 		}
 		// actualizar la mejor solucion global
 		best_particle.best_value_position(best_particle);
+		best_particle.getGlobalParameters();
 		std::cout << "\n\033[1;32m################### " << i << " #############################\033[0m"
 			  << std::endl;
 	}
