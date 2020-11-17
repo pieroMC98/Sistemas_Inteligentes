@@ -1,5 +1,4 @@
 #include "PSO.h"
-#include <algorithm>
 
 /**
  * @brief Construct a new Particle:: Particle object
@@ -126,12 +125,12 @@ void Particle::Set_best_personal_properties() {
 void Particle::update_speed(float w, float f1, float f2) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
-			v = w * v + f1 * (this->random_float(0, 1)) * (this->best_personal_position[i] - this->position[i]) +
-					f2 * (this->random_float(0, 1)) * (this->best_global_position[i] - this->position[i]);
-			if( v >= 2 ) v = 2;
-			if( v < -2 ) v = -2;
+		v = w * v + f1 * (this->random_float(0, 1)) * (this->best_personal_position[i] - this->position[i]) +
+		    f2 * (this->random_float(0, 1)) * (this->best_global_position[i] - this->position[i]);
+		if (v >= 2) v = 2;
+		if (v < -2) v = -2;
 		i++;
-		});
+	});
 }
 
 /**
@@ -143,7 +142,6 @@ void Particle::update_position() {
 	int j = 0;
 	this->aux_pos = this->position;
 	std::for_each(this->position.begin(), this->position.end(), [&](float &x) { x += this->speed[j++]; });
-	this->limit_test(this->position);
 }
 
 /**
@@ -175,18 +173,16 @@ void Particle::test_particle(int i) {
  *
  * @return std::vector<float> devuelve vector comprobado
  */
-std::vector<float> Particle::limit_test(std::vector<float> test) {
-	std::for_each(test.begin(), test.end(), [this](float &x) {
+void Particle::limit_test() {
+	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
 		int neg = false;
 		if (x < 0) neg = true;
 		if (abs(x) > this->limits) {
 			x = this->limits;
-			std::fill(this->speed.begin(),this->speed.end(),0);
+			std::fill(this->speed.begin(), this->speed.end(), 0);
 		}
 		if (neg == true) x *= -1;
 	});
-
-	return this->position;
 }
 
 /**

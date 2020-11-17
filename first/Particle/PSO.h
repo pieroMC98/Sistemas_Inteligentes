@@ -87,7 +87,7 @@ class Particle {
 	void update_speed(float, float, float);
 	void update_position();
 	int getID();
-	std::vector<float> limit_test(std::vector<float>);
+	void limit_test();
 	float (*call_back)(std::vector<float>, int);
 
 	/**
