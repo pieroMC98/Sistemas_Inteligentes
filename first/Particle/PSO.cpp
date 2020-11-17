@@ -175,12 +175,8 @@ void Particle::test_particle(int i) {
  */
 void Particle::limit_test() {
 	std::for_each(this->position.begin(), this->position.end(), [this](float &x) {
-		int neg = false;
-		if (x < 0) neg = true;
-		if (abs(x) > this->limits) {
-			x = this->limits;
-		}
-		if (neg == true) x *= -1;
+		if (x >= this->limits) x = this->limits;
+		if (x < -this->limits) x = -this->limits;
 	});
 }
 
@@ -222,21 +218,27 @@ void Particle::getParameters() {
 	std::cout << "best personal value " << this->best_personal_value << " & personal value = " << this->value
 		  << "\n";
 	std::cout << "position: (";
-	for (int i = 0; i < this->Dimension; i++) std::cout << this->position[i] << " ";
+	for (auto x : this->position) std::cout << x << " ";
 
 	std::cout << "\b)\nspeed: (";
-	for (int i = 0; i < this->Dimension; i++) std::cout << this->speed[i] << " ";
+	for (auto x : this->speed) std::cout << x << " ";
 
 	std::cout << "\b)\nbest personal position: (";
-	for (int i = 0; i < this->Dimension; i++) std::cout << this->best_personal_position[i] << " ";
+	for (auto x : this->best_personal_position) std::cout << x << " ";
+
 	std::cout << "\b)\n";
 }
 
+/**
+ * @brief imprime las propiedades del enjambre, la mejor particula
+ * y los atributos globales del enjambre como la mejor posición y la mejor solucion*(best fitness)
+ *
+ */
 void Particle::getGlobalParameters() {
 	std::cout << "\033[1;34m--------------------------------------\033[0m";
 	std::cout << "\n\033[1;35mBest Particle = " << this->getID() << "\033[0m\n";
 	std::cout << "best global value " << this->best_global_value << "\n";
 	std::cout << "position: (";
-	for (int i = 0; i < this->Dimension; i++) std::cout << this->position[i] << " ";
+	for (auto x : this->position) std::cout << x << " ";
 	std::cout << "\b)\n";
 }

@@ -9,7 +9,7 @@
  */
 float sphere(std::vector<float> x, int i) {
 	float r = 0;
-	for (auto j : x) r += j * j;
+	for (int j = 0; j < i; j++) r += pow(x[j], 2);
 	return r;
 }
 
