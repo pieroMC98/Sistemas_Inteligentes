@@ -179,7 +179,6 @@ void Particle::limit_test() {
 		if (x < 0) neg = true;
 		if (abs(x) > this->limits) {
 			x = this->limits;
-			std::fill(this->speed.begin(), this->speed.end(), 0);
 		}
 		if (neg == true) x *= -1;
 	});
