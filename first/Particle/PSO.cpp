@@ -1,4 +1,5 @@
 #include "PSO.h"
+#include <algorithm>
 
 /**
  * @brief Construct a new Particle:: Particle object
@@ -127,6 +128,8 @@ void Particle::update_speed(float w, float f1, float f2) {
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
 			v = w * v + f1 * (this->random_float(0, 1)) * (this->best_personal_position[i] - this->position[i]) +
 					f2 * (this->random_float(0, 1)) * (this->best_global_position[i] - this->position[i]);
+			if( v >= 2 ) v = 2;
+			if( v < -2 ) v = -2;
 		i++;
 		});
 }
@@ -178,7 +181,7 @@ std::vector<float> Particle::limit_test(std::vector<float> test) {
 		if (x < 0) neg = true;
 		if (abs(x) > this->limits) {
 			x = this->limits;
-
+			std::fill(this->speed.begin(),this->speed.end(),0);
 		}
 		if (neg == true) x *= -1;
 	});
