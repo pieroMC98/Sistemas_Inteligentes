@@ -1,7 +1,7 @@
-#include "../second/Ant/ant.h"
+#include "../second/Frog/frog.h"
 int main(int argc, char *argv[]) {
-  Ant ant(2, 2, 2);
-  ant.run(*(new Particle));
-  ant.getParameters();
+  typedef vector<Frog> row_frogs;
+  vector<row_frogs> memeplexer(4, row_frogs(4, *(new Frog)));
+
   return 0;
 }
