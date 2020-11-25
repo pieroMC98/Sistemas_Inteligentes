@@ -1,0 +1,144 @@
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 6.09436 & personal value = 6.09436
+position: (1.27097 -2.11636 -8.49282 )
+speed: (0 0 0 )
+best personal position: (1.27097 -2.11636 -8.49282 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 169.843 & personal value = 169.843
+position: (8.94189 9.48079 -5.41256 )
+speed: (0 0 0 )
+best personal position: (8.94189 9.48079 -5.41256 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 124.334 & personal value = 124.334
+position: (6.51921 -9.04619 7.47782 )
+speed: (0 0 0 )
+best personal position: (6.51921 -9.04619 7.47782 )
+[1;34m--------------------------------------[0m
+[1;35mBest Particle = 0[0m
+best global value 6.09436
+position: (1.27097 -2.11636 -8.49282 )
+
+[1;32m################### 0 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 0.0136298 & personal value = 0.0136298
+position: (-0.00943577 -0.116365 -6.49282 )
+speed: (-1.2804 2 2 )
+best personal position: (-0.00943577 -0.116365 -6.49282 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 104.152 & personal value = 104.152
+position: (6.94189 7.48079 -3.41256 )
+speed: (-2 -2 2 )
+best personal position: (6.94189 7.48079 -3.41256 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 70.072 & personal value = 70.072
+position: (4.51921 -7.04619 5.47782 )
+speed: (-2 2 -2 )
+best personal position: (4.51921 -7.04619 5.47782 )
+[1;34m--------------------------------------[0m
+[1;35mBest Particle = 0[0m
+best global value 0.0136298
+position: (-0.00943577 -0.116365 -6.49282 )
+
+[1;32m################### 1 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 0.0136298 & personal value = 0.914357
+position: (-0.935263 -0.199097 -7.02244 )
+speed: (-0.925827 -0.0827323 -0.529622 )
+best personal position: (-0.00943577 -0.116365 -6.49282 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 54.4614 & personal value = 54.4614
+position: (4.94189 5.48079 -5.41256 )
+speed: (-2 -2 -2 )
+best personal position: (4.94189 5.48079 -5.41256 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 31.8104 & personal value = 31.8104
+position: (2.51921 -5.04619 3.47782 )
+speed: (-2 2 -2 )
+best personal position: (2.51921 -5.04619 3.47782 )
+[1;34m--------------------------------------[0m
+[1;35mBest Particle = 0[0m
+best global value 0.0136298
+position: (-0.00943577 -0.116365 -6.49282 )
+
+[1;32m################### 2 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 0.0136298 & personal value = 0.0493625
+position: (-0.212532 0.0647506 -6.75128 )
+speed: (0.722731 0.263848 0.271163 )
+best personal position: (-0.212532 0.0647506 -6.75128 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 20.7706 & personal value = 20.7706
+position: (2.94189 3.48079 -7.41256 )
+speed: (-2 -2 -2 )
+best personal position: (2.94189 3.48079 -7.41256 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 9.54884 & personal value = 9.54884
+position: (0.519209 -3.04619 1.47782 )
+speed: (-2 2 -2 )
+best personal position: (0.519209 -3.04619 1.47782 )
+[1;34m--------------------------------------[0m
+[1;35mBest Particle = 0[0m
+best global value 0.0136298
+position: (-0.00943577 -0.116365 -6.49282 )
+
+[1;32m################### 3 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 0.0136298 & personal value = 0.321549
+position: (0.509678 0.248551 -6.19478 )
+speed: (0.72221 0.1838 0.556496 )
+best personal position: (-0.212532 0.0647506 -6.75128 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 3.0799 & personal value = 3.0799
+position: (0.941895 1.48079 -7.42027 )
+speed: (-2 -2 -0.00770533 )
+best personal position: (0.941895 1.48079 -7.42027 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.28725 & personal value = 3.28725
+position: (-1.48079 -1.04619 -0.522181 )
+speed: (-2 2 -2 )
+best personal position: (-1.48079 -1.04619 -0.522181 )
+[1;34m--------------------------------------[0m
+[1;35mBest Particle = 0[0m
+best global value 0.0136298
+position: (-0.00943577 -0.116365 -6.49282 )
+
+[1;32m################### 4 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 0.0136298 & personal value = 0.10759
+position: (-0.326605 0.0303175 -7.02463 )
+speed: (-0.836283 -0.218233 -0.829852 )
+best personal position: (-0.326605 0.0303175 -7.02463 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 1.38917 & personal value = 1.38917
+position: (-1.05811 -0.519211 -6.45492 )
+speed: (-2 -2 0.965351 )
+best personal position: (-1.05811 -0.519211 -6.45492 )
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.20113 & personal value = 3.20113
+position: (-1.51373 0.953813 -2.52218 )
+speed: (-0.032935 2 -2 )
+best personal position: (-1.51373 0.953813 -2.52218 )
+[1;34m--------------------------------------[0m
+[1;35mBest Particle = 0[0m
+best global value 0.0136298
+position: (-0.00943577 -0.116365 -6.49282 )
+
+[1;32m################### 5 #############################[0m

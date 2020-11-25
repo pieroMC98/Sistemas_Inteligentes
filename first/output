@@ -1,0 +1,210 @@
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 10.4289 & personal value = 10.4289
+best global value 0
+position: (-7.09032 7.00965 3.0586 )
+
+speed: (0 0 0 )
+
+best personal position: (-7.09032 7.00965 3.0586 )
+
+la mejor particula ( ahora ) es 0
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 10.2658 & personal value = 10.2658
+best global value 0
+position: (-9.40606 -1.37922 -3.87441 )
+
+speed: (0 0 0 )
+
+best personal position: (-9.40606 -1.37922 -3.87441 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 13.5255 & personal value = 13.5255
+best global value 0
+position: (-1.87298 -9.9144 9.00751 )
+
+speed: (0 0 0 )
+
+best personal position: (-1.87298 -9.9144 9.00751 )
+
+la mejor particula ( ahora ) es 1
+
+[1;32m################### 0 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 7.79995 & personal value = 7.79995
+best global value 10.2658
+position: (3.69058 6.39985 2.50215 )
+
+speed: (3.39974 -0.609795 -0.556452 )
+
+best personal position: (3.69058 6.39985 2.50215 )
+
+la mejor particula ( ahora ) es 0
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 2.45385 & personal value = 2.45385
+best global value 10.2658
+position: (1.73573 1.3076 1.13966 )
+
+speed: (7.67033 2.68681 2.73475 )
+
+best personal position: (1.73573 1.3076 1.13966 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.57136 & personal value = 3.57136
+best global value 10.2658
+position: (0.241268 3.33934 1.24306 )
+
+speed: (1.63171 13.2537 -7.76446 )
+
+best personal position: (0.241268 3.33934 1.24306 )
+
+la mejor particula ( ahora ) es 1
+
+[1;32m################### 1 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 7.79995 & personal value = 13.0401
+best global value 2.45385
+position: (-10 5.8993 5.93649 )
+
+speed: (0 0 0 )
+
+best personal position: (3.69058 6.39985 2.50215 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 2.45385 & personal value = 9.86275
+best global value 2.45385
+position: (7.89189 0.506103 5.8937 )
+
+speed: (-9.62762 -1.8137 -7.03336 )
+
+best personal position: (1.73573 1.3076 1.13966 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.57136 & personal value = 13.5002
+best global value 2.45385
+position: (3.54135 9.30699 9.11562 )
+
+speed: (-3.78262 5.96765 -10.3587 )
+
+best personal position: (0.241268 3.33934 1.24306 )
+
+la mejor particula ( ahora ) es 1
+
+[1;32m################### 2 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 7.79995 & personal value = 11.175
+best global value 2.45385
+position: (10 1.73455 4.67684 )
+
+speed: (0 0 0 )
+
+best personal position: (10 1.73455 4.67684 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 2.45385 & personal value = 11.6341
+best global value 2.45385
+position: (-10 0.985482 5.8636 )
+
+speed: (0 0 0 )
+
+best personal position: (7.89189 0.506103 5.8937 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.57136 & personal value = 11.6977
+best global value 2.45385
+position: (5.80945 1.75675 -10 )
+
+speed: (0 0 0 )
+
+best personal position: (5.80945 1.75675 -10 )
+
+la mejor particula ( ahora ) es 1
+
+[1;32m################### 3 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 7.79995 & personal value = 10.2172
+best global value 2.45385
+position: (9.45942 1.6929 3.47041 )
+
+speed: (-0.540585 -0.0416545 -1.20643 )
+
+best personal position: (9.45942 1.6929 3.47041 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 2.45385 & personal value = 10.0661
+best global value 2.45385
+position: (10 0.599946 0.982597 )
+
+speed: (0 0 0 )
+
+best personal position: (10 0.599946 0.982597 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.57136 & personal value = 5.62449
+best global value 2.45385
+position: (4.10028 1.4516 3.56587 )
+
+speed: (-1.70917 -0.305156 13.5659 )
+
+best personal position: (4.10028 1.4516 3.56587 )
+
+la mejor particula ( ahora ) es 1
+
+[1;32m################### 4 #############################[0m
+[1;31m--------------------------------------[0m
+[1;35mParticle 0[0m
+best personal value 2.10726 & personal value = 2.10726
+best global value 2.45385
+position: (0.723722 1.18636 1.58408 )
+
+speed: (-10.1831 -0.506537 -1.88632 )
+
+best personal position: (0.723722 1.18636 1.58408 )
+
+la mejor particula ( ahora ) es 0
+[1;31m--------------------------------------[0m
+[1;35mParticle 1[0m
+best personal value 2.07405 & personal value = 2.07405
+best global value 2.45385
+position: (0.931694 1.55628 1.00579 )
+
+speed: (-9.06831 0.956333 0.0231941 )
+
+best personal position: (0.931694 1.55628 1.00579 )
+
+la mejor particula ( ahora ) es 1
+[1;31m--------------------------------------[0m
+[1;35mParticle 2[0m
+best personal value 3.57136 & personal value = 9.5738
+best global value 2.45385
+position: (1.5549 1.17591 9.37321 )
+
+speed: (-2.54537 -0.275684 5.80734 )
+
+best personal position: (4.10028 1.4516 3.56587 )
+
+la mejor particula ( ahora ) es 1
+
+[1;32m################### 5 #############################[0m
