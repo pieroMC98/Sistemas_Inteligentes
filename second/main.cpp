@@ -1,6 +1,10 @@
+#include "../first/Function/function.h"
 #include "../second/Frog/frog.h"
 int main(int argc, char *argv[]) {
-	typedef vector<Frog> row_frogs;
-	vector<row_frogs> memeplexer(4, row_frogs(4, *(new Frog)));
+	int N, s, option, process, dimension, limits;
+	if (params(argv, argc, N, s, option, process, dimension, limits) == EXIT_FAILURE) return EXIT_FAILURE;
+
+	vector<Frog> ranas(N);
+
 	return 0;
 }
