@@ -5,12 +5,21 @@ bool operator>(const Frog& r1, const Frog& r2) {
 	return false;
 }
 
-void Frog::sort(vector<Frog> ranas) {
-	for( int i = 0; i < ranas.size(); i++ ) {
-		if( ranas[i] > ranas[i+1]) {
-			auto aux = ranas[i+1];
-			ranas[i+1] = ranas[i];
-			ranas[i] = aux;
+void Frog::sort(vector<Frog>& ranas) {
+	for (size_t i = 1; i < ranas.size(); i++) {
+		if (ranas[i - 1] > ranas[i]) {
+			Frog aux = ranas[i];
+			ranas[i] = ranas[i - 1];
+			ranas[i - 1] = aux;
 		}
+	}
+}
+
+void Frog::memeplexer(vector<Frog>& ranas) {
+	for (size_t i = 0; i < ranas.size(); i++) {
+		if (!i % 2)
+			ranas[i].meme_id = 1;
+		else
+			ranas[i].meme_id = 2;
 	}
 }
