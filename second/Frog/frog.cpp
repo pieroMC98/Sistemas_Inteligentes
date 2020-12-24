@@ -1,30 +1,27 @@
 #include "./frog.h"
 
-bool operator>(const Frog& r1, const Frog& r2) {
-	if (r1.value > r2.value) return true;
-	return false;
-}
+vector<vector<Frog>> Frog::_columFrogs(2, vector<Frog>());
+
+bool operator>(const Frog& r1, const Frog& r2) { return r1.value > r2.value ? true : false; }
+
+void Frog::setMeme_id(int i) { this->meme_id = i; }
+
+int Frog::getMeme_id() { return this->meme_id; }
 
 void Frog::sort(vector<Frog>& ranas) {
-	for (size_t i = 1; i < ranas.size(); i++) {
+	for (size_t i = 1; i < ranas.size(); i++)
 		if (ranas[i - 1] > ranas[i]) {
 			Frog aux = ranas[i];
 			ranas[i] = ranas[i - 1];
 			ranas[i - 1] = aux;
 		}
-	}
 }
 
-void Frog::memeplexer(vector<Frog>& ranas) {
-	for (size_t i = 0; i < ranas.size(); i++) {
-		if (!i % 2)
-			ranas[i].meme_id = 1;
-		else
-			ranas[i].meme_id = 2;
-	}
+void Frog::memeplexer_id(vector<Frog>& ranas) {
+	for (size_t i = 0; i < ranas.size(); i++) ranas[i].setMeme_id(!(i % 2) ? 1 : 2);
 }
 
-void Frog::getParameters(){
+void Frog::getParameters() {
 	Particle::getParameters();
-	cout<<"memeplexer group "<<this->meme_id<<endl;
+	cout << "memeplexer group " << this->meme_id << endl;
 }

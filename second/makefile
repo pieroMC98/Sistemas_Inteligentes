@@ -6,6 +6,7 @@ objects = \
 main.cpp
 
 objects: $(objects)
+	clear
 	g++ -Wall -g $(objects) -o $(main)
 
 run:objects

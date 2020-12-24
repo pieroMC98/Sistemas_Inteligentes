@@ -3,6 +3,9 @@
 
 int main(int argc, char *argv[]) {
 	int N, s, option, process, dimension, limits;
+	typedef vector<Frog> _rowFrogs;
+	vector<_rowFrogs> _columFrogs;
+
 	if (params(argv, argc, N, s, option, process, dimension, limits) == EXIT_FAILURE) return EXIT_FAILURE;
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
 
@@ -30,8 +33,15 @@ int main(int argc, char *argv[]) {
 		x.limit_test();
 	}
 
-	tmp->sort(ranas);
-	tmp->memeplexer(ranas);
+	_columFrogs = Frog::meme(ranas);
+
+	int f = 0;
+	for (auto &x : _columFrogs) {
+		cout << "me ejecuto " << f++ << endl;
+		for (auto &j : x) {
+		}
+	}
+
 	for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
 
 	tmp->~Frog();
