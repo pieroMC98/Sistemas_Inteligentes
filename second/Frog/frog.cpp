@@ -23,3 +23,8 @@ void Frog::memeplexer(vector<Frog>& ranas) {
 			ranas[i].meme_id = 2;
 	}
 }
+
+void Frog::getParameters(){
+	Particle::getParameters();
+	cout<<"memeplexer group "<<this->meme_id<<endl;
+}

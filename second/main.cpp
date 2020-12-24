@@ -30,11 +30,9 @@ int main(int argc, char *argv[]) {
 		x.limit_test();
 	}
 
-	for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
 	tmp->sort(ranas);
 	tmp->memeplexer(ranas);
 	for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
-	// actualizar la mejor solucion global
 
 	tmp->~Frog();
 	return 0;
