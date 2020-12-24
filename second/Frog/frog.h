@@ -12,4 +12,5 @@ class Frog : public Particle {
 	void sort(vector<Frog>&);
 	void memeplexer(vector<Frog>&);
 	friend bool operator>(const Frog&, const Frog&);
+	virtual void getParameters();
 };
