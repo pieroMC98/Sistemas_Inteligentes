@@ -1,16 +1,16 @@
 #include "../../first/Particle/PSO.h"
 using namespace std;
+
 class Frog : public Particle {
 	int meme_id;
+	std::vector<float> worst_global_position;
+	float worst_global_value;
 
-	static void sort(vector<Frog>&);
-	static void memeplexer_id(vector<Frog>&);
+	static void sort(vector<Frog> &);
+	static void memeplexer_id(vector<Frog> &);
 	static void memeplexer(vector<Frog> ranas) {
 		for (size_t i = 0; i < ranas.size(); i++)
-			if (ranas[i].getMeme_id() == 1)
-				Frog::_columFrogs[0].push_back(ranas[i]);
-			else
-				Frog::_columFrogs[1].push_back(ranas[i]);
+			Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
 	}
 
        public:
@@ -19,17 +19,19 @@ class Frog : public Particle {
 	Frog() : Particle() {}
 	Frog(int x, int y, int z) : Particle(x, y, z) {}
 	~Frog() {}
-	void setMeme_id(int i);
+	void setMeme_id(int);
 	int getMeme_id();
+	void worst_particle(Frog &);
 
-	static vector<vector<Frog>> meme(vector<Frog> ranas) {
-		for_each(Frog::_columFrogs.begin(), Frog::_columFrogs.end(), [=](vector<Frog>& x) { x.resize(4); });
+	static vector<vector<Frog>> meme(vector<Frog> &ranas) {
 		Frog::sort(ranas);
 		Frog::memeplexer_id(ranas);
 		Frog::memeplexer(ranas);
 		return Frog::_columFrogs;
 	}
+	void worst_value_position(Frog &);
 
-	friend bool operator>(const Frog&, const Frog&);
+	friend bool operator>(const Frog &, const Frog &);
+	friend bool operator<(const Frog &, const Frog &);
 	virtual void getParameters();
 };

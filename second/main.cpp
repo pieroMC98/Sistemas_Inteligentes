@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 	vector<Frog> ranas(N);
 	std::for_each(ranas.begin(), ranas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 	Frog best_particle = ranas[0];
+	Frog worst_particle = ranas[0];
 	best_particle.fitness();
 
 	for (auto &x : ranas) {
@@ -35,14 +36,33 @@ int main(int argc, char *argv[]) {
 
 	_columFrogs = Frog::meme(ranas);
 
-	int f = 0;
 	for (auto &x : _columFrogs) {
-		cout << "me ejecuto " << f++ << endl;
-		for (auto &j : x) {
+		for (int i = 0; i < N; i++) {
+			for (auto &j : x) {
+				j.run(best_particle);
+				// evaluar el fitness de cada particula
+				j.fitness();
+
+				// actualizar la mejor solucion personal de cada particula
+				j.Set_best_personal_properties();
+				j.best_particle(best_particle);
+				j.worst_particle(worst_particle);
+
+				// muestro cada particula por pantalla
+				j.getParameters();
+
+				// actualizar la velocidad y posicion de cada particula
+				j.update_speed(0.729, 2.05, 2.05);
+				j.update_position();
+				j.limit_test();
+			}
+			bug;
+			best_particle.best_value_position(best_particle);
+			worst_particle.best_value_position(worst_particle);
+			best_particle.getGlobalParameters();
 		}
 	}
-
-	for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
+	// for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
 
 	tmp->~Frog();
 	return 0;
