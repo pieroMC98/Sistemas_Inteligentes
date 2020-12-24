@@ -1,8 +1,8 @@
 main = .main
-objects = Particle/PSO.cpp Function/function.cpp main.cpp
+objects = particle/pso.cpp function/function.cpp main.cpp
 
 objects: $(objects)
-	g++ -Wall -g $(objects) -o $(main)
+	g++ -wall -g $(objects) -o $(main)
 
 run:objects
 	clear
