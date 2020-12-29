@@ -22,6 +22,11 @@ void Frog::memeplexer_id(vector<Frog>& ranas) {
 	for (size_t i = 0; i < ranas.size(); i++) ranas[i].setMeme_id(!(i % 2) ? 1 : 2);
 }
 
+void Frog::memeplexer(vector<Frog> ranas) {
+	for (size_t i = 0; i < ranas.size(); i++)
+		Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
+}
+
 void Frog::getParameters() {
 	Particle::getParameters();
 	cout << "memeplexer group " << this->meme_id << endl;
@@ -61,4 +66,11 @@ void Frog::worst_value_position(Frog& worst_particle) {
 	// esto no es est'atico
 	this->worst_global_value = worst_value;
 	this->worst_global_position = worst_position;
+}
+
+void Frog::slf(Frog& x1) {
+	if (x1 > *this) {
+		*this = x1;
+	} else {
+	}
 }

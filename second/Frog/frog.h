@@ -8,14 +8,12 @@ class Frog : public Particle {
 
 	static void sort(vector<Frog> &);
 	static void memeplexer_id(vector<Frog> &);
-	static void memeplexer(vector<Frog> ranas) {
-		for (size_t i = 0; i < ranas.size(); i++)
-			Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
-	}
+	static void memeplexer(vector<Frog>);
 
        public:
 	typedef vector<Frog> _rowFrogs;
 	static vector<_rowFrogs> _columFrogs;
+
 	Frog() : Particle() {}
 	Frog(int x, int y, int z) : Particle(x, y, z) {}
 	~Frog() {}
@@ -31,6 +29,7 @@ class Frog : public Particle {
 	}
 	void worst_value_position(Frog &);
 
+	void slf(Frog &);
 	friend bool operator>(const Frog &, const Frog &);
 	friend bool operator<(const Frog &, const Frog &);
 	virtual void getParameters();
