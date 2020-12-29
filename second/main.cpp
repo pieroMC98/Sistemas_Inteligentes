@@ -58,7 +58,8 @@ int main(int argc, char *argv[]) {
 			}
 			bug;
 			best_particle.best_value_position(best_particle);
-			worst_particle.best_value_position(worst_particle);
+			worst_particle.worst_value_position(worst_particle);
+			Frog::local_search(best_particle, worst_particle);
 			best_particle.getGlobalParameters();
 		}
 	}

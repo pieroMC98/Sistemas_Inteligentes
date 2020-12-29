@@ -68,9 +68,17 @@ void Frog::worst_value_position(Frog& worst_particle) {
 	this->worst_global_position = worst_position;
 }
 
-void Frog::slf(Frog& x1) {
-	if (x1 > *this) {
-		*this = x1;
-	} else {
+void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }
+
+float Frog::enhance(Frog x) { return this->value + x.value; }
+
+void Frog::slf(Frog& x) {}
+
+void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
+	this->best_value_position(best_particle);
+	this->worst_value_position(worst_particle);
+	float x1 = this->enhance(best_particle);
+	if (x1 > this->value) {
+
 	}
 }
