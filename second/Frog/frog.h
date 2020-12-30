@@ -10,8 +10,7 @@ class Frog : public Particle {
 	static void memeplexer_id(vector<Frog> &);
 	static void memeplexer(vector<Frog>);
 	static void set_value_position_frogs(vector<Frog> &);
-	float enhance(Frog);
-	float enhance_global();
+	Frog enhance(float w, float f1, float f2, vector<float> D);
 
        public:
 	typedef vector<Frog> _rowFrogs;
@@ -28,7 +27,7 @@ class Frog : public Particle {
 	void worst_particle(Frog &);
 
 	static void best_value_position_from_memeplexer(Frog);
-	static vector<vector<Frog>> meme(vector<Frog> &ranas) {
+	static vector<_rowFrogs> meme(vector<Frog> &ranas) {
 		Frog::sort(ranas);
 		Frog::memeplexer_id(ranas);
 		Frog::memeplexer(ranas);
@@ -36,13 +35,12 @@ class Frog : public Particle {
 	}
 
 	void worst_value_position(Frog &);
-	void slf(Frog &);
-	static void local_search(Frog &, Frog &);
+	static void local_search(Frog& best_particle, Frog& worst_particle,float w, float f1, float f2);
 
 	void best_local_value_postion(Frog);
 	friend bool operator>(const Frog &, const Frog &);
 	friend bool operator<(const Frog &, const Frog &);
 	friend vector<float> operator+(const vector<float> &, const vector<float> &);
 	virtual void getParameters();
-	virtual void update_speed(float, float, float);
+	virtual void update_speed(float, float, float,vector<float>);
 };

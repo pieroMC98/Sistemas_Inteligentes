@@ -96,7 +96,6 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 	Frog::sort(Frog::global_best);
 	vector<Frog>::iterator i = Frog::global_best.end();
 	cout << " la mejor particula es " << i->getID();
-	// cout<<" la mejor particula es "<<Frog::global_best[ global_best.size() -1 ].getID();
 
 	Frog::best_global_value_from_memeplexer = i->value;
 	Frog::best_global_position_from_memeplexer = i->position;
@@ -104,38 +103,30 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }
 
-float Frog::enhance(Frog x) {
-	float D = random_float(0, 1) * (x.best_global_value - this->value);
-	return this->value + D;
+Frog Frog::enhance(float w, float f1, float f2, vector<float> D) {
+	this->update_speed(w,f1,f2,D);
+	this->update_position();
+	this->fitness();
+	return *this;
 }
 
-
-void Frog::update_speed(float w, float f1, float f2 ) {
+void Frog::update_speed(float w, float f1, float f2, vector<float> D) {
 	int i = 0;
-	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
-		
-
-
-		v = w * v + f1 * (this->random_float(0, 1)) * (this->best_personal_position[i] - this->position[i]) +
-		    f2 * (this->random_float(0, 1)) * (this->best_global_position[i] - this->position[i]);
+	std::for_each(this->speed.begin(), this->speed.end(), [&](float& v) {
+	v = this->random_float(0, 1) * (D[i] - this->position[i]);
 		if (v >= 2) v = 2;
 		if (v < -2) v = -2;
 		i++;
 	});
-
 }
-float Frog::enhance_global() {
-	float D = random_float(0, 1) * (Frog::best_global_value_from_memeplexer - this->value);
-	return this->value + D;
-}
-void Frog::slf(Frog& x) {}
 
-void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
-	float x1 = worst_particle.enhance(best_particle);
-	if (x1 > worst_particle.value) {
-		worst_particle.value = x1;
+void Frog::local_search(Frog& best_particle, Frog& worst_particle,float w, float f1, float f2) {
+	srand(time(NULL));
+	Frog xb = worst_particle.enhance(w,f1,f2,best_particle.position);
+	Frog xg = worst_particle.enhance(w,f1,f2,Frog::best_global_position_from_memeplexer);
+	if (xb > worst_particle) {
+		worst_particle = xb;
 	} else {
-		float x1 = worst_particle.enhance_global();
-		if (x1 > worst_particle.value) worst_particle.value = x1;
+		if (xg > worst_particle) worst_particle = xg;
 	}
 }
