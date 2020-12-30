@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
 	Frog best_particle = ranas[0];
 	Frog worst_particle = ranas[0];
 	best_particle.fitness();
+	worst_particle.fitness();
 
 	for (auto &x : ranas) {
 		x.run(best_particle);
@@ -37,6 +38,7 @@ int main(int argc, char *argv[]) {
 	memeplexer = Frog::meme(ranas);
 
 	for (auto &x : memeplexer) {
+		Frog::best_value_position_from_memeplexer(best_particle);
 		for (int i = 0; i < N; i++) {
 			for (auto &j : x) {
 				j.run(best_particle);
