@@ -14,8 +14,8 @@ class Frog : public Particle {
        public:
 	typedef vector<Frog> _rowFrogs;
 	static vector<_rowFrogs> _columFrogs;
-	static vector<float> best_global_position_frogs;
-	static float best_global_value_forgs;
+	static vector<float> best_global_position_from_memeplexer;
+	static float best_global_value_from_memeplexer;
 
 	Frog() : Particle() {}
 	Frog(int x, int y, int z) : Particle(x, y, z) {}
@@ -33,11 +33,13 @@ class Frog : public Particle {
 
 	void worst_value_position(Frog &);
 	void slf(Frog &);
-	void local_search(Frog &, Frog &);
+	void local_search(Frog &, Frog &, Frog &);
 	float enhance(Frog);
 
 	void best_local_value_postion(Frog);
 	friend bool operator>(const Frog &, const Frog &);
 	friend bool operator<(const Frog &, const Frog &);
+	friend vector<float> operator+(const vector<float>&, const vector<float>&);
+	friend vector<float> operator-(const vector<float>&, const vector<float>&);
 	virtual void getParameters();
 };

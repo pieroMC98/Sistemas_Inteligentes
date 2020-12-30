@@ -4,6 +4,26 @@ vector<vector<Frog>> Frog::_columFrogs(2, vector<Frog>());
 
 bool operator>(const Frog& r1, const Frog& r2) { return r1.value > r2.value ? true : false; }
 bool operator<(const Frog& r1, const Frog& r2) { return r1.value < r2.value ? true : false; }
+vector<float> operator+(const vector<float>& v1, const vector<float>& v2){
+	if( v1.size() != v2.size() )
+		return vector<float>();
+
+	vector<float> aux(v1.size());
+	for( size_t i = 0; i < v1.size(); i++) {
+		aux[i] = v1[i] + v2[i];
+	}
+	return aux;
+}
+vector<float> operator-(const vector<float>& v1, const vector<float>& v2){
+	if( v1.size() != v2.size() )
+		return vector<float>();
+
+	vector<float> aux(v1.size());
+	for( size_t i = 0; i < v1.size(); i++) {
+		aux[i] = v1[i] - v2[i];
+	}
+	return aux;
+}
 
 void Frog::sort(vector<Frog>& ranas) {
 	for (size_t i = 1; i < ranas.size(); i++)
@@ -70,15 +90,20 @@ void Frog::worst_value_position(Frog& worst_particle) {
 
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }
 
-float Frog::enhance(Frog x) { return this->value + x.value; }
+float Frog::enhance(Frog x) {
+	float D = random_float(0, 1) * (x.best_global_value - x.value );
+	return this->value + D;
+}
 
 void Frog::slf(Frog& x) {}
 
-void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
-	this->best_value_position(best_particle);
-	this->worst_value_position(worst_particle);
-	float x1 = this->enhance(best_particle);
-	if (x1 > this->value) {
-
+void Frog::local_search(Frog& best_particle,Frog &best_global_particle, Frog& worst_particle) {
+	float x1 = worst_particle.enhance(best_particle);
+	if (x1 > worst_particle.value) {
+		worst_particle.value = x1;
+	} else {
+		x1 = worst_particle.value + Frog::best_global_value_from_memeplexer;
+		if( x1 > worst_particle.value )
+			worst_particle.value = x1;
 	}
 }
