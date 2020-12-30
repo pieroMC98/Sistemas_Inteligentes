@@ -39,6 +39,7 @@ int main(int argc, char *argv[]) {
 
 	for (auto &x : memeplexer) {
 		Frog::best_value_position_from_memeplexer(best_particle);
+		best_particle = x[0];
 		for (int i = 0; i < N; i++) {
 			for (auto &j : x) {
 				j.run(best_particle);
@@ -52,18 +53,18 @@ int main(int argc, char *argv[]) {
 
 				// muestro cada particula por pantalla
 				j.getParameters();
-
-				// actualizar la velocidad y posicion de cada particula
+				best_particle.best_value_position(best_particle);
+				worst_particle.worst_value_position(worst_particle);
 				j.update_speed(0.729, 2.05, 2.05);
 				j.update_position();
+
+				// actualizar la velocidad y posicion de cada particula
 				j.limit_test();
 			}
-			bug;
-			best_particle.best_value_position(best_particle);
-			worst_particle.worst_value_position(worst_particle);
-			Frog::local_search(best_particle, worst_particle);
-			best_particle.getGlobalParameters();
 		}
+		bug;
+		Frog::local_search(best_particle, worst_particle);
+		best_particle.getGlobalParameters();
 	}
 	// for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
 

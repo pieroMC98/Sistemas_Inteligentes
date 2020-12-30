@@ -109,6 +109,21 @@ float Frog::enhance(Frog x) {
 	return this->value + D;
 }
 
+
+void Frog::update_speed(float w, float f1, float f2 ) {
+	int i = 0;
+	std::for_each(this->speed.begin(), this->speed.end(), [&](float &v) {
+		
+
+
+		v = w * v + f1 * (this->random_float(0, 1)) * (this->best_personal_position[i] - this->position[i]) +
+		    f2 * (this->random_float(0, 1)) * (this->best_global_position[i] - this->position[i]);
+		if (v >= 2) v = 2;
+		if (v < -2) v = -2;
+		i++;
+	});
+
+}
 float Frog::enhance_global() {
 	float D = random_float(0, 1) * (Frog::best_global_value_from_memeplexer - this->value);
 	return this->value + D;

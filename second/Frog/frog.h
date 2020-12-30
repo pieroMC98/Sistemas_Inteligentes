@@ -43,6 +43,6 @@ class Frog : public Particle {
 	friend bool operator>(const Frog &, const Frog &);
 	friend bool operator<(const Frog &, const Frog &);
 	friend vector<float> operator+(const vector<float> &, const vector<float> &);
-	friend vector<float> operator-(const vector<float> &, const vector<float> &);
 	virtual void getParameters();
+	virtual void update_speed(float, float, float);
 };
