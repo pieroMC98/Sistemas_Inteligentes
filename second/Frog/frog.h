@@ -27,20 +27,15 @@ class Frog : public Particle {
 	void worst_particle(Frog &);
 
 	static void best_value_position_from_memeplexer(Frog);
-	static vector<_rowFrogs> meme(vector<Frog> &ranas) {
-		Frog::sort(ranas);
-		Frog::memeplexer_id(ranas);
-		Frog::memeplexer(ranas);
-		return Frog::_columFrogs;
-	}
+	static vector<_rowFrogs> meme(vector<Frog> &ranas);
 
 	void worst_value_position(Frog &);
-	static void local_search(Frog& best_particle, Frog& worst_particle,float w, float f1, float f2);
+	static void local_search(Frog &best_particle, Frog &worst_particle, float w, float f1, float f2);
 
 	void best_local_value_postion(Frog);
 	friend bool operator>(const Frog &, const Frog &);
 	friend bool operator<(const Frog &, const Frog &);
 	friend vector<float> operator+(const vector<float> &, const vector<float> &);
 	virtual void getParameters();
-	virtual void update_speed(float, float, float,vector<float>);
+	virtual void update_speed(float, float, float, vector<float>);
 };

@@ -16,6 +16,7 @@ vector<float> operator+(const vector<float>& v1, const vector<float>& v2) {
 	}
 	return aux;
 }
+
 vector<float> operator-(const vector<float>& v1, const vector<float>& v2) {
 	if (v1.size() != v2.size()) return vector<float>();
 
@@ -42,12 +43,24 @@ void Frog::setMeme_id(int i) { this->meme_id = i; }
 int Frog::getMeme_id() { return this->meme_id; }
 
 void Frog::memeplexer_id(vector<Frog>& ranas) {
-	for (size_t i = 0; i < ranas.size(); i++) ranas[i].setMeme_id(!(i % 2) ? 1 : 2);
+	for (size_t i = 0; i < ranas.size(); i++) {
+		if (!(i % 2))
+			ranas[i].setMeme_id(1);
+		else
+			ranas[i].setMeme_id(2);
+	}
 }
 
 void Frog::memeplexer(vector<Frog> ranas) {
 	for (size_t i = 0; i < ranas.size(); i++)
 		Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
+}
+
+vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
+	Frog::sort(ranas);
+	Frog::memeplexer_id(ranas);
+	Frog::memeplexer(ranas);
+	return Frog::_columFrogs;
 }
 
 void Frog::getParameters() {
@@ -104,7 +117,7 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }
 
 Frog Frog::enhance(float w, float f1, float f2, vector<float> D) {
-	this->update_speed(w,f1,f2,D);
+	this->update_speed(w, f1, f2, D);
 	this->update_position();
 	this->fitness();
 	return *this;
@@ -113,17 +126,16 @@ Frog Frog::enhance(float w, float f1, float f2, vector<float> D) {
 void Frog::update_speed(float w, float f1, float f2, vector<float> D) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float& v) {
-	v = this->random_float(0, 1) * (D[i] - this->position[i]);
+		v = this->random_float(0, 1) * (D[i] - this->position[i]);
 		if (v >= 2) v = 2;
 		if (v < -2) v = -2;
 		i++;
 	});
 }
 
-void Frog::local_search(Frog& best_particle, Frog& worst_particle,float w, float f1, float f2) {
-	srand(time(NULL));
-	Frog xb = worst_particle.enhance(w,f1,f2,best_particle.position);
-	Frog xg = worst_particle.enhance(w,f1,f2,Frog::best_global_position_from_memeplexer);
+void Frog::local_search(Frog& best_particle, Frog& worst_particle, float w, float f1, float f2) {
+	Frog xb = worst_particle.enhance(w, f1, f2, best_particle.position);
+	Frog xg = worst_particle.enhance(w, f1, f2, Frog::best_global_position_from_memeplexer);
 	if (xb > worst_particle) {
 		worst_particle = xb;
 	} else {

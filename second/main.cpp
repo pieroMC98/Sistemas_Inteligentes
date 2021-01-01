@@ -1,3 +1,5 @@
+#include <cstdio>
+
 #include "../first/Function/function.h"
 #include "../second/Frog/frog.h"
 
@@ -30,7 +32,7 @@ int main(int argc, char *argv[]) {
 		// x.getParameters();
 
 		// actualizar la velocidad y posicion de cada particula
-		//x.update_speed(0.729, 2.05, 2.05);
+		// x.update_speed(0.729, 2.05, 2.05);
 		x.update_position();
 		x.limit_test();
 	}
@@ -55,16 +57,20 @@ int main(int argc, char *argv[]) {
 				j.getParameters();
 				best_particle.best_value_position(best_particle);
 				worst_particle.worst_value_position(worst_particle);
-				//j.update_speed(0.729, 2.05, 2.05);
+				// j.update_speed(0.729, 2.05, 2.05);
 				j.update_position();
-				
 
 				// actualizar la velocidad y posicion de cada particula
 				j.limit_test();
 			}
 		}
 		bug;
-		Frog::local_search(best_particle, worst_particle,0.729, 2.05, 2.05);
+		cout << " la mejor particula es \n";
+		best_particle.getParameters();
+		cout << " la peor particula es \n";
+		worst_particle.getParameters();
+		getchar();
+		Frog::local_search(best_particle, worst_particle, 0.729, 2.05, 2.05);
 		best_particle.getGlobalParameters();
 	}
 	// for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
