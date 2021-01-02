@@ -112,6 +112,9 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 
 	Frog::best_global_value_from_memeplexer = i->value;
 	Frog::best_global_position_from_memeplexer = i->position;
+	cout << i->position[0];
+	//cout << Frog::global_best[0].position[0];
+	getchar();
 }
 
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }

@@ -1,5 +1,3 @@
-#include <cstdio>
-
 #include "../first/Function/function.h"
 #include "../second/Frog/frog.h"
 
