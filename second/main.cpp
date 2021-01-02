@@ -36,7 +36,6 @@ int main(int argc, char *argv[]) {
 	}
 
 	memeplexer = Frog::meme(ranas);
-
 	for (auto &x : memeplexer) {
 		Frog::best_value_position_from_memeplexer(best_particle);
 		best_particle = x[0];

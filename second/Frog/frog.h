@@ -10,7 +10,7 @@ class Frog : public Particle {
 	static void memeplexer_id(vector<Frog> &);
 	static void memeplexer(vector<Frog>);
 	static void set_value_position_frogs(vector<Frog> &);
-	Frog enhance(float w, float f1, float f2, vector<float> D);
+	void enhance(float w, float f1, float f2, vector<float> D);
 
        public:
 	typedef vector<Frog> _rowFrogs;
