@@ -4,7 +4,6 @@ vector<vector<Frog>> Frog::_columFrogs(2, vector<Frog>());
 vector<float> Frog::best_global_position_from_memeplexer = {};
 float Frog::best_global_value_from_memeplexer = -1;
 vector<Frog> Frog::global_best = {};
-
 bool operator>(const Frog& r1, const Frog& r2) { return r1.value > r2.value ? true : false; }
 bool operator<(const Frog& r1, const Frog& r2) { return r1.value < r2.value ? true : false; }
 vector<float> operator+(const vector<float>& v1, const vector<float>& v2) {
@@ -104,17 +103,19 @@ void Frog::worst_value_position(Frog& worst_particle) {
 	this->worst_global_position = worst_position;
 }
 
+vector<float> Frog::getposition() {
+	return this->position;
+}
+
 void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 	Frog::global_best.push_back(best_particle);
 	Frog::sort(Frog::global_best);
-	vector<Frog>::iterator i = Frog::global_best.end();
-	cout << " la mejor particula es " << i->getID();
+	auto i = Frog::global_best[ Frog::global_best.size() - 1 ];
+	cout << "la mejor particula es " << i.getID()<<endl;
+	vector<float> a = i.getposition();
 
-	Frog::best_global_value_from_memeplexer = i->value;
-	Frog::best_global_position_from_memeplexer = i->position;
-	cout << i->position[0];
-	//cout << Frog::global_best[0].position[0];
-	getchar();
+	Frog::best_global_value_from_memeplexer = i.value;
+	Frog::best_global_position_from_memeplexer = i.position;
 }
 
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }

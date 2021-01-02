@@ -25,6 +25,7 @@ class Frog : public Particle {
 	void setMeme_id(int);
 	int getMeme_id();
 	void worst_particle(Frog &);
+	vector<float> getposition();
 
 	static void best_value_position_from_memeplexer(Frog);
 	static vector<_rowFrogs> meme(vector<Frog> &ranas);
