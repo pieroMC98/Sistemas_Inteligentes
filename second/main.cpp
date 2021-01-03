@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 		cout << " la peor particula es \n";
 		worst_particle.getParameters();
 		getchar();
-		Frog::local_search(best_particle, worst_particle, 0.729, 2.05, 2.05);
+		Frog::local_search(best_particle, worst_particle);
 		best_particle.getGlobalParameters();
 	}
 	// for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
