@@ -162,5 +162,4 @@ void Frog::local_search(Frog best_particle, Frog& worst_particle) {
 			worst_particle.random_position();
 	}
 	cout << "\nmejorado ahora es de w " << worst_particle.value;
-	getchar();
 }

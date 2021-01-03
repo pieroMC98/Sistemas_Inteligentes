@@ -16,8 +16,7 @@ int main(int argc, char *argv[]) {
 
 	for (int i = 0; i < N; i++) {
 		// calculo el fitness de cada particula
-		for (auto &x : ranas)
-			x.fitness();
+		for (auto &x : ranas) x.fitness();
 		memeplexer = Frog::meme(ranas);
 
 		// cada memeplexer
@@ -50,6 +49,10 @@ int main(int argc, char *argv[]) {
 				cout << "------------------ " << i << " ------------------\n";
 				worst_particle.getParameters();
 				Frog::local_search(best_particle, worst_particle);
+				replace_if(
+					x.begin(), x.end(),
+					[&](Frog j) -> bool { return j.getID() == worst_particle.getID(); },
+					worst_particle);
 				cout << " mejoro a la peor" << endl;
 				worst_particle.getParameters();
 				cout << "------------------ " << i << " ------------------\n";
