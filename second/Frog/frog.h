@@ -29,7 +29,8 @@ class Frog : public Particle {
 	vector<float> getposition();
 
 	static void best_value_position_from_memeplexer(Frog);
-	static vector<_rowFrogs> meme(vector<Frog> &ranas);
+	static vector<_rowFrogs> meme(vector<Frog> &);
+	static vector<Frog> join_memeplexer();
 
 	void worst_value_position(Frog &);
 	static void local_search(Frog &best_particle, Frog &worst_particle);

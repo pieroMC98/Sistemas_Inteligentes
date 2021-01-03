@@ -62,6 +62,13 @@ vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
 	return Frog::_columFrogs;
 }
 
+vector<Frog> Frog::join_memeplexer() {
+	vector<Frog> aux;
+	for (auto i : Frog::_columFrogs)
+		for (auto j : i) aux.push_back(j);
+	return aux;
+}
+
 void Frog::getParameters() {
 	Particle::getParameters();
 	cout << "memeplexer group " << this->meme_id << endl;
@@ -143,7 +150,7 @@ void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
 	Frog xg = worst_particle;
 	xb.enhance(best_particle.position);
 	xg.enhance(Frog::best_global_position_from_memeplexer);
-
+	cout << " la peor es " << worst_particle.getID();
 	if (xb > worst_particle) {
 		worst_particle = xb;
 	} else {
@@ -152,4 +159,6 @@ void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
 		else
 			worst_particle.random_position();
 	}
+	cout << " la peor es " << worst_particle.getID();
+	getchar();
 }
