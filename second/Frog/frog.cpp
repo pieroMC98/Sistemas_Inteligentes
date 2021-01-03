@@ -134,8 +134,8 @@ void Frog::update_speed(vector<float> D) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float& v) {
 		v = this->random_float(0, 1) * (D[i] - this->position[i]);
-		if (v >= 2) v = 2;
-		if (v < -2) v = -2;
+		/* if (v >= 2) v = 2; */
+		/* if (v < -2) v = -2; */
 		i++;
 	});
 }
@@ -145,12 +145,14 @@ void Frog::random_position() {
 		 [this](float& x) { x = this->random_float(-this->limits, this->limits); });
 }
 
-void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
+void Frog::local_search(Frog best_particle, Frog& worst_particle) {
 	Frog xb = worst_particle;
 	Frog xg = worst_particle;
 	xb.enhance(best_particle.position);
 	xg.enhance(Frog::best_global_position_from_memeplexer);
-	cout << " la peor es " << worst_particle.getID();
+	cout << "valor de w " << worst_particle.value;
+	cout << "\nvalor de xb " << xb.value;
+	cout << "\nvalor de xg " << xg.value;
 	if (xb > worst_particle) {
 		worst_particle = xb;
 	} else {
@@ -159,6 +161,6 @@ void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
 		else
 			worst_particle.random_position();
 	}
-	cout << " la peor es " << worst_particle.getID();
+	cout << "\nmejorado ahora es de w " << worst_particle.value;
 	getchar();
 }

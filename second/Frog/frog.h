@@ -22,7 +22,7 @@ class Frog : public Particle {
 
 	Frog(int x, int y, int z) : Particle(x, y, z) {}
 	Frog();
-	~Frog() {}
+	virtual ~Frog() {}
 	void setMeme_id(int);
 	int getMeme_id();
 	void worst_particle(Frog &);
@@ -33,7 +33,7 @@ class Frog : public Particle {
 	static vector<Frog> join_memeplexer();
 
 	void worst_value_position(Frog &);
-	static void local_search(Frog &best_particle, Frog &worst_particle);
+	static void local_search(Frog best_particle, Frog &worst_particle);
 
 	void best_local_value_postion(Frog);
 	friend bool operator>(const Frog &, const Frog &);

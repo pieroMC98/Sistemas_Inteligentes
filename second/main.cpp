@@ -12,55 +12,41 @@ int main(int argc, char *argv[]) {
 	Frog *tmp = new Frog(process, dimension, limits);
 	vector<Frog> ranas(N);
 	std::for_each(ranas.begin(), ranas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
-	Frog best_particle = ranas[0];
-	Frog worst_particle = ranas[0];
-	best_particle.fitness();
-	worst_particle.fitness();
+	Frog::best_value_position_from_memeplexer(ranas[0]);
 
 	for (int i = 0; i < N; i++) {
-		for (auto &x : ranas) {
-			x.run(best_particle);
-			// evaluar el fitness de cada particula
+		// calculo el fitness de cada particula
+		for (auto &x : ranas)
 			x.fitness();
-
-			// actualizar la mejor solucion personal de cada particula
-			x.Set_best_personal_properties();
-			x.best_particle(best_particle);
-
-			// muestro cada particula por pantalla
-			// x.getParameters();
-
-			// actualizar la velocidad y posicion de cada particula
-			// x.update_speed(0.729, 2.05, 2.05);
-			x.update_position();
-			x.limit_test();
-		}
 		memeplexer = Frog::meme(ranas);
 
+		// cada memeplexer
 		for (auto &x : memeplexer) {
-			Frog::best_value_position_from_memeplexer(best_particle);
-			best_particle = x[0];
+			Frog best_particle = x[0];
+			Frog worst_particle = x[0];
+			best_particle.fitness();
+			worst_particle.fitness();
+
+			for (auto &j : x) {
+				j.run(best_particle);
+				// evaluar el fitness de cada particula
+				j.fitness();
+
+				// actualizar la mejor solucion personal de cada particula
+				j.best_particle(best_particle);
+				j.worst_particle(worst_particle);
+
+				// muestro cada particula por pantalla
+				j.getParameters();
+
+				// actualizar la velocidad y posicion de cada particula
+				j.limit_test();
+			}
+			best_particle.best_value_position(best_particle);
+			worst_particle.worst_value_position(worst_particle);
+
+			// numero de iteraciones de mejora
 			for (int j = 0; j < 3; j++) {
-				for (auto &j : x) {
-					j.run(best_particle);
-					// evaluar el fitness de cada particula
-					j.fitness();
-
-					// actualizar la mejor solucion personal de cada particula
-					j.Set_best_personal_properties();
-					j.best_particle(best_particle);
-					j.worst_particle(worst_particle);
-
-					// muestro cada particula por pantalla
-					j.getParameters();
-					best_particle.best_value_position(best_particle);
-					worst_particle.worst_value_position(worst_particle);
-					// j.update_speed(0.729, 2.05, 2.05);
-					j.update_position();
-
-					// actualizar la velocidad y posicion de cada particula
-					j.limit_test();
-				}
 				cout << "------------------ " << i << " ------------------\n";
 				worst_particle.getParameters();
 				Frog::local_search(best_particle, worst_particle);
@@ -73,12 +59,11 @@ int main(int argc, char *argv[]) {
 			best_particle.getParameters();
 			cout << " la peor particula es \n";
 			worst_particle.getParameters();
-			best_particle.getGlobalParameters();
+			Frog::best_value_position_from_memeplexer(best_particle);
 		}
 		ranas = Frog::join_memeplexer();
 	}
-	// for_each(ranas.begin(), ranas.end(), [=](Frog x) { x.getParameters(); });
 
-	tmp->~Frog();
+	delete tmp;
 	return 0;
 }
