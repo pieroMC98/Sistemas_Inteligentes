@@ -1,11 +1,42 @@
 #include "./frog.h"
 
+/**
+ * inicializacion variables est'aticas
+ *
+ *
+ */
 vector<vector<Frog>> Frog::_columFrogs(2, vector<Frog>());
 vector<float> Frog::best_global_position_from_memeplexer = {};
 float Frog::best_global_value_from_memeplexer = -1;
 vector<Frog> Frog::global_best = {};
+
+/**
+ * @brief
+ *
+ * @param r1
+ * @param r2
+ * @return true
+ * @return false
+ */
 bool operator>(const Frog& r1, const Frog& r2) { return r1.value > r2.value ? true : false; }
+
+/**
+ * @brief
+ *
+ * @param r1
+ * @param r2
+ * @return true
+ * @return false
+ */
 bool operator<(const Frog& r1, const Frog& r2) { return r1.value < r2.value ? true : false; }
+
+/**
+ * @brief
+ *
+ * @param v1
+ * @param v2
+ * @return vector<float>
+ */
 vector<float> operator+(const vector<float>& v1, const vector<float>& v2) {
 	if (v1.size() != v2.size()) return vector<float>();
 
@@ -16,6 +47,13 @@ vector<float> operator+(const vector<float>& v1, const vector<float>& v2) {
 	return aux;
 }
 
+/**
+ * @brief
+ *
+ * @param v1
+ * @param v2
+ * @return vector<float>
+ */
 vector<float> operator-(const vector<float>& v1, const vector<float>& v2) {
 	if (v1.size() != v2.size()) return vector<float>();
 
@@ -26,8 +64,17 @@ vector<float> operator-(const vector<float>& v1, const vector<float>& v2) {
 	return aux;
 }
 
+/**
+ * @brief Construct a new Frog:: Frog object
+ *
+ */
 Frog::Frog() : Particle() { Frog::best_global_position_from_memeplexer.resize(this->Dimension); }
 
+/**
+ * @brief
+ *
+ * @param ranas
+ */
 void Frog::sort(vector<Frog>& ranas) {
 	for (size_t i = 1; i < ranas.size(); i++)
 		if (ranas[i - 1] > ranas[i]) {
@@ -37,10 +84,25 @@ void Frog::sort(vector<Frog>& ranas) {
 		}
 }
 
+/**
+ * @brief
+ *
+ * @param i
+ */
 void Frog::setMeme_id(int i) { this->meme_id = i; }
 
+/**
+ * @brief
+ *
+ * @return int
+ */
 int Frog::getMeme_id() { return this->meme_id; }
 
+/**
+ * @brief
+ *
+ * @param ranas
+ */
 void Frog::memeplexer_id(vector<Frog>& ranas) {
 	for (size_t i = 0; i < ranas.size(); i++) {
 		if (!(i % 2))
@@ -50,11 +112,22 @@ void Frog::memeplexer_id(vector<Frog>& ranas) {
 	}
 }
 
+/**
+ * @brief
+ *
+ * @param ranas
+ */
 void Frog::memeplexer(vector<Frog> ranas) {
 	for (size_t i = 0; i < ranas.size(); i++)
 		Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
 }
 
+/**
+ * @brief
+ *
+ * @param ranas
+ * @return vector<vector<Frog>>
+ */
 vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
 	Frog::sort(ranas);
 	Frog::memeplexer_id(ranas);
@@ -62,6 +135,11 @@ vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
 	return Frog::_columFrogs;
 }
 
+/**
+ * @brief
+ *
+ * @return vector<Frog>
+ */
 vector<Frog> Frog::join_memeplexer() {
 	vector<Frog> aux;
 	for (auto i : Frog::_columFrogs)
@@ -69,11 +147,20 @@ vector<Frog> Frog::join_memeplexer() {
 	return aux;
 }
 
+/**
+ * @brief
+ *
+ */
 void Frog::getParameters() {
 	Particle::getParameters();
 	cout << "memeplexer group " << this->meme_id << endl;
 }
 
+/**
+ * @brief
+ *
+ * @param worst_particle
+ */
 void Frog::worst_particle(Frog& worst_particle) {
 	if (this->process == MINIMIZAR)
 		if (*this > worst_particle) worst_particle = *this;
@@ -82,6 +169,11 @@ void Frog::worst_particle(Frog& worst_particle) {
 		if (*this < worst_particle) worst_particle = *this;
 }
 
+/**
+ * @brief
+ *
+ * @param worst_particle
+ */
 void Frog::worst_value_position(Frog& worst_particle) {
 	float value = worst_particle.value;
 	std::vector<float> position = worst_particle.position;
@@ -110,8 +202,18 @@ void Frog::worst_value_position(Frog& worst_particle) {
 	this->worst_global_position = worst_position;
 }
 
+/**
+ * @brief
+ *
+ * @return vector<float>
+ */
 vector<float> Frog::getposition() { return this->position; }
 
+/**
+ * @brief
+ *
+ * @param best_particle
+ */
 void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 	Frog::global_best.push_back(best_particle);
 	Frog::sort(Frog::global_best);
@@ -122,14 +224,29 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 	Frog::best_global_position_from_memeplexer = i.position;
 }
 
+/**
+ * @brief
+ *
+ * @param best_frog
+ */
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }
 
+/**
+ * @brief
+ *
+ * @param D
+ */
 void Frog::enhance(vector<float> D) {
 	this->update_speed(D);
 	this->update_position();
 	this->fitness();
 }
 
+/**
+ * @brief
+ *
+ * @param D
+ */
 void Frog::update_speed(vector<float> D) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float& v) {
@@ -140,11 +257,21 @@ void Frog::update_speed(vector<float> D) {
 	});
 }
 
+/**
+ * @brief
+ *
+ */
 void Frog::random_position() {
 	for_each(this->position.begin(), this->position.end(),
 		 [this](float& x) { x = this->random_float(-this->limits, this->limits); });
 }
 
+/**
+ * @brief
+ *
+ * @param best_particle
+ * @param worst_particle
+ */
 void Frog::local_search(Frog best_particle, Frog& worst_particle) {
 	Frog xb = worst_particle;
 	Frog xg = worst_particle;
