@@ -140,7 +140,11 @@ vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
  *
  * @return vector<Frog>
  */
-vector<Frog> Frog::join_memeplexer() {
+vector<Frog> Frog::join_memeplexer(vector<vector<Frog>> meme) {
+	Frog::_columFrogs = meme;
+	/* cout << "))))\n"; */
+	/* for_each(meme[0].begin(), meme[0].end(), [=](Frog f) { f.getParameters(); }); */
+	/* getchar(); */
 	vector<Frog> aux;
 	for (auto i : Frog::_columFrogs)
 		for (auto j : i) aux.push_back(j);
@@ -277,16 +281,12 @@ void Frog::local_search(Frog best_particle, Frog& worst_particle) {
 	Frog xg = worst_particle;
 	xb.enhance(best_particle.position);
 	xg.enhance(Frog::best_global_position_from_memeplexer);
-	cout << "valor de w " << worst_particle.value;
-	cout << "\nvalor de xb " << xb.value;
-	cout << "\nvalor de xg " << xg.value;
-	if (xb > worst_particle) {
+	if (xb > worst_particle)
 		worst_particle = xb;
-	} else {
-		if (xg > worst_particle)
-			worst_particle = xg;
-		else
-			worst_particle.random_position();
-	}
-	cout << "\nmejorado ahora es de w " << worst_particle.value;
+	else if (xg > worst_particle)
+		worst_particle = xg;
+	else
+		worst_particle.random_position();
+
+	cout << "\nmejorado, ahora w fitness es " << worst_particle.value << "\n";
 }

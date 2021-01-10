@@ -21,6 +21,8 @@ int main(int argc, char *argv[]) {
 
 		// cada memeplexer
 		for (auto &x : memeplexer) {
+			cout << "memeplexer_id : \n";
+			cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>> " << x[0].getMeme_id() << " <<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
 			Frog best_particle = x[0];
 			Frog worst_particle = x[0];
 			best_particle.fitness();
@@ -45,28 +47,29 @@ int main(int argc, char *argv[]) {
 			worst_particle.worst_value_position(worst_particle);
 
 			// numero de iteraciones de mejora
+			cout << "\033[1;33m\n>MEJORANDO LA PEOR PARTICULA< \033[0m" << worst_particle.getID() << endl;
 			for (int j = 0; j < 3; j++) {
-				cout << "------------------ " << i << " ------------------\n";
-				worst_particle.getParameters();
 				Frog::local_search(best_particle, worst_particle);
 				replace_if(
 					x.begin(), x.end(),
-					[&](Frog j) -> bool { return j.getID() == worst_particle.getID(); },
+					[&](Frog k) -> bool { return k.getID() == worst_particle.getID(); },
 					worst_particle);
-				cout << " mejoro a la peor" << endl;
 				worst_particle.getParameters();
-				cout << "------------------ " << i << " ------------------\n";
 			}
-			bug;
+			cout << "\033[1;33m>MEJORA TERMINADA \033[0m" << endl << endl;
 			cout << " la mejor particula es \n";
 			best_particle.getParameters();
 			cout << " la peor particula es \n";
 			worst_particle.getParameters();
 			Frog::best_value_position_from_memeplexer(best_particle);
 		}
-		ranas = Frog::join_memeplexer();
+		/* cout << "))))\n"; */
+		/* for_each(memeplexer[0].begin(), memeplexer[0].end(), [=](Frog f) { f.getParameters(); }); */
+		/* getchar(); */
+		cout << "--------------------------- " << i << " ---------------------------\n";
+		ranas = Frog::join_memeplexer(memeplexer);
 	}
 
 	delete tmp;
-	return 0;
+	return EXIT_SUCCESS;
 }
