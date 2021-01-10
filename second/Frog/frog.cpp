@@ -122,6 +122,10 @@ void Frog::memeplexer(vector<Frog> ranas) {
 		Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
 }
 
+void Frog::reset_meme() {
+	for_each(Frog::_columFrogs.begin(), Frog::_columFrogs.end(), [=](vector<Frog>& i) { i.clear(); });
+}
+
 /**
  * @brief
  *
@@ -129,6 +133,7 @@ void Frog::memeplexer(vector<Frog> ranas) {
  * @return vector<vector<Frog>>
  */
 vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
+	Frog::reset_meme();
 	Frog::sort(ranas);
 	Frog::memeplexer_id(ranas);
 	Frog::memeplexer(ranas);
@@ -142,6 +147,8 @@ vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
  */
 vector<Frog> Frog::join_memeplexer(vector<vector<Frog>> meme) {
 	Frog::_columFrogs = meme;
+	/* Frog::_columFrogs[0].resize(meme[0].size()); */
+	/* Frog::_columFrogs[1].resize(meme[1].size()); */
 	/* cout << "))))\n"; */
 	/* for_each(meme[0].begin(), meme[0].end(), [=](Frog f) { f.getParameters(); }); */
 	/* getchar(); */

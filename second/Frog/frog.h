@@ -12,6 +12,7 @@ class Frog : public Particle {
 	static void set_value_position_frogs(vector<Frog> &);
 	void enhance(vector<float> D);
 	void random_position();
+	static void reset_meme();
 
        public:
 	typedef vector<Frog> _rowFrogs;
