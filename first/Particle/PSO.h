@@ -82,9 +82,9 @@ class Particle {
 	void fitness();
 	void Set_best_personal_properties();
 	void best_particle(Particle &);
-	void getParameters();
+	virtual void getParameters();
 	void getGlobalParameters();
-	void update_speed(float, float, float);
+	virtual void update_speed(float, float, float);
 	void update_position();
 	int getID();
 	void limit_test();

@@ -2,8 +2,9 @@ main = .main
 objects = \
 ../first/Function/function.cpp \
 ../first/Particle/PSO.cpp \
+../Operator/operator.cpp \
 ../second/Frog/frog.cpp \
-./Firefly/Firefly.cpp
+./Firefly/Firefly.cpp \
 main.cpp
 
 objects: $(objects)
