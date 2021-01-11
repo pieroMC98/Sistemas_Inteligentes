@@ -18,4 +18,5 @@
 #define EXIT 10
 
 #define bug std::cout << "-------8888--------" << std::endl
+std::vector<float> operator+(const std::vector<float> &, const std::vector<float> &);
 #endif

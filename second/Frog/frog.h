@@ -39,7 +39,6 @@ class Frog : public Particle {
 	void best_local_value_postion(Frog);
 	friend bool operator>(const Frog &, const Frog &);
 	friend bool operator<(const Frog &, const Frog &);
-	friend vector<float> operator+(const vector<float> &, const vector<float> &);
 	virtual void getParameters();
 	virtual void update_speed(vector<float>);
 };

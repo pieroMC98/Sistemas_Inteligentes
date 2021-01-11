@@ -30,22 +30,6 @@ bool operator>(const Frog& r1, const Frog& r2) { return r1.value > r2.value ? tr
  */
 bool operator<(const Frog& r1, const Frog& r2) { return r1.value < r2.value ? true : false; }
 
-/**
- * @brief
- *
- * @param v1
- * @param v2
- * @return vector<float>
- */
-vector<float> operator+(const vector<float>& v1, const vector<float>& v2) {
-	if (v1.size() != v2.size()) return vector<float>();
-
-	vector<float> aux(v1.size());
-	for (size_t i = 0; i < v1.size(); i++) {
-		aux[i] = v1[i] + v2[i];
-	}
-	return aux;
-}
 
 /**
  * @brief
