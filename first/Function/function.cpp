@@ -82,11 +82,39 @@ int params(char **argv, int argc, int &N, int &s, int &option, int &process, int
  * @param v2
  * @return vector<float>
  */
-std::vector<float> operator+(const std::vector<float>& v1, const std::vector<float>& v2) {
+std::vector<float> operator+(const std::vector<float> &v1, const std::vector<float> &v2) {
 	if (v1.size() != v2.size()) return std::vector<float>();
 
 	std::vector<float> aux(v1.size());
-	for (size_t i = 0; i < v1.size(); i++)
-		aux[i] = v1[i] + v2[i];
+	for (size_t i = 0; i < v1.size(); i++) aux[i] = v1[i] + v2[i];
 	return aux;
 }
+
+namespace trird {
+
+/**
+ * @brief parametros que recibe el programa
+ *
+ * @return int si se han recibido los parametros
+ */
+int params(char **argv, int argc, int &N, int &s, int &option, int &process, int &dimension, int &limits) {
+	if (argc == 7) {
+		N = atoi(argv[1]);
+		s = atoi(argv[2]);
+		option = atoi(argv[3]);
+		process = atoi(argv[4]);
+		dimension = atoi(argv[5]);
+		limits = atoi(argv[6]);
+		return EXIT_SUCCESS;
+	} else {
+		std::cout << "los parámetros son:\n\
+			1º - número de partículas\n\
+			2º - número de iteraciones\n\
+			3º - funcion para el fitness: sphere(0) | sum_of_different_power(1) | dixon_price(2)\n\
+			4º - proceso de optimizado: 1> minimizar, 2> maximizar\n\
+			5º - dimension del sistema\n\
+			6º - limite del sistema\n";
+		return EXIT_FAILURE;
+	}
+}
+}  // namespace trird

@@ -1,5 +1,7 @@
 #include "./frog.h"
 
+#include "../../Template/template.cpp"
+
 /**
  * inicializacion variables est'aticas
  *
@@ -9,27 +11,6 @@ vector<vector<Frog>> Frog::_columFrogs(2, vector<Frog>());
 vector<float> Frog::best_global_position_from_memeplexer = {};
 float Frog::best_global_value_from_memeplexer = -1;
 vector<Frog> Frog::global_best = {};
-
-/**
- * @brief
- *
- * @param r1
- * @param r2
- * @return true
- * @return false
- */
-bool operator>(const Frog& r1, const Frog& r2) { return r1.value > r2.value ? true : false; }
-
-/**
- * @brief
- *
- * @param r1
- * @param r2
- * @return true
- * @return false
- */
-bool operator<(const Frog& r1, const Frog& r2) { return r1.value < r2.value ? true : false; }
-
 
 /**
  * @brief
