@@ -1,5 +1,6 @@
 #include "../../HEADER_H.h"
-
+#ifndef _PARTICLE_H
+#define _PARTICLE_H
 class Particle {
        protected:
 	int id;
@@ -123,3 +124,4 @@ class Particle {
 		this->best_global_position = best_position;
 	}
 };
+#endif

@@ -1,5 +1,5 @@
-#include "../../first/Particle/PSO.h"
 #include "../../Template/template.h"
+#include "../../first/Particle/PSO.h"
 using namespace std;
 
 class Frog : public Particle {
@@ -38,10 +38,11 @@ class Frog : public Particle {
 	static void local_search(Frog best_particle, Frog &worst_particle);
 
 	void best_local_value_postion(Frog);
+	// clang-format off
 	friend bool operator> <>(const Frog &, const Frog &);
 	friend bool operator< <>(const Frog &, const Frog &);
+	// clang-format on
 
 	void getParameters();
 	void update_speed(vector<float>);
 };
-

@@ -90,13 +90,13 @@ std::vector<float> operator+(const std::vector<float> &v1, const std::vector<flo
 	return aux;
 }
 
-
 /**
  * @brief parametros que recibe el programa
  *
  * @return int si se han recibido los parametros
  */
-int third::params(char **argv, int argc, int &N, int &s, int &option, int &process, int &dimension, int &limits, float &gamma, float &beta0) {
+int third::params(char **argv, int argc, int &N, int &s, int &option, int &process, int &dimension, int &limits,
+		  float &gamma, float &beta0) {
 	if (argc == 9) {
 		N = atoi(argv[1]);
 		s = atoi(argv[2]);
@@ -107,7 +107,7 @@ int third::params(char **argv, int argc, int &N, int &s, int &option, int &proce
 		gamma = atof(argv[7]);
 		beta0 = atof(argv[8]);
 		return EXIT_SUCCESS;
-	} 
+	}
 
 	std::cout << "los parámetros son:\n\
 		1º - número de partículas\n\
