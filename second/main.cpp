@@ -57,16 +57,17 @@ int main(int argc, char *argv[]) {
 				worst_particle.getParameters();
 			}
 			cout << "\033[1;33m>MEJORA TERMINADA \033[0m" << endl << endl;
-			cout << " la mejor particula es \n";
+			cout << "la mejor particula es \n";
 			best_particle.getParameters();
-			cout << " la peor particula es \n";
+			cout << "\n\nla peor particula es \n";
 			worst_particle.getParameters();
 			Frog::best_value_position_from_memeplexer(best_particle);
 		}
 		cout << "--------------------------- " << i << " ---------------------------\n";
 		ranas = Frog::join_memeplexer(memeplexer);
 	}
-
+	cout << "\n\nla mejor solucion es \n";
+	Frog::global_best.back().getParameters();
 	delete tmp;
 	return EXIT_SUCCESS;
 }

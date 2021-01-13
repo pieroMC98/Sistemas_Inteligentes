@@ -1,4 +1,4 @@
-main = .main
+main = main
 objects = \
 ../first/Function/function.cpp \
 ../first/Particle/PSO.cpp \
@@ -12,5 +12,3 @@ objects: $(objects)
 run:objects
 	clear
 	./$(main) 3 6 0 1 3 10
-format:
-	find . -regex '.*\.\(cpp\|hpp\|h\|c\)' -exec clang-format -style=file -i {} \;
