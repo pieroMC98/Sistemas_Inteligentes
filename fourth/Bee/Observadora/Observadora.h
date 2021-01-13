@@ -1,5 +1,3 @@
 #include "../Bee.h"
 
-class Observadora : private Bee {
-
-};
+class Observadora : private Bee {};

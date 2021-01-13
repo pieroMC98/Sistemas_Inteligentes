@@ -1,6 +1,7 @@
 #include "./Firefly.h"
 
 #include "../../Template/template.h"
+
 float Firefly::gamma = {};
 float Firefly::beta0 = {};
 
@@ -22,10 +23,9 @@ Firefly Firefly::sort(vector<Firefly> &l) {
 }
 
 void Firefly::update_position(Firefly neighbor) {
-	int i = 0;
-	std::vector<float> beta(neighbor.Dimension);
-	std::vector<float> diff(neighbor.Dimension);
+	std::vector<float> beta(neighbor.Dimension), diff(neighbor.Dimension);
 	vector<float> epsilon(neighbor.Dimension);
+
 	std::generate(epsilon.begin(), epsilon.end(), std::rand);
 
 	diff = this->position - neighbor.position;
@@ -43,3 +43,5 @@ void Firefly::move_best(Firefly &best) {
 	std::generate(rand.begin(), rand.end(), std::rand);
 	best.position = best.position + rand;
 }
+
+bool Firefly::is_thebest() { return this->best; }

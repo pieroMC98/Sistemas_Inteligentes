@@ -63,9 +63,6 @@ int main(int argc, char *argv[]) {
 			worst_particle.getParameters();
 			Frog::best_value_position_from_memeplexer(best_particle);
 		}
-		/* cout << "))))\n"; */
-		/* for_each(memeplexer[0].begin(), memeplexer[0].end(), [=](Frog f) { f.getParameters(); }); */
-		/* getchar(); */
 		cout << "--------------------------- " << i << " ---------------------------\n";
 		ranas = Frog::join_memeplexer(memeplexer);
 	}

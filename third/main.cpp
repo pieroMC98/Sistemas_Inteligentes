@@ -1,5 +1,6 @@
 #include "../first/Function/function.h"
 #include "./Firefly/Firefly.h"
+
 int main(int argc, char *argv[]) {
 	int N, s, option, process, dimension, limits;
 	float gamma, beta0;
@@ -21,10 +22,26 @@ int main(int argc, char *argv[]) {
 	for (Firefly &i : luciernagas) i.fitness();
 	thebest = Firefly::sort(luciernagas);
 
+	cout << "la mejor particula es:\n";
+	thebest.getParameters();
+	cout << "\n\n";
 	for (int i = 0; i < N; i++) {
-		for (Firefly &i : luciernagas)
-			for (auto j : luciernagas) i.move(j);
+		for (Firefly &i : luciernagas) {
+			if (i.is_thebest()) continue;
+			cout << "luciernaga :\n";
+			i.getParameters();
+			cout << "\n\n se mueve :\n";
+			for (auto j : luciernagas) {
+				i.move(j);
+				i.getParameters();
+			}
+			cout << "\n\n";
+		}
+		cout << "--------------------------- " << i << " ---------------------------\n";
+		// cout << "\n\n\n";
 		Firefly::move_best(thebest);
+		cout << " la mejor se mueve: \n";
+		thebest.getParameters();
 	}
 
 	delete tmp;

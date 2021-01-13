@@ -1,5 +1,3 @@
 #include "../Bee.h"
 
-class Exploradora : private Bee {
-
-};
+class Exploradora : private Bee {};

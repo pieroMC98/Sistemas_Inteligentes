@@ -15,6 +15,7 @@ class Firefly : public Frog {
 	void update_position(Firefly);
 	void move(Firefly);
 	float betai(Firefly);
+	bool is_thebest();
 	// clang-format off
 	friend bool operator> <>(const Firefly &, const Firefly &);
 	friend bool operator< <>(const Firefly &, const Firefly &);

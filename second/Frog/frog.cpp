@@ -1,5 +1,4 @@
 #include "./frog.h"
-// template bool operator> <Frog>(const Frog &r1, const Frog &r2);
 /**
  * inicializacion variables est'aticas
  *
@@ -10,22 +9,6 @@ vector<float> Frog::best_global_position_from_memeplexer = {};
 float Frog::best_global_value_from_memeplexer = -1;
 vector<Frog> Frog::global_best = {};
 
-/**
- * @brief
- *
- * @param v1
- * @param v2
- * @return vector<float>
- */
-/* vector<float> operator-(const vector<float>& v1, const vector<float>& v2) { */
-/* if (v1.size() != v2.size()) return vector<float>(); */
-
-/* vector<float> aux(v1.size()); */
-/* for (size_t i = 0; i < v1.size(); i++) { */
-/* aux[i] = v1[i] - v2[i]; */
-/* } */
-/* return aux; */
-/* } */
 
 /**
  * @brief Construct a new Frog:: Frog object
@@ -34,9 +17,9 @@ vector<Frog> Frog::global_best = {};
 Frog::Frog() : Particle() { Frog::best_global_position_from_memeplexer.resize(this->Dimension); }
 
 /**
- * @brief
+ * @brief Ordena las ranas pasadas como parámetros por referencia
  *
- * @param ranas
+ * @param ranas array de N ranas pasadas por referencia
  */
 void Frog::sort(vector<Frog>& ranas) {
 	for (size_t i = 1; i < ranas.size(); i++)
@@ -48,52 +31,56 @@ void Frog::sort(vector<Frog>& ranas) {
 }
 
 /**
- * @brief
+ * @brief Setter del id del memeplexer
  *
- * @param i
+ * @param i id a settear
  */
 void Frog::setMeme_id(int i) { this->meme_id = i; }
 
 /**
- * @brief
+ * @brief Getter del id del memeplexer
+
  *
  * @return int
  */
 int Frog::getMeme_id() { return this->meme_id; }
 
 /**
- * @brief
+ * @brief Establece el id de cada rana
  *
- * @param ranas
+ * @param ranas array de ranas a establecer el id
  */
 void Frog::memeplexer_id(vector<Frog>& ranas) {
-	for (size_t i = 0; i < ranas.size(); i++) {
+	for (size_t i = 0; i < ranas.size(); i++)
 		if (!(i % 2))
 			ranas[i].setMeme_id(1);
 		else
 			ranas[i].setMeme_id(2);
-	}
 }
 
 /**
- * @brief
+ * @brief Array de MxN donde M es la fila de memeplexer totales y N es cada rana de ese memeplexer
  *
- * @param ranas
+ * @param ranas array de ranas a establecer en array MxN
  */
 void Frog::memeplexer(vector<Frog> ranas) {
 	for (size_t i = 0; i < ranas.size(); i++)
 		Frog::_columFrogs[ranas[i].getMeme_id() == 1 ? 0 : 1].push_back(ranas[i]);
 }
 
+/**
+ * @brief Reinicia el array MxN de memeplexer
+ *
+ */
 void Frog::reset_meme() {
 	for_each(Frog::_columFrogs.begin(), Frog::_columFrogs.end(), [=](vector<Frog>& i) { i.clear(); });
 }
 
 /**
- * @brief
+ * @brief Crea los memeplexer
  *
- * @param ranas
- * @return vector<vector<Frog>>
+ * @param ranas array de ranas a ordenar y dar id a cada una
+ * @return vector<vector<Frog>> devuelve array MxN de el array N de ranas para trabajar mejor los datos
  */
 vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
 	Frog::reset_meme();
@@ -104,17 +91,12 @@ vector<vector<Frog>> Frog::meme(vector<Frog>& ranas) {
 }
 
 /**
- * @brief
+ * @brief Recibe array MxN y transforma a array M
  *
- * @return vector<Frog>
+ * @return vector<Frog> array M
  */
 vector<Frog> Frog::join_memeplexer(vector<vector<Frog>> meme) {
 	Frog::_columFrogs = meme;
-	/* Frog::_columFrogs[0].resize(meme[0].size()); */
-	/* Frog::_columFrogs[1].resize(meme[1].size()); */
-	/* cout << "))))\n"; */
-	/* for_each(meme[0].begin(), meme[0].end(), [=](Frog f) { f.getParameters(); }); */
-	/* getchar(); */
 	vector<Frog> aux;
 	for (auto i : Frog::_columFrogs)
 		for (auto j : i) aux.push_back(j);
@@ -122,7 +104,7 @@ vector<Frog> Frog::join_memeplexer(vector<vector<Frog>> meme) {
 }
 
 /**
- * @brief
+ * @brief Obtener propiedades de cada rana
  *
  */
 void Frog::getParameters() {
@@ -131,9 +113,9 @@ void Frog::getParameters() {
 }
 
 /**
- * @brief
+ * @brief Establece la peor rana
  *
- * @param worst_particle
+ * @param worst_particle peor rana pasada por referencia
  */
 void Frog::worst_particle(Frog& worst_particle) {
 	if (this->process == MINIMIZAR)
@@ -144,9 +126,9 @@ void Frog::worst_particle(Frog& worst_particle) {
 }
 
 /**
- * @brief
+ * @brief Establece la peor posicion de la peor rana
  *
- * @param worst_particle
+ * @param worst_particle recibe peor rana
  */
 void Frog::worst_value_position(Frog& worst_particle) {
 	float value = worst_particle.value;
@@ -171,27 +153,26 @@ void Frog::worst_value_position(Frog& worst_particle) {
 		worst_position = position;
 	}
 
-	// esto no es est'atico
 	this->worst_global_value = worst_value;
 	this->worst_global_position = worst_position;
 }
 
 /**
- * @brief
+ * @brief Getter de la posición de la rana
  *
  * @return vector<float>
  */
 vector<float> Frog::getposition() { return this->position; }
 
 /**
- * @brief
+ * @brief Obtener la mejor rana global
  *
- * @param best_particle
+ * @param best_particle mejor rana a procesar
  */
 void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 	Frog::global_best.push_back(best_particle);
 	Frog::sort(Frog::global_best);
-	Frog i = Frog::global_best[Frog::global_best.size() - 1];
+	Frog i = Frog::global_best.back();
 	cout << "la mejor particula es " << i.getID() << endl;
 
 	Frog::best_global_value_from_memeplexer = i.value;
@@ -199,40 +180,39 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 }
 
 /**
- * @brief
+ * @brief Obtener la mejor rana local del memeplexer i
  *
- * @param best_frog
+ * @param best_frog recibe la mejor rana
  */
 void Frog::best_local_value_postion(Frog best_frog) { Particle::best_value_position(best_frog); }
 
 /**
- * @brief
+ * @brief mejora una rana
  *
- * @param D
+ * @param D posición de mejora
  */
 void Frog::enhance(vector<float> D) {
 	this->update_speed(D);
 	this->update_position();
+	this->limit_test();
 	this->fitness();
 }
 
 /**
- * @brief
+ * @brief velocidad de la rana
  *
- * @param D
+ * @param D posición de mejora
  */
 void Frog::update_speed(vector<float> D) {
 	int i = 0;
 	std::for_each(this->speed.begin(), this->speed.end(), [&](float& v) {
 		v = this->random_float(0, 1) * (D[i] - this->position[i]);
-		/* if (v >= 2) v = 2; */
-		/* if (v < -2) v = -2; */
 		i++;
 	});
 }
 
 /**
- * @brief
+ * @brief Si la rana no mejora, dar valores aleatorios
  *
  */
 void Frog::random_position() {
@@ -241,12 +221,13 @@ void Frog::random_position() {
 }
 
 /**
- * @brief
+ * @brief búsqueda local de la peor partícula a mejorar. Si la peor rana mejora más que la mejor rana
+ *, esta se convertirá en la mejora rana
  *
- * @param best_particle
- * @param worst_particle
+ * @param best_particle mejor rana pasada por referenicia por si hay que actualizar
+ * @param worst_particle recibe la peor rana a actualizar
  */
-void Frog::local_search(Frog best_particle, Frog& worst_particle) {
+void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
 	Frog xb = worst_particle;
 	Frog xg = worst_particle;
 	xb.enhance(best_particle.position);
@@ -257,6 +238,7 @@ void Frog::local_search(Frog best_particle, Frog& worst_particle) {
 		worst_particle = xg;
 	else
 		worst_particle.random_position();
+	if (worst_particle > best_particle) best_particle = worst_particle;
 
 	cout << "\nmejorado, ahora w fitness es " << worst_particle.value << "\n";
 }
