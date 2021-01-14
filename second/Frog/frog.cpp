@@ -24,7 +24,7 @@ Frog::Frog() : Particle() { Frog::best_global_position_from_memeplexer.resize(th
 void Frog::sort(vector<Frog>& ranas) {
 	for (size_t i = 0; i < ranas.size(); i++)
 		for (size_t j = 0; j < ranas.size() - 1; j++)
-			if (ranas[j] > ranas[j+1]) {
+			if (ranas[j] > ranas[j + 1]) {
 				Frog aux = ranas[j];
 				ranas[j] = ranas[j + 1];
 				ranas[j + 1] = aux;

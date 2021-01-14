@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 				worst_particle.getParameters();
 			}
 			if ((worst_particle < best_particle && process == MINIMIZAR) ||
-			   (worst_particle > best_particle && process == MAXIMIZAR))
+			    (worst_particle > best_particle && process == MAXIMIZAR))
 				best_particle = worst_particle;
 
 			cout << "\033[1;33m>MEJORA TERMINADA \033[0m" << endl << endl;
@@ -67,7 +67,6 @@ int main(int argc, char *argv[]) {
 		}
 		cout << "--------------------------- " << i << " ---------------------------\n";
 		ranas = Frog::join_memeplexer(memeplexer);
-		getchar();
 	}
 	cout << "\n\nla mejor solucion es \n";
 	Frog::global_best.back().getParameters();
