@@ -1,4 +1,5 @@
 #include "./frog.h"
+
 /**
  * inicializacion variables est'aticas
  *
@@ -21,12 +22,13 @@ Frog::Frog() : Particle() { Frog::best_global_position_from_memeplexer.resize(th
  * @param ranas array de N ranas pasadas por referencia
  */
 void Frog::sort(vector<Frog>& ranas) {
-	for (size_t i = 1; i < ranas.size(); i++)
-		if (ranas[i - 1] > ranas[i]) {
-			Frog aux = ranas[i];
-			ranas[i] = ranas[i - 1];
-			ranas[i - 1] = aux;
-		}
+	for (size_t i = 0; i < ranas.size(); i++)
+		for (size_t j = 0; j < ranas.size() - 1; j++)
+			if (ranas[j] > ranas[j+1]) {
+				Frog aux = ranas[j];
+				ranas[j] = ranas[j + 1];
+				ranas[j + 1] = aux;
+			}
 }
 
 /**
@@ -172,11 +174,11 @@ void Frog::best_value_position_from_memeplexer(Frog best_particle) {
 	Frog::global_best.push_back(best_particle);
 	Frog::sort(Frog::global_best);
 	Frog i;
-	if( best_particle.process == MAXIMIZAR)
+	if (best_particle.process == MAXIMIZAR)
 		i = Frog::global_best.back();
 	else
 		i = Frog::global_best.front();
-	cout << "la mejor particula es " << i.getID() << endl;
+	cout << "la mejor particula global es " << i.getID() << endl;
 
 	Frog::best_global_value_from_memeplexer = i.value;
 	Frog::best_global_position_from_memeplexer = i.position;
@@ -243,7 +245,6 @@ void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
 			worst_particle = xg;
 		else
 			worst_particle.random_position();
-		if (worst_particle > best_particle) best_particle = worst_particle;
 	} else {
 		if (xb < worst_particle)
 			worst_particle = xb;
@@ -251,6 +252,5 @@ void Frog::local_search(Frog& best_particle, Frog& worst_particle) {
 			worst_particle = xg;
 		else
 			worst_particle.random_position();
-		if (worst_particle < best_particle) best_particle = worst_particle;
 	}
 }

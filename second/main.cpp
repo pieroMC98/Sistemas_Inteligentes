@@ -12,12 +12,12 @@ int main(int argc, char *argv[]) {
 	Frog *tmp = new Frog(process, dimension, limits);
 	vector<Frog> ranas(N);
 	std::for_each(ranas.begin(), ranas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
-	Frog::best_value_position_from_memeplexer(ranas[0]);
 
 	for (int i = 0; i < N; i++) {
 		// calculo el fitness de cada particula
 		for (auto &x : ranas) x.fitness();
 		memeplexer = Frog::meme(ranas);
+		Frog::best_value_position_from_memeplexer(process == MAXIMIZAR ? ranas.back() : ranas.front());
 
 		// cada memeplexer
 		for (auto &x : memeplexer) {
@@ -56,15 +56,18 @@ int main(int argc, char *argv[]) {
 					worst_particle);
 				worst_particle.getParameters();
 			}
+			if ((worst_particle < best_particle && process == MINIMIZAR) ||
+			   (worst_particle > best_particle && process == MAXIMIZAR))
+				best_particle = worst_particle;
+
 			cout << "\033[1;33m>MEJORA TERMINADA \033[0m" << endl << endl;
 			cout << "la mejor particula es \n";
 			best_particle.getParameters();
-			cout << "\n\nla peor particula es \n";
-			worst_particle.getParameters();
 			Frog::best_value_position_from_memeplexer(best_particle);
 		}
 		cout << "--------------------------- " << i << " ---------------------------\n";
 		ranas = Frog::join_memeplexer(memeplexer);
+		getchar();
 	}
 	cout << "\n\nla mejor solucion es \n";
 	Frog::global_best.back().getParameters();
