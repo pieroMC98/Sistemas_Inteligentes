@@ -22,24 +22,31 @@ int main(int argc, char *argv[]) {
 	for (Firefly &i : luciernagas) i.fitness();
 	thebest = Firefly::sort(luciernagas);
 
-	cout << "la mejor particula es:\n";
+	cout << "la mejor luciernaga es:\n";
 	thebest.getParameters();
 	cout << "\n\n";
 	for (int i = 0; i < N; i++) {
 		for (Firefly &i : luciernagas) {
 			if (i.is_thebest()) continue;
-			cout << "luciernaga :\n";
+			cout << "\033[1;33m\nLUCIERNAGA:\033[0m" << endl;
 			i.getParameters();
-			cout << "\n\n se mueve :\n";
+
+			cout << "\033[1;33m\nSE MUEVE :\033[0m" << endl;
 			for (auto j : luciernagas) {
+				if (i.getID() == j.getID()) continue;
+				cout << endl << endl;
+				if (i.getFitness() > j.getFitness() && process == MAXIMIZAR) cout << "No ";
+				if (i.getFitness() < j.getFitness() && process == MINIMIZAR) cout << "No ";
+				cout << "\033[1;36minfluido por " << j.getID() << endl;
+				cout << "con fitness " << j.getFitness() << endl;
+				cout << "\033[0m";
 				i.move(j);
 				i.getParameters();
 			}
 			cout << "\n\n";
 		}
 		cout << "--------------------------- " << i << " ---------------------------\n";
-		// cout << "\n\n\n";
-		Firefly::move_best(thebest);
+		thebest.move_best();
 		cout << " la mejor se mueve: \n";
 		thebest.getParameters();
 	}

@@ -1,4 +1,4 @@
-main = .main
+main = main
 objects = \
 ../first/Function/function.cpp \
 ../first/Particle/PSO.cpp \

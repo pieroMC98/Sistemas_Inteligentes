@@ -3,6 +3,7 @@
 using namespace std;
 
 class Frog : public Particle {
+       protected:
 	int meme_id;
 	std::vector<float> worst_global_position;
 	float worst_global_value;

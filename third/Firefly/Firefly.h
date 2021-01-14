@@ -7,7 +7,8 @@ class Firefly : public Frog {
        public:
 	static float gamma, beta0;
 	static Firefly sort(vector<Firefly> &);
-	static void move_best(Firefly &);
+	void move_best();
+	float getFitness();
 	Firefly(int x, int y, int z) : Frog(x, y, z) {}
 
 	Firefly() : Frog() {}
