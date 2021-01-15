@@ -27,12 +27,14 @@ int main(int argc, char *argv[]) {
 	cout << "\n\n";
 	for (int i = 0; i < N; i++) {
 		for (Firefly &i : luciernagas) {
+			// si la luciernaga que itera es la mejor, pasa al siguiente
 			if (i.is_thebest()) continue;
 			cout << "\033[1;33m\nLUCIERNAGA:\033[0m" << endl;
 			i.getParameters();
 
 			cout << "\033[1;33m\nSE MUEVE :\033[0m" << endl;
 			for (auto j : luciernagas) {
+				// si se evalua la misma luciernaga, pasa al siguiente
 				if (i.getID() == j.getID()) continue;
 				cout << endl << endl;
 				if (i.getFitness() > j.getFitness() && process == MAXIMIZAR) cout << "No ";
