@@ -10,12 +10,15 @@ Source::Source() {
 	this->position.resize(this->Dimension);
 	std::for_each(this->position.begin(), this->position.end(),
 		      [this](float &x) { x = this->random_float(-this->limits, this->limits); });
-	this->gen_solves_array();
+	this->solves_array.resize(this->D);
+
+	for (auto i : this->solves_array) this->solves_array.push_back(Source(this->random_float(0, 1)));
 	this->limiti = 0;
 }
 
-void Source::gen_solves_array() {
-	for (float &j : this->solves_array) j = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin);
+Source::Source(float rand) {
+	for (float &j : this->position) j = Source::xmin + rand * (Source::xmax - Source::xmin);
+	this->fitness();
 }
 
 void Source::setPosition(std::vector<float> x) {
@@ -31,4 +34,5 @@ void Source::getParameters() {
 
 float Source::getFitness() { return this->value; }
 
-std::vector<float> Source::getArraySolve() { return this->solves_array; }
+std::vector<Source> Source::getArraySolve() { return this->solves_array; }
+std::vector<float> Source::getPosition() { return this->position; }

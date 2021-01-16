@@ -11,4 +11,4 @@ Source Observadora::choose_source(Source S) {
 	pi = S.getFitness() / Observadora::sumatorio;
 }
 
-void Observadora::run(Source vi) {}
+void Observadora::run(Source &vi) {}
