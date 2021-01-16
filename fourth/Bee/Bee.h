@@ -7,5 +7,6 @@ class Bee : public Firefly {
 	Bee(int x, int y, int z) : Firefly(x, y, z) {}
 	Bee() : Firefly() {}
 	virtual ~Bee(){};
-	Source src;
+	virtual void run(Source);
+	Source xi;
 };

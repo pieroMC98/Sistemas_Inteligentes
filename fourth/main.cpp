@@ -9,10 +9,10 @@ int main(int argc, char *argv[]) {
 	if (params(argv, argc, N, s, option, process, dimension, limits) == EXIT_FAILURE) return EXIT_FAILURE;
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
 
-	Frog *tmp = new Firefly(process, dimension, limits);
+	Source *tmp = new Source(process, dimension, limits);
+	vector<Source> S(N);
 	vector<Frog> ranas(N);
 	std::for_each(ranas.begin(), ranas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
-	Frog::best_value_position_from_memeplexer(ranas[0]);
 
 	delete tmp;
 	return EXIT_SUCCESS;
