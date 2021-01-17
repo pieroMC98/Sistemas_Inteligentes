@@ -1,11 +1,11 @@
 #include "../Bee.h"
+#include "../Empleada/Empleada.h"
 
 class Observadora : public Bee {
-	Source choose_source(Source);
-	static float sumatorio;
+	float choose_source(Source);
 
        public:
-	void run(Source&) override;
+	void run(Source&, Source);
 	static void sum_S(vector<Source>);
 	Observadora(int x, int y, int z) : Bee(x, y, z) {}
 	Observadora() : Bee() {}

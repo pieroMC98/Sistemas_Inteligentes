@@ -1,7 +1,8 @@
 #include "./Source.h"
 
-float Source::xmin, Source::xmax;
-int Source::D = {};
+float Source::xmin = 5, Source::xmax = 10;
+int Source::D = 6;
+
 Source::Source() {
 	Particle::counter();
 	Particle::setProcess();

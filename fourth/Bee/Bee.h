@@ -1,3 +1,5 @@
+#ifndef _BEE_BASE
+#define _BEE_BASE
 #include "../../Operator/operator.h"
 #include "../../Template/template.h"
 #include "../Source/Source.h"
@@ -9,7 +11,7 @@ class Bee : public Firefly {
 	Bee(int x, int y, int z) : Firefly(x, y, z) {}
 	Bee() : Firefly() {}
 	virtual ~Bee(){};
-	virtual void run(Source &) = 0;
+	virtual void run(Source &) {}
 
 	// clang-format off
 	friend bool operator> <>(const Bee &, const Bee &);
@@ -17,3 +19,4 @@ class Bee : public Firefly {
 	// clang-format on
 	std::vector<float> getPosition();
 };
+#endif

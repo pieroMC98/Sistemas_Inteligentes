@@ -1,14 +1,13 @@
 #include "./Observadora.h"
 
-float Observadora::sumatorio = {};
-
-void Observadora::sum_S(vector<Source> S) {
-	for (Source i : S) Observadora::sumatorio += i.getFitness();
+float Observadora::choose_source(Source S) {
+	float pj = 0;
+	for (Source j : S.getArraySolve()) pj += j.getFitness();
+	return S.getFitness() / pj;
 }
 
-Source Observadora::choose_source(Source S) {
-	float pi;
-	pi = S.getFitness() / Observadora::sumatorio;
+void Observadora::run(Source &vi, Source random) {
+	float Probi = choose_source(vi);
+	Empleada rt;
+	rt.run(vi, random);
 }
-
-void Observadora::run(Source &vi) {}
