@@ -14,22 +14,35 @@ int main(int argc, char *argv[]) {
 
 	Source *tmp = new Source(process, dimension, limits);
 	vector<Source> S(N);
-	vector<Empleada> abejas(N);
-	vector<Observadora> observadoras(N);
+	vector<Bee> abejas;
+	for( int i = 0; i < N; i++ )
+		abejas.push_back(Empleada());
+
+	vector<Observadora> observadoras(N/5);
 	vector<Exploradora> Exploradora(N);
 	std::for_each(abejas.begin(), abejas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 
 	for (int i = 0; i < N; i++) {
+		size_t k;
+		Source random;
 		for (size_t it = 0; it < abejas.size(); it++) {
-			int k;
-			Source random;
 			do {
 				k = rand() % abejas.size();
 				random = S[k];
 			} while (it == k);
 
 			abejas[it].run(S[it], random);
-			observadoras[it].run(S[it], random);
+			Observadora::choose_source(S);
+		}
+
+		for (size_t it = 0; it < observadoras.size(); it++) {
+			do {
+				k = rand() % observadoras.size();
+				random = S[k];
+			} while (it == k);
+			
+			abejas.push_back(*(observadoras[it].run(S[it], random)));
+			
 		}
 	}
 

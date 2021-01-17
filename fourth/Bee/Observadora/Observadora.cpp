@@ -1,13 +1,31 @@
 #include "./Observadora.h"
 
-float Observadora::choose_source(Source S) {
+Source Observadora::prob = {};
+void Observadora::choose_source(vector<Source> S) {
 	float pj = 0;
-	for (Source j : S.getArraySolve()) pj += j.getFitness();
-	return S.getFitness() / pj;
+	vector<float> pi(S.size());
+	vector<Source>::iterator it = S.begin();
+
+	for( Source i : S )
+		pj+=i.getFitness();
+
+	for( float &j : pi ){
+		j = it->getFitness()/pj;
+		*it++;
+	}
+
+	it = S.begin();
+	for( auto k : S )
+		if( k > *it ){
+			*it = k;
+			*it++;
+		}
+	Observadora::prob = *it;
 }
 
-void Observadora::run(Source &vi, Source random) {
-	float Probi = choose_source(vi);
-	Empleada rt;
-	rt.run(vi, random);
+Bee* Observadora::run(Source &vi, Source random) {
+	vi = Observadora::prob;
+	Bee* rt = new Empleada();
+	rt->run(vi, random);
+	return rt;
 }

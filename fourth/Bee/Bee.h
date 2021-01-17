@@ -11,7 +11,7 @@ class Bee : public Firefly {
 	Bee(int x, int y, int z) : Firefly(x, y, z) {}
 	Bee() : Firefly() {}
 	virtual ~Bee(){};
-	virtual void run(Source &) {}
+	virtual Bee* run(Source &,Source){ return new Bee(); }
 
 	// clang-format off
 	friend bool operator> <>(const Bee &, const Bee &);

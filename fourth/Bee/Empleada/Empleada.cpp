@@ -24,11 +24,13 @@ Source Empleada::fuente_candidata(Source vi, Source random) {
 	return max;
 }
 
-void Empleada::run(Source &vi, Source random) {
+Bee* Empleada::run(Source &vi, Source random) {
 	vi = this->fuente_candidata(vi, Source());
 	if (vi > this->xi)
 		this->xi = vi;
 	else
 		++this->xi.limiti;
 	vi = this->xi;
+	Bee *rt = new Exploradora();
+	return rt;
 }
