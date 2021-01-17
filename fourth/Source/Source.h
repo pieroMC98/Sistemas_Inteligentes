@@ -4,10 +4,10 @@
 class Source : private Particle {
 	void gen_solves_array();
 	static float xmin, xmax;
-	int D;
 	std::vector<Source> solves_array;
 
        public:
+	static int D;
 	int limiti;
 	Source();
 	Source(float);
@@ -18,6 +18,7 @@ class Source : private Particle {
 	void setPosition(std::vector<float>);
 	float getFitness();
 	std::vector<Source> getArraySolve();
+	void setArraySolve(std::vector<Source>);
 	// clang-format off
 	friend bool operator> <>(const Source &, const Source &);
 	friend bool operator< <>(const Source &, const Source &);
