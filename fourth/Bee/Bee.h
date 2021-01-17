@@ -3,13 +3,12 @@
 #include "../../Operator/operator.h"
 #include "../../Template/template.h"
 #include "../Source/Source.h"
-#include "./../../third/Firefly/Firefly.h"
-
-class Bee : public Firefly {
+using namespace std;
+class Bee : public Particle {
        public:
 	Source xi;
-	Bee(int x, int y, int z) : Firefly(x, y, z) {}
-	Bee() : Firefly() {}
+	Bee(int x, int y, int z) : Particle(x, y, z) {}
+	Bee() : Particle() {}
 	virtual ~Bee(){};
 	virtual Bee* run(Source &,Source){ return new Bee(); }
 

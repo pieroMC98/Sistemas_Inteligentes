@@ -1,17 +1,23 @@
 #include "PSO.h"
+static int P = {}, id = 0, D = {};
+static float LIMIT = {};
 
+void Particle::setStatics(int p,int d, float l){
+	Particle::P = p;
+	Particle::D = d;
+	Particle::LIMIT = l;
+}
 /**
  * @brief Construct a new Particle:: Particle object
  *
  */
 Particle::Particle() {
-	Particle::counter();
-	Particle::setProcess();
+	this->id = Particle::ID++;
+	this->process = Particle::P;
 	srand(time(NULL) + this->getID() * MAX_POS);
-	Particle::dimension();
+	this->Dimension = Particle::D;
 	best_personal_value = value = 0;
-
-	Particle::limit();
+	this->limits = Particle::LIMIT;
 	this->best_global_position.resize(this->Dimension);
 	this->best_personal_position.resize(this->Dimension);
 	this->speed.resize(this->Dimension);
@@ -29,14 +35,14 @@ Particle::Particle() {
  * @params d dimensión del sistema
  * @params l limite de la particula
  */
-Particle::Particle(int p, int d, int l) {
-	this->process = p;
-	this->Dimension = d;
-	this->limits = l;
-	Particle::dimension();
-	Particle::setProcess();
-	Particle::limit();
-}
+/* Particle::Particle(int p, int d, int l) { */
+	/* this->process = p; */
+	/* this->Dimension = d; */
+	/* this->limits = l; */
+	/* Particle::dimension(); */
+	/* Particle::setProcess(); */
+	/* Particle::limit(); */
+/* } */
 
 /**
  * @brief genera números aleatorios flotantes

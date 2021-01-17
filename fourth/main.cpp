@@ -6,8 +6,6 @@
 
 int main(int argc, char *argv[]) {
 	int N, s, option, process, dimension, limits;
-	typedef vector<Frog> _rowFrogs;
-	vector<_rowFrogs> memeplexer;
 
 	if (params(argv, argc, N, s, option, process, dimension, limits) == EXIT_FAILURE) return EXIT_FAILURE;
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
