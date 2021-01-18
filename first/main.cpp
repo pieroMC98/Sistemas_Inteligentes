@@ -20,13 +20,13 @@ int main(int argc, char *argv[]) {
 
 	// se crea Particula termporal para que el enjambre se cree con la dimension los limites y la optimizacion
 	// que son variables estaticas de el objeto Particula
-	Particle *tmp = new Particle(process, dimension, limits);
+	//Particle *tmp = new Particle(process, dimension, limits);
 	// instancio el array del enjambre
 	std::vector<Particle> enjambre(N);
 	// setter de la funcion call_back que se va ha usar que guarda la funcion para cada instancia de enjambre
 	std::for_each(enjambre.begin(), enjambre.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 	// se elimina la instancia temporal por que ya no se usa
-	tmp->~Particle();
+	//tmp->~Particle();
 
 	// la mejor particula es la primera instancia del enjambre
 	Particle best_particle = enjambre[0];

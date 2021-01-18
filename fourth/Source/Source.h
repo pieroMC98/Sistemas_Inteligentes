@@ -2,22 +2,22 @@
 #define _SOURCE_H
 #include "../../Template/template.h"
 #include "../../first/Particle/PSO.h"
-
-class Source : private Particle {
+class Source : public Particle {
 	void gen_solves_array();
 	static float xmin, xmax;
 	static int D;
 	std::vector<Source> solves_array;
 
        public:
+	void setCall(float (*)(std::vector<float>, int));
 	static void setStatics(int p, int d, float l);
+	void update_arraySolve();
 	static int sol;
 	int limiti;
-	Source() : Particle() {
-		 for (int i= 0; i < Source::sol; i++) this->solves_array.push_back(Source(this->random_float(0, 1)));
-	};
+	Source();
+	Source(float (*)(std::vector<float>, int));
 	Source(float);
-	void run() { setArraySolve(); }
+	void run();
 	virtual ~Source() {}
 	std::vector<float> getPosition();
 	void getParameters() override;
@@ -31,5 +31,5 @@ class Source : private Particle {
 	friend bool operator< <>(const Source &, const Source &);
 	// clang-format on
 };
+typedef float (*Call)(std::vector<float>, int);
 #endif
-// int Particle::P , Particle::ID, Particle::D;

@@ -7,5 +7,6 @@ class Empleada : public Bee {
        public:
 	Empleada() : Bee() {}
 	Bee* run(Source&, Source) override;
+	void getParameters() override;
 	virtual ~Empleada() {}
 };
