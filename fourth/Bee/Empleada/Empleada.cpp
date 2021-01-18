@@ -1,4 +1,5 @@
 #include "./Empleada.h"
+
 Source Empleada::fuente_candidata(Source vi, Source random) {
 	vector<Source> xk = random.getArraySolve();
 

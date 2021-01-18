@@ -12,7 +12,7 @@ class Firefly : public Frog {
 	Firefly(int x, int y, int z) : Frog(x, y, z) {}
 
 	Firefly() : Frog() {}
-	~Firefly(){}
+	~Firefly() {}
 	void update_position(Firefly);
 	void move(Firefly);
 	float betai(Firefly);

@@ -2,7 +2,7 @@
 int Particle::P = {}, Particle::ID = 0, Particle::D = {};
 float Particle::LIMIT = {};
 
-void Particle::setStatics(int p,int d, float l){
+void Particle::setStatics(int p, int d, float l) {
 	Particle::P = p;
 	Particle::D = d;
 	Particle::LIMIT = l;
@@ -36,12 +36,12 @@ Particle::Particle() {
  * @params l limite de la particula
  */
 /* Particle::Particle(int p, int d, int l) { */
-	/* this->process = p; */
-	/* this->Dimension = d; */
-	/* this->limits = l; */
-	/* Particle::dimension(); */
-	/* Particle::setProcess(); */
-	/* Particle::limit(); */
+/* this->process = p; */
+/* this->Dimension = d; */
+/* this->limits = l; */
+/* Particle::dimension(); */
+/* Particle::setProcess(); */
+/* Particle::limit(); */
 /* } */
 
 /**

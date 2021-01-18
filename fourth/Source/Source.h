@@ -7,6 +7,7 @@ class Source : public Particle {
 	void gen_solves_array();
 	static float xmin, xmax;
 	static int D;
+	static int ID;
 	std::vector<Source> solves_array;
 
        public:

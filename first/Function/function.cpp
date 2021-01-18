@@ -1,4 +1,5 @@
 #include "function.h"
+
 #include <ostream>
 
 /**

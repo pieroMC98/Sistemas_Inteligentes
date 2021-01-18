@@ -3,10 +3,10 @@
 float Source::xmin = 5, Source::xmax = 10;
 int Source::sol = 4;
 Call Source::c_b = NULL;
-
-// Source::Source(float (*call)(std::vector<float>, int)) { this->setCall(call); }
-
-Source::Source() : Particle() { this->call_back = Source::c_b; };
+int Source::ID = 0;
+Source::Source() : Particle() {
+	this->call_back = Source::c_b;
+};
 
 void Source::setArraySolve() {
 	std::for_each(this->position.begin(), this->position.end(),
@@ -14,6 +14,7 @@ void Source::setArraySolve() {
 }
 
 Source::Source(float i) {
+	this->id = Source::ID++;
 	srand(time(NULL) + this->getID() * MAX_POS);
 	this->call_back = Source::c_b;
 	for (auto &i : this->position) i = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin);

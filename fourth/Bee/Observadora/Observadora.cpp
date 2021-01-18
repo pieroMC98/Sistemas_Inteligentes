@@ -1,5 +1,4 @@
 #include "./Observadora.h"
-
 Source Observadora::prob = {};
 void Observadora::choose_source(vector<Source> S) {
 	float pj = 0;

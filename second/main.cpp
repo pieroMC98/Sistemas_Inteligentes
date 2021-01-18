@@ -9,8 +9,8 @@ int main(int argc, char *argv[]) {
 	if (params(argv, argc, N, s, option, process, dimension, limits) == EXIT_FAILURE) return EXIT_FAILURE;
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
 
-	//Frog *tmp = new Frog(process, dimension, limits);
-	Particle::setStatics(process,dimension,limits);
+	// Frog *tmp = new Frog(process, dimension, limits);
+	Particle::setStatics(process, dimension, limits);
 	vector<Frog> ranas(N);
 	std::for_each(ranas.begin(), ranas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 
@@ -71,6 +71,6 @@ int main(int argc, char *argv[]) {
 	}
 	cout << "\n\nla mejor solucion es \n";
 	Frog::global_best.back().getParameters();
-	//delete tmp;
+	// delete tmp;
 	return EXIT_SUCCESS;
 }

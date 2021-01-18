@@ -10,17 +10,16 @@ class Particle {
 	float limits;
 	float best_personal_value, value, best_global_value;
 	float aux_value;
-		static int P;
-		static float LIMIT;
-		static int ID;
-		static int D;
+	static int P;
+	static float LIMIT;
+	static int ID;
+	static int D;
 
 	/**
 	 * @brief Set el tipo de optimización para todas las partículas
 	 *
 	 */
-	
-	
+
 	/* void setProcess() { */
 	/* 	static int process; */
 	/* 	if (this->process != 0) process = this->process; */
@@ -83,8 +82,8 @@ class Particle {
 	float module_vector(std::vector<float>, int);
 
        public:
-	static void setStatics(int,int,float);
-	//Particle(int, int, int);
+	static void setStatics(int, int, float);
+	// Particle(int, int, int);
 	Particle();
 	~Particle() {}
 	void run(Particle);
@@ -98,7 +97,6 @@ class Particle {
 	int getID();
 	void limit_test();
 	float (*call_back)(std::vector<float>, int) = NULL;
-
 
 	/**
 	 * @brief
