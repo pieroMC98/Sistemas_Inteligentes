@@ -7,9 +7,7 @@ using namespace std;
 class Bee : public Particle {
        public:
 	Source xi;
-	Bee() : Particle() {
-
-	}
+	Bee() : Particle() {}
 	virtual ~Bee(){};
 	virtual Bee *run(Source &, Source) { return new Bee(); }
 

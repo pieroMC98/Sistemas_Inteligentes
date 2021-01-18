@@ -1,9 +1,22 @@
 #include "./Source.h"
+
+#include <cstdio>
 float Source::xmin = 5, Source::xmax = 10;
 int Source::sol = 5;
 
 void Source::setArraySolve() {
-	for (float &j : this->position) j = Source::xmin + this->random_float(0,1) * (Source::xmax - Source::xmin);
+	std::for_each(this->position.begin(), this->position.end(), [&](float &j) {
+		j = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin);
+	});
+	// for (auto &j : this->position) j = Source::xmin + this->random_float(0,1) * (Source::xmax - Source::xmin);
+	this->fitness();
+	bug;
+}
+
+Source::Source(float i) {
+	std::for_each(this->position.begin(), this->position.end(), [&](float &j) {
+		j = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin);
+	});
 	this->fitness();
 }
 

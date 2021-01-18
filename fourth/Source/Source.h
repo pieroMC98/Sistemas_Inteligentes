@@ -10,18 +10,14 @@ class Source : private Particle {
 	std::vector<Source> solves_array;
 
        public:
-	static void setStatics(int p,int d, float l);
+	static void setStatics(int p, int d, float l);
 	static int sol;
 	int limiti;
-	Source() : Particle (){
-		std::cout<<" "<<this->Dimension;
-		std::cout<<" "<<this->limits;
-		std::cout<<" "<<this->process;
-		std::cout<<" "<<Source::sol;
-		//this->setArraySolve();
-		//for (int i= 0; i < Source::sol; i++) this->solves_array.push_back(Source(this->random_float(0, 1)));
+	Source() : Particle() {
+		 for (int i= 0; i < Source::sol; i++) this->solves_array.push_back(Source(this->random_float(0, 1)));
 	};
 	Source(float);
+	void run() { setArraySolve(); }
 	virtual ~Source() {}
 	std::vector<float> getPosition();
 	void getParameters() override;
@@ -36,4 +32,4 @@ class Source : private Particle {
 	// clang-format on
 };
 #endif
-//int Particle::P , Particle::ID, Particle::D;
+// int Particle::P , Particle::ID, Particle::D;
