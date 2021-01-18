@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 
 	Particle::setStatics(process, dimension, limits);
 	Source::c_b = function_option[option];
-	//Source *tmp = new Source((float (*)(vector<float>, int))function_option[option]);
+	// Source *tmp = new Source((float (*)(vector<float>, int))function_option[option]);
 	vector<Source> S(N);
 	vector<Bee *> abejas;
 	// std::for_each(S.begin(), S.end(), [=](Particle &x) { x.call_back = function_option[option]; });
@@ -50,6 +50,6 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	//delete tmp;
+	// delete tmp;
 	return EXIT_SUCCESS;
 }

@@ -4,23 +4,11 @@ Source Empleada::fuente_candidata(Source vi, Source random) {
 
 	vector<Source>::iterator j = xk.begin();
 
-	vector<float> alfa(Source::sol);
+	vector<float> alfa(this->Dimension);
 	std::fill(alfa.begin(), alfa.end(), this->random_float(0, 1));
 
 	vector<Source> vij = this->xi.getArraySolve();
 	for_each(vij.begin(), vij.end(), [&](Source &vij) {
-		auto yy = vij.getPosition() + alfa * (vij.getPosition() - j->getPosition());
-		bug;
-		for( auto k : vij.getPosition() )
-			std::cout<<" "<<k;
-		bug;
-		for( auto k : alfa * (vij.getPosition() - j->getPosition()) )
-			std::cout<<" "<<k;
-		bug;
-		for( auto k : yy )
-			std::cout<<" "<<k;
-		bug;
-		getchar();
 		vij.setPosition(vij.getPosition() + alfa * (vij.getPosition() - j->getPosition()));
 		*j++;
 	});
