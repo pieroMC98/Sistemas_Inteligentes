@@ -21,18 +21,18 @@ class Particle {
 	 */
 	
 	
-	void setProcess() {
-		static int process;
-		if (this->process != 0) process = this->process;
-		if (!process) {
-			std::string option;
-			std::cout << "wwtfff";
-			std::cout << "MINIMIZAR(1) | MAXIMIZAR(2)\n";
-			std::getline(std::cin, option);
-			process = atoi(option.c_str());
-		}
-		this->process = process;
-	}
+	/* void setProcess() { */
+	/* 	static int process; */
+	/* 	if (this->process != 0) process = this->process; */
+	/* 	if (!process) { */
+	/* 		std::string option; */
+	/* 		//std::cout << "wwtfff"; */
+	/* 		std::cout << "MINIMIZAR(1) | MAXIMIZAR(2)\n"; */
+	/* 		std::getline(std::cin, option); */
+	/* 		process = atoi(option.c_str()); */
+	/* 	} */
+	/* 	this->process = process; */
+	/* } */
 
 	/**
 	 * @brief genera los límites de las partículas

@@ -3,7 +3,6 @@ objects = \
 ../first/Function/function.cpp \
 ../Operator/operator.cpp \
 ../first/Particle/PSO.cpp \
-../second/Frog/frog.cpp \
 ./Source/Source.cpp \
 ./Bee/Bee.cpp \
 ./Bee/Empleada/Empleada.cpp \

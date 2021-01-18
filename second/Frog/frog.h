@@ -23,7 +23,7 @@ class Frog : public Particle {
 	static vector<Frog> global_best;
 	static float best_global_value_from_memeplexer;
 
-	Frog(int x, int y, int z) : Particle(x, y, z) {}
+	//Frog(int x, int y, int z) : Particle(x, y, z) {}
 	Frog();
 	virtual ~Frog() {}
 	void setMeme_id(int);

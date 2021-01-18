@@ -1,6 +1,6 @@
 #include "PSO.h"
-static int P = {}, id = 0, D = {};
-static float LIMIT = {};
+int Particle::P = {}, Particle::ID = 0, Particle::D = {};
+float Particle::LIMIT = {};
 
 void Particle::setStatics(int p,int d, float l){
 	Particle::P = p;

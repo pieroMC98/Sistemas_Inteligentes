@@ -1,25 +1,9 @@
 #include "./Source.h"
-
 float Source::xmin = 5, Source::xmax = 10;
-int Source::D = 6;
+int Source::sol = 5;
 
-Source::Source() {
-	Particle::counter();
-	Particle::setProcess();
-	srand(time(NULL) + this->getID() * MAX_POS);
-	Particle::dimension();
-	Particle::limit();
-	this->position.resize(this->Dimension);
-	std::for_each(this->position.begin(), this->position.end(),
-		      [this](float &x) { x = this->random_float(-this->limits, this->limits); });
-	this->solves_array.resize(Source::D);
-
-	for (auto i : this->solves_array) this->solves_array.push_back(Source(this->random_float(0, 1)));
-	this->limiti = 0;
-}
-
-Source::Source(float rand) {
-	for (float &j : this->position) j = Source::xmin + rand * (Source::xmax - Source::xmin);
+void Source::setArraySolve() {
+	for (float &j : this->position) j = Source::xmin + this->random_float(0,1) * (Source::xmax - Source::xmin);
 	this->fitness();
 }
 

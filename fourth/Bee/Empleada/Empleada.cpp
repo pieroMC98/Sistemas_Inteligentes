@@ -5,7 +5,7 @@ Source Empleada::fuente_candidata(Source vi, Source random) {
 
 	vector<Source>::iterator j = xk.begin();
 
-	vector<float> alfa(Source::D);
+	vector<float> alfa(Source::sol);
 	std::fill(alfa.begin(), alfa.end(), this->random_float(0, 1));
 
 	vector<Source> vij = this->xi.getArraySolve();
@@ -24,7 +24,7 @@ Source Empleada::fuente_candidata(Source vi, Source random) {
 	return max;
 }
 
-Bee* Empleada::run(Source &vi, Source random) {
+Bee *Empleada::run(Source &vi, Source random) {
 	vi = this->fuente_candidata(vi, Source());
 	if (vi > this->xi)
 		this->xi = vi;

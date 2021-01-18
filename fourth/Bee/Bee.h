@@ -7,10 +7,11 @@ using namespace std;
 class Bee : public Particle {
        public:
 	Source xi;
-	Bee(int x, int y, int z) : Particle(x, y, z) {}
-	Bee() : Particle() {}
+	Bee() : Particle() {
+
+	}
 	virtual ~Bee(){};
-	virtual Bee* run(Source &,Source){ return new Bee(); }
+	virtual Bee *run(Source &, Source) { return new Bee(); }
 
 	// clang-format off
 	friend bool operator> <>(const Bee &, const Bee &);
