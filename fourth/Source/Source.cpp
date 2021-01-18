@@ -2,34 +2,32 @@
 
 float Source::xmin = 5, Source::xmax = 10;
 int Source::sol = 4;
+Call Source::c_b = NULL;
 
-void Source::setCall(float (*call)(std::vector<float>, int)) {
-	static float (*c_b)(std::vector<float>, int);
-	if (c_b == NULL) c_b = call;
-	this->call_back = c_b;
-}
+//Source::Source(float (*call)(std::vector<float>, int)) { this->setCall(call); }
 
-Source::Source(float (*call)(std::vector<float>, int)) { this->setCall(call); }
-
-Source::Source() : Particle() { this->setCall(NULL); };
+Source::Source() : Particle() { this->call_back = Source::c_b; };
 
 void Source::setArraySolve() {
 	std::for_each(this->position.begin(), this->position.end(),
 		      [&](float &j) { j = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin); });
-	bug;
 }
 
 Source::Source(float i) {
 	srand(time(NULL) + this->getID() * MAX_POS);
-	this->setCall(NULL);
-
-	for (auto &i : this->position) i = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin);
+	this->call_back = Source::c_b;
+	for (auto &i : this->position)
+		i = Source::xmin + this->random_float(0, 1) * (Source::xmax - Source::xmin);
 	this->fitness();
 }
 
 void Source::setPosition(std::vector<float> x) {
 	this->position = x;
-	this->fitness();
+	this->value = Source::c_b(this->position,this->position.size());
+	std::cout<<"fit con ftiness "<<this->value<<std::endl;
+	std::cout<<"fit con ftiness "<<this->getFitness()<<std::endl;
+	getchar();
+	bug;
 }
 
 void Source::getParameters() {

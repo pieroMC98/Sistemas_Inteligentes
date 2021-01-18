@@ -17,5 +17,5 @@
 #define MAXIMIZAR 2
 #define EXIT 10
 
-#define bug std::cout << "-------8888--------" << std::endl
+#define bug std::cout << "\n-------8888--------" << std::endl
 #endif

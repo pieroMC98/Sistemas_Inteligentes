@@ -1,4 +1,5 @@
 #include "function.h"
+#include <ostream>
 
 /**
  * @brief función esfera
@@ -9,7 +10,7 @@
  */
 float sphere(std::vector<float> x, int i) {
 	float r = 0;
-	for (int j = 0; j < i; j++) r += pow(x[j], 2);
+	for (int j = 0; j < i; j++) r += pow(x[j], 2.0);
 	return r;
 }
 

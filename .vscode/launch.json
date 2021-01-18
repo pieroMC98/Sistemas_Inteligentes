@@ -9,7 +9,14 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/fourth/main",
-			"args": [],
+			"args": [
+				"3",
+				"2",
+				"0",
+				"1",
+				"3",
+				"10"
+			],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

@@ -6,10 +6,11 @@ objects = \
 ../second/Frog/frog.cpp \
 ./Firefly/Firefly.cpp \
 main.cpp
+d = --debug
 
 objects: $(objects)
 	clear
-	g++ -Wall -g $(objects) -o $(main)
+	g++ -Wall -g $(objects) -o $(main) $(d)
 
 run:objects
 	clear

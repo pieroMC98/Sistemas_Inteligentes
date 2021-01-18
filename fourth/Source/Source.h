@@ -2,6 +2,7 @@
 #define _SOURCE_H
 #include "../../Template/template.h"
 #include "../../first/Particle/PSO.h"
+typedef float (*Call)(std::vector<float>, int);
 class Source : public Particle {
 	void gen_solves_array();
 	static float xmin, xmax;
@@ -9,7 +10,7 @@ class Source : public Particle {
 	std::vector<Source> solves_array;
 
        public:
-	void setCall(float (*)(std::vector<float>, int));
+	static Call c_b;
 	static void setStatics(int p, int d, float l);
 	void update_arraySolve();
 	static int sol;
@@ -31,5 +32,4 @@ class Source : public Particle {
 	friend bool operator< <>(const Source &, const Source &);
 	// clang-format on
 };
-typedef float (*Call)(std::vector<float>, int);
 #endif

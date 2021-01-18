@@ -97,7 +97,8 @@ class Particle {
 	void update_position();
 	int getID();
 	void limit_test();
-	float (*call_back)(std::vector<float>, int);
+	float (*call_back)(std::vector<float>, int) = NULL;
+
 
 	/**
 	 * @brief

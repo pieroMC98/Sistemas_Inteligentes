@@ -13,31 +13,30 @@ int main(int argc, char *argv[]) {
 	float (*function_option[])(std::vector<float>, int) = {sphere, sum_of_different_power, dixon_price};
 
 	Particle::setStatics(process, dimension, limits);
-	// Source::call = function_option[option];
-	Source *c = new Source((float (*)(vector<float>, int))function_option[option]);
+	Source::c_b = function_option[option];
+	//Source *tmp = new Source((float (*)(vector<float>, int))function_option[option]);
 	vector<Source> S(N);
-	getchar();
-	vector<Bee> abejas;
-	std::for_each(abejas.begin(), abejas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
+	vector<Bee *> abejas;
 	// std::for_each(S.begin(), S.end(), [=](Particle &x) { x.call_back = function_option[option]; });
-	for (int i = 0; i < N; i++) abejas.push_back(Empleada());
-
 	for (Source &i : S) i.run();
+	for (int i = 0; i < N; i++) abejas.push_back(new Empleada(S[i]));
+	std::for_each(abejas.begin(), abejas.end(), [=](Bee *x) { x->call_back = function_option[option]; });
 
 	vector<Observadora> observadoras(N / 5);
 	vector<Exploradora> Exploradora(N);
-	std::for_each(abejas.begin(), abejas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
+	// std::for_each(abejas.begin(), abejas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
 
 	for (int i = 0; i < N; i++) {
 		size_t k;
 		Source random;
 		for (size_t it = 0; it < abejas.size(); it++) {
+			// abejas[it]->getParameters();
+
 			do {
 				k = rand() % abejas.size();
 				random = S[k];
 			} while (it == k);
-
-			abejas[it].run(S[it], random);
+			abejas[it]->run(S[it], random);
 			Observadora::choose_source(S);
 		}
 
@@ -47,10 +46,10 @@ int main(int argc, char *argv[]) {
 				random = S[k];
 			} while (it == k);
 
-			abejas.push_back(*(observadoras[it].run(S[it], random)));
+			abejas.push_back(observadoras[it].run(S[it], random));
 		}
 	}
 
-	// delete tmp;
+	//delete tmp;
 	return EXIT_SUCCESS;
 }

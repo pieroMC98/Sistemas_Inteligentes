@@ -24,7 +24,7 @@ void Observadora::choose_source(vector<Source> S) {
 
 Bee* Observadora::run(Source& vi, Source random) {
 	vi = Observadora::prob;
-	Bee* rt = new Empleada();
+	Bee* rt = new Empleada(vi);
 	rt->run(vi, random);
 	return rt;
 }

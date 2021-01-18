@@ -80,7 +80,7 @@ void Particle::run(Particle best_particle) {
  * @brief valor del fitness de la partícula
  *
  */
-void Particle::fitness() { this->value = this->call_back(this->position, this->Dimension - 1); }
+void Particle::fitness() { this->value = this->call_back(this->position, this->position.size()); }
 
 /**
  * @brief setter del mejor valor de la partícula
