@@ -24,25 +24,23 @@ int main(int argc, char *argv[]) {
 
 	vector<Observadora> observadoras(N / 5);
 	vector<Exploradora> Exploradora(N);
-	// std::for_each(abejas.begin(), abejas.end(), [=](Particle &x) { x.call_back = function_option[option]; });
-	/* for (Source i : S) cout << "id array fuente = " << i.getID() << endl; */
-	/* cout << endl; */
-
-	/* for (Bee *i : abejas) cout << "id array abejas = " << i->getID() << endl; */
 	for (int i = 0; i < N; i++) {
 		size_t k;
 		Source random;
 		cout << "trabajo de las empleadas:\n";
 		for (size_t it = 0; it < abejas.size(); it++) {
-			cout << "id = " << abejas[0]->getID() << endl;
 			do {
-				k = rand() % abejas.size();
-				random = S[k];
+				k = rand() % S.size();
 			} while (it == k);
-			abejas[it]->run(S[it], random);
-			Observadora::choose_source(S);
+			random = S.at(k);
+			cout << "size: " << S.size() << "\n";
+			cout << "random: " << k << "\n\n";
+			for (auto i : random.getArraySolve()) i.getFitness();
+			cout << "aqui se rompe\n\n";
+			abejas[it]->run(S[it], S.at(k));
 		}
-		cout << "trabajo de las observadoras:\n";
+		Observadora::choose_source(S);
+		cout << "\ntrabajo de las observadoras:\n";
 
 		for (size_t it = 0; it < observadoras.size(); it++) {
 			do {

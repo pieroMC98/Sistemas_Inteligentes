@@ -4,9 +4,8 @@ float Source::xmin = 5, Source::xmax = 10;
 int Source::sol = 4;
 Call Source::c_b = NULL;
 int Source::ID = 0;
-Source::Source() : Particle() {
-	this->call_back = Source::c_b;
-};
+
+Source::Source() : Particle() { this->call_back = Source::c_b; };
 
 void Source::setArraySolve() {
 	std::for_each(this->position.begin(), this->position.end(),
