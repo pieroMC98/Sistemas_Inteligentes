@@ -26,7 +26,7 @@ void Source::setPosition(std::vector<float> x) {
 }
 
 void Source::getParameters() {
-	std::cout << "fuenta en la posicion (";
+	std::cout << "fuente en la posicion (";
 	for (auto x : this->position) std::cout << x << " ";
 	std::cout << "\b)\nfitness = " << this->getFitness() << std::endl;
 }
@@ -43,7 +43,4 @@ std::vector<float> Source::getPosition() { return this->position; }
 void Source::run() {
 	this->fitness();
 	for (int i = 0; i < Source::sol; i++) this->solves_array.push_back(Source((float)this->random_float(0, 1)));
-	//	this->getParameters();
-	// bug;
-	// this->solves_array[0].getParameters();
 }

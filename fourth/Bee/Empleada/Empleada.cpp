@@ -1,13 +1,14 @@
 #include "./Empleada.h"
 
-Source Empleada::fuente_candidata(Source vi, Source random) {
+Source Empleada::fuente_candidata(Source random) {
+	Source vi = this->xi;
 	vector<Source> xk = random.getArraySolve();
 	vector<Source>::iterator j = xk.begin();
 	vector<float> alfa(this->Dimension);
 
 	std::fill(alfa.begin(), alfa.end(), this->random_float(0, 1));
 
-	vector<Source> vij = this->xi.getArraySolve();
+	vector<Source> vij = vi.getArraySolve();
 	vector<float> add, diff, prod;
 	for_each(vij.begin(), vij.end(), [&](Source &vij) {
 		diff = vij.getPosition() - j->getPosition();
@@ -16,21 +17,20 @@ Source Empleada::fuente_candidata(Source vi, Source random) {
 		vij.setPosition(add);
 		*j++;
 	});
-	cout << " sig inter\n\n";
+	vi.setArraySolve(vij);
 
-	Source max = vij[0];
-	for (Source it : vij) {
+
+	Source max = this->xi;
+	for (Source it : vi.getArraySolve())
 		if (it > max) max = it;
-	}
-
-	this->xi.setArraySolve(vij);
-	return max;
+	vi = max;
+	vi.setArraySolve(vij);
+	return vi;
 }
 
 Bee *Empleada::run(Source &vi, Source random) {
 	this->fitness();
-	// Source aux;
-	Source aux = this->fuente_candidata(vi, random);
+	Source aux = this->fuente_candidata(random);
 	this->getParameters();
 	if (aux > this->xi) {
 		this->xi = aux;
@@ -46,7 +46,7 @@ Bee *Empleada::run(Source &vi, Source random) {
 void Empleada::getParameters() {
 	std::cout << "\033[1;31m--------------------------------------\033[0m";
 	std::cout << "\n\033[1;35mAbeja " << this->getID() << "\033[0m\n";
-	std::cout << "personal value = " << this->value << "\n";
+	std::cout << "value = " << this->value << "\n";
 	std::cout << "position(Fuente): | \n";
 	this->xi.getParameters();
 	std::cout << "\b\b|\n";

@@ -2,7 +2,7 @@
 #include "../Exploradora/Exploradora.h"
 
 class Empleada : public Bee {
-	Source fuente_candidata(Source, Source);
+	Source fuente_candidata(Source);
 
        public:
 	Empleada(Source xi) { this->xi = xi; }
