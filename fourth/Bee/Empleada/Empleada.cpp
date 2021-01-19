@@ -6,7 +6,7 @@ Source Empleada::fuente_candidata(Source random) {
 	vector<Source>::iterator j = xk.begin();
 	vector<float> alfa(this->Dimension);
 
-	std::fill(alfa.begin(), alfa.end(), this->random_float(0, 1));
+	std::fill(alfa.begin(), alfa.end(), this->random_float(-1, 1));
 
 	vector<Source> vij = vi.getArraySolve();
 	vector<float> add, diff, prod;
@@ -19,10 +19,13 @@ Source Empleada::fuente_candidata(Source random) {
 	});
 	vi.setArraySolve(vij);
 
-
 	Source max = this->xi;
-	for (Source it : vi.getArraySolve())
-		if (it > max) max = it;
+	for (Source it : vi.getArraySolve()) {
+		if (this->process == MAXIMIZAR) {
+			if (it > max) max = it;
+		} else if (it < max)
+			max = it;
+	}
 	vi = max;
 	vi.setArraySolve(vij);
 	return vi;
@@ -32,15 +35,25 @@ Bee *Empleada::run(Source &vi, Source random) {
 	this->fitness();
 	Source aux = this->fuente_candidata(random);
 	this->getParameters();
-	if (aux > this->xi) {
-		this->xi = aux;
-		cout << "\033[1;35mEncontrada mejor fuente vecina\033[0m\n";
-		this->xi.getParameters();
-		vi = this->xi;
-	} else
-		++this->xi.limiti;
-	Bee *rt = new Exploradora();
-	return rt;
+	if (this->process == MAXIMIZAR) {
+		if (aux > this->xi) {
+			this->xi = aux;
+			cout << "\033[1;35mEncontrada mejor fuente vecina\033[0m\n";
+			this->xi.getParameters();
+			vi = this->xi;
+		} else
+			++this->xi.limiti;
+	} else {
+		if (aux < this->xi) {
+			this->xi = aux;
+			cout << "\033[1;35mEncontrada mejor fuente vecina\033[0m\n";
+			this->xi.getParameters();
+			vi = this->xi;
+		} else
+			++this->xi.limiti;
+	}
+	if (xi.limiti == 5) return new Exploradora();
+	return NULL;
 }
 
 void Empleada::getParameters() {
@@ -49,5 +62,4 @@ void Empleada::getParameters() {
 	std::cout << "value = " << this->value << "\n";
 	std::cout << "position(Fuente): | \n";
 	this->xi.getParameters();
-	std::cout << "\b\b|\n";
 }

@@ -11,7 +11,7 @@ void Observadora::choose_source(vector<Source> S) {
 		j = it->getFitness() / pj;
 		*it++;
 	}
-	
+
 	it = S.begin();
 	for (auto k : S)
 		if (k > *it) {
@@ -21,10 +21,4 @@ void Observadora::choose_source(vector<Source> S) {
 	Observadora::prob = *it;
 }
 
-Bee* Observadora::run(Source vi, Source random) {
-	vi = Observadora::prob;
-	vi.getParameters();
-	for( auto i : vi.getArraySolve() )
-		i.getParameters();
-	return new Empleada(vi);
-}
+Bee* Observadora::run() { return new Empleada(Observadora::prob); }

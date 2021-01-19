@@ -4,6 +4,6 @@
 
 class Exploradora : public Bee {
        public:
-	Bee* run(Source&, Source) override;
+	void run(vector<Source>&);
 };
 #endif
