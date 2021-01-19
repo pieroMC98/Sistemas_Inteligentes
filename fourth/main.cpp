@@ -1,5 +1,3 @@
-#include <cstdio>
-
 #include "../first/Function/function.h"
 #include "../fourth/Bee/Bee.h"
 #include "../fourth/Bee/Exploradora/Exploradora.h"
@@ -19,6 +17,7 @@ int main(int argc, char *argv[]) {
 	vector<Source> S(N);
 	vector<Bee *> abejas;
 	for (Source &i : S) i.run();
+	// se asigna a cada fuente una abeja empleada
 	for (int i = 0; i < N; i++) abejas.push_back(new Empleada(S[i]));
 
 	vector<Observadora> observadoras(5);
@@ -27,11 +26,14 @@ int main(int argc, char *argv[]) {
 		Source random;
 		cout << "\ntrabajo de las empleadas(" << abejas.size() << ")\n";
 		for (size_t it = 0; it < S.size(); it++) {
+			// fuente aleatoria i != k
 			do {
 				k = rand() % S.size();
 			} while (it == k);
 			random = S.at(k);
 			Bee *ex = abejas[it]->run(S[it], random);
+			// si la fuente no se puede mejorar más( max 5 iteraciones) se obliga a la abeja a buscar otra
+			// fuente
 			if (ex != nullptr) {
 				cout << "trabajo de las Exploradoras\n";
 				Source *aux = new Source();
@@ -57,6 +59,5 @@ int main(int argc, char *argv[]) {
 	cout << "\nmejor solucion del sistema:\n";
 	Observadora::prob.getParameters();
 
-	// delete tmp;
 	return EXIT_SUCCESS;
 }

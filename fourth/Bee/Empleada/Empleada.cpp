@@ -1,5 +1,10 @@
 #include "./Empleada.h"
-
+/**
+ * @brief Abeja elige una fuente candidata
+ *
+ * @param random fuente aleatoria a procesas
+ * @return Source devuelve la mejor fuente encontrada
+ */
 Source Empleada::fuente_candidata(Source random) {
 	Source vi = this->xi;
 	vector<Source> xk = random.getArraySolve();
@@ -31,6 +36,13 @@ Source Empleada::fuente_candidata(Source random) {
 	return vi;
 }
 
+/**
+ * @brief ejecución de la abeja empleada
+ *
+ * @param vi fuente actual en uso
+ * @param random fuente aleatiora para elegir candidada
+ * @return Bee* devuelve Exploradora si la actual fuente no se puede optimizar más
+ */
 Bee *Empleada::run(Source &vi, Source random) {
 	this->fitness();
 	Source aux = this->fuente_candidata(random);
@@ -56,6 +68,10 @@ Bee *Empleada::run(Source &vi, Source random) {
 	return NULL;
 }
 
+/**
+ * @brief imprimir parámetros
+ *
+ */
 void Empleada::getParameters() {
 	std::cout << "\033[1;31m--------------------------------------\033[0m";
 	std::cout << "\n\033[1;35mAbeja " << this->getID() << "\033[0m\n";
